@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitação de Desenvolvimento TI - COE</title>
+    <style>
+        :root {
+            --coe-blue: #0056b3;
+            --coe-light-blue: #e8f0fe;
+            --bg-color: #f0f4f8;
+            --text-dark: #202124;
+            --text-gray: #5f6368;
+            --danger: #d93025;
+            --border: #dadce0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-bottom: 60px;
+        }
+
+        /* Estilo Google Forms (Cartões) */
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            border: 1px solid var(--border);
+            transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+        }
+
+        .card-header {
+            border-top: 8px solid var(--coe-blue);
+        }
+
+        h1 {
+            color: var(--text-dark);
+            margin-top: 0;
+            font-size: 24px;
+        }
+
+        p {
+            color: var(--text-gray);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .section-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 16px;
+            display: block;
+            color: var(--text-dark);
+        }
+
+        .blue-diamond {
+            color: var(--coe-blue);
+            font-size: 1.2em;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+
+        .help-text {
+            font-size: 13px;
+            color: var(--text-gray);
+            margin-top: -4px;
+            margin-bottom: 8px;
+            display: block;
+            font-style: italic;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .required {
+            color: var(--danger);
+        }
+
+        input[type="text"],
+        input[type="time"],
+        select,
+        textarea,
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+            margin-top: 5px;
+        }
+
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--coe-blue);
+            outline: none;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            margin-bottom: 12px;
+        }
+
+        .radio-group label,
+        .checkbox-group label {
+            display: inline-block;
+            font-weight: normal;
+            margin-left: 8px;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        .inline-options {
+            display: flex;
+            gap: 15px;
+            margin-left: 25px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        /* Categorias do Radio Button */
+        .category-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-gray);
+            margin: 16px 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .category-container {
+            margin-left: 10px;
+        }
+
+        /* Utilitários e Animações */
+        .hidden {
+            display: none !important;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert-warning {
+            background-color: #fef0db;
+            border-left: 4px solid #f29900;
+            padding: 12px;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #b06900;
+        }
+
+        .alert-danger {
+            background-color: #fce8e6;
+            border-left: 4px solid var(--danger);
+            padding: 12px;
+            margin-top: 10px;
+            font-size: 14px;
+            color: var(--danger);
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            color: #155724;
+            font-weight: 500;
+        }
+
+        .info-box {
+            background-color: var(--coe-light-blue);
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #004085;
+        }
+
+        .btn-submit {
+            background-color: var(--coe-blue);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #004494;
+        }
+
+        .btn-submit:disabled {
+            background-color: #a0c1e8;
+            cursor: not-allowed;
+        }
+
+        .sub-section {
+            border-left: 3px solid var(--coe-blue);
+            padding-left: 15px;
+            margin-top: 15px;
+            background: #fafafa;
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Mensagem de Sucesso Controlada pelo JS -->
+        <div id="mensagem_sucesso" class="alert-success hidden fade-in">
+            ✅ <strong>Formulário enviado com sucesso!</strong> Os dados foram processados (Modo Protótipo).
+        </div>
+
+        <!-- Modificado para não fazer post no PHP e usar JS no onsubmit -->
+        <form id="coeForm" onsubmit="enviarFormulario(event)">
+
+            <!-- CABEÇALHO -->
+            <div class="card card-header">
+                <h1>🟦 FORMULÁRIO DE DESENVOLVIMENTO (PADRÃO GLPI COE)</h1>
+            </div>
+
+            <!-- PASSO 1: TIPO DE SOLICITAÇÃO -->
+            <div class="card" id="card_passo_1">
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label class="section-title"><span class="blue-diamond">◆</span> 1. TIPO DE SOLICITAÇÃO <span
+                            class="required">*</span></label>
+                    <div class="radio-group">
+                        <input type="radio" id="solic_ajuste" name="tipo_solicitacao" value="ajuste" required
+                            onchange="handleTipoSolicitacao()">
+                        <label for="solic_ajuste">Ajuste ou Correção de Desenvolvimento Existente</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="solic_novo" name="tipo_solicitacao" value="novo" required
+                            onchange="handleTipoSolicitacao()">
+                        <label for="solic_novo">Novo Desenvolvimento</label>
+                    </div>
+                    <div id="msgAjuste" class="alert-warning hidden">
+                        <strong>Atenção:</strong> Demandas que envolvam alteração de lógica, reformulação completa de
+                        layout ou alteração estrutural de dados deverão ser registradas como Novo Desenvolvimento.
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASSO 2: TIPO DE DESENVOLVIMENTO (Oculto inicialmente) -->
+            <div class="card hidden fade-in" id="card_passo_2">
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label class="section-title"><span class="blue-diamond">◆</span> 2. TIPO DE DESENVOLVIMENTO <span
+                            class="required">*</span></label>
+
+                    <div class="category-title">MV</div>
+                    <div class="category-container">
+                        <div class="radio-group">
+                            <input type="radio" id="dev_relatorios" name="tipo_desenvolvimento" value="relatorios"
+                                required onchange="handleTipoDesenvolvimento()">
+                            <label for="dev_relatorios">Relatórios</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" id="dev_docs" name="tipo_desenvolvimento" value="docs" required
+                                onchange="handleTipoDesenvolvimento()">
+                            <label for="dev_docs">Documentos Eletrônicos</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" id="dev_notificacao" name="tipo_desenvolvimento" value="notificacao"
+                                required onchange="handleTipoDesenvolvimento()">
+                            <label for="dev_notificacao">Notificação Inteligente</label>
+                        </div>
+                    </div>
+
+                    <div class="category-title">BI</div>
+                    <div class="category-container">
+                        <div class="radio-group">
+                            <input type="radio" id="dev_metabase" name="tipo_desenvolvimento" value="metabase" required
+                                onchange="handleTipoDesenvolvimento()">
+                            <label for="dev_metabase">Metabase</label>
+                        </div>
+                    </div>
+
+                    <div class="category-title">PROCESSOS</div>
+                    <div class="category-container">
+                        <div class="radio-group">
+                            <input type="radio" id="dev_automacao" name="tipo_desenvolvimento" value="automacao"
+                                required onchange="handleTipoDesenvolvimento()">
+                            <label for="dev_automacao">Automatização</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" id="dev_sistemas" name="tipo_desenvolvimento" value="sistemas" required
+                                onchange="handleTipoDesenvolvimento()">
+                            <label for="dev_sistemas">Sistemas Internos</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASSO 3: INFORMAÇÕES GERAIS (Oculto inicialmente) -->
+            <div class="card hidden fade-in" id="card_passo_3">
+                <label class="section-title"><span class="blue-diamond">◆</span> 3. INFORMAÇÕES GERAIS</label>
+                <div class="form-group">
+                    <label>Título <span class="required">*</span></label>
+                    <input type="text" name="titulo" required>
+                </div>
+                <div class="form-group">
+                    <label>Responsável pela homologação e testes <span class="required">*</span></label>
+                    <span class="help-text">Seleção de usuário GLPI nativa (será adicionado como Observador)</span>
+                    <input type="text" name="responsavel" placeholder="Buscar usuário..." required>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label>O processo já é realizado atualmente? <span class="required">*</span></label>
+                    <div class="radio-group"><input type="radio" name="processo_atual" id="proc_atual_nao" value="nao"
+                            required onchange="handleProcessoAtual()"> <label for="proc_atual_nao">Não</label></div>
+                    <div class="radio-group"><input type="radio" name="processo_atual" id="proc_atual_sim" value="sim"
+                            required onchange="handleProcessoAtual()"> <label for="proc_atual_sim">Sim, já realizamos
+                            esse processo</label></div>
+                </div>
+
+                <div id="blocoSituacaoAtual" class="hidden sub-section">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>Situação Atual <span class="required">*</span></label>
+                        <span class="help-text">Descrição: Descrever detalhadamente a situação/como é realizado o
+                            processo hoje.</span>
+                        <textarea name="situacao_atual" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div id="blocoProcessoAtual" class="hidden sub-section">
+                    <div class="form-group">
+                        <label>Descreva como o processo é realizado hoje <span class="required">*</span></label>
+                        <textarea name="desc_processo_hoje" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Tempo do gasto com o processo atual</label>
+                        <input type="time" name="tempo_atual">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>Tempo estimado do novo processo</label>
+                        <input type="time" name="tempo_novo">
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 20px;">
+                    <label>Objetivo Esperado <span class="required">*</span></label>
+                    <span class="help-text">Descrição: Informe detalhadamente qual é o objetivo esperado</span>
+                    <textarea name="objetivo" rows="3" required></textarea>
+                </div>
+            </div>
+
+            <!-- PASSO 4: ENVOLVIMENTO DE OUTROS SETORES (Oculto inicialmente) -->
+            <div class="card hidden fade-in" id="card_passo_4">
+                <label class="section-title"><span class="blue-diamond">◆</span> 4. ENVOLVIMENTO DE OUTROS
+                    SETORES</label>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label>Existem outros setores envolvidos no processo? <span class="required">*</span></label>
+                    <div class="radio-group"><input type="radio" name="outros_setores" id="setor_nao" value="nao"
+                            required onchange="handleOutrosSetores()"> <label for="setor_nao">Não</label></div>
+                    <div class="radio-group"><input type="radio" name="outros_setores" id="setor_sim" value="sim"
+                            required onchange="handleOutrosSetores()"> <label for="setor_sim">Sim</label></div>
+                </div>
+
+                <div id="blocoCiente" class="hidden sub-section">
+                    <label>O setor está ciente e de acordo? <span class="required">*</span></label>
+                    <div class="radio-group"><input type="radio" name="setor_ciente" id="ciente_nao" value="nao"
+                            onchange="handleSetorCiente()"> <label for="ciente_nao">Não</label></div>
+                    <div class="radio-group"><input type="radio" name="setor_ciente" id="ciente_sim" value="sim"
+                            onchange="handleSetorCiente()"> <label for="ciente_sim">Sim</label></div>
+
+                    <div id="msgBloqueio" class="alert-danger hidden">
+                        ⚠️ <strong>Realize o alinhamento com os setores envolvidos. Após concordância e ciência formal,
+                            realize a abertura do chamado.</strong>
+                    </div>
+
+                    <div id="blocoObservador" class="hidden form-group mt-2">
+                        <label>Incluir responsável como observador <span class="required">*</span></label>
+                        <span class="help-text">Seleção de usuário GLPI</span>
+                        <input type="text" name="observador_setor" placeholder="Buscar usuário do setor...">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+             CONTAINER DAS SEÇÕES FINAIS (Oculto até o Passo 4)
+             ========================================== -->
+            <div id="container_final" class="hidden fade-in">
+
+                <!-- 5. LÓGICA PARA RELATÓRIOS -->
+                <div id="sec_relatorios" class="card hidden secao-dinamica">
+                    <label class="section-title"><span class="blue-diamond">◆</span> 5. LÓGICA PARA RELATÓRIOS</label>
+
+                    <div id="relatorios_ajuste" class="hidden">
+                        <label>Informação do Ajuste <span class="required">*</span></label>
+                        <div class="radio-group"><input type="radio" name="rel_ajuste_tipo" id="rel_ajuste_erro"
+                                value="erro" onchange="handleRelatorioAjuste()"> <label
+                                for="rel_ajuste_erro">Erro</label></div>
+                        <div class="radio-group"><input type="radio" name="rel_ajuste_tipo" id="rel_ajuste_melhoria"
+                                value="melhoria" onchange="handleRelatorioAjuste()"> <label
+                                for="rel_ajuste_melhoria">Melhoria</label></div>
+
+                        <div id="rel_erro" class="hidden sub-section">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="err_dados" onchange="toggleCampo(this, 'txt_err_dados')">
+                                <label for="err_dados">Dados incorretos ou ausentes</label>
+                                <input type="text" id="txt_err_dados" class="hidden mt-1"
+                                    placeholder="Detalhar quais informações estão ausentes ou incorretas">
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="err_filtros" onchange="toggleCampo(this, 'txt_err_filtros')">
+                                <label for="err_filtros">Filtros inoperantes</label>
+                                <input type="text" id="txt_err_filtros" class="hidden mt-1"
+                                    placeholder="Detalhar quais filtros estão inoperantes ou incorretos e descrever o comportamento esperado">
+                            </div>
+                            <div class="checkbox-group"><input type="checkbox" id="err_msg"> <label
+                                    for="err_msg">Mensagem de erro ao gerar relatório</label></div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="err_outros" onchange="toggleCampo(this, 'txt_err_outros')">
+                                <label for="err_outros">Outros</label>
+                                <input type="text" id="txt_err_outros" class="hidden mt-1" placeholder="Detalhar...">
+                            </div>
+                        </div>
+
+                        <div id="rel_melhoria" class="hidden sub-section">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="mel_quebra" onchange="toggleCampo(this, 'box_quebra')">
+                                <label for="mel_quebra">Quebra</label>
+                                <div id="box_quebra" class="hidden">
+                                    <input type="text"
+                                        placeholder="Informar qual é a quebra e como ela deve ser aplicada">
+                                    <div class="inline-options"><label><input type="checkbox"> Adição</label>
+                                        <label><input type="checkbox"> Alteração</label> <label><input type="checkbox">
+                                            Exclusão</label></div>
+                                </div>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="mel_filtro" onchange="toggleCampo(this, 'box_filtro')">
+                                <label for="mel_filtro">Filtro</label>
+                                <div id="box_filtro" class="hidden">
+                                    <input type="text"
+                                        placeholder="Informar qual é o filtro e como ele deve ser aplicado">
+                                    <div class="inline-options"><label><input type="checkbox"> Adição</label>
+                                        <label><input type="checkbox"> Alteração</label> <label><input type="checkbox">
+                                            Exclusão</label></div>
+                                </div>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="mel_coluna" onchange="toggleCampo(this, 'box_coluna')">
+                                <label for="mel_coluna">Coluna</label>
+                                <div id="box_coluna" class="hidden">
+                                    <input type="text"
+                                        placeholder="Informar qual é a coluna e como ela deve ser aplicada">
+                                    <div class="inline-options"><label><input type="checkbox"> Adição</label>
+                                        <label><input type="checkbox"> Alteração</label> <label><input type="checkbox">
+                                            Exclusão</label></div>
+                                </div>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="mel_ordem" onchange="toggleCampo(this, 'box_ordem')"> <label
+                                    for="mel_ordem">Ordenação</label>
+                                <div id="box_ordem" class="hidden">
+                                    <input type="text" placeholder="Informar qual ordenação deve ser aplicada">
+                                    <div class="inline-options"><label><input type="checkbox"> Adição</label>
+                                        <label><input type="checkbox"> Alteração</label> <label><input type="checkbox">
+                                            Exclusão</label></div>
+                                </div>
+                            </div>
+                            <p class="alert-warning">⚠️ Anexo obrigatório – Mensagem: Insira um anexo como modelo do
+                                relatório.</p>
+                        </div>
+                    </div>
+
+                    <div id="relatorios_novo" class="hidden">
+                        <div class="form-group">
+                            <label>Caminho das telas e dos documentos <span class="required">*</span></label>
+                            <input type="text">
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="req_prints_rel"> <label for="req_prints_rel">Prints das telas –
+                                Informar quais campos deverão ser considerados (anexo obrigatório)</label>
+                            <input type="text" placeholder="Quais campos..." class="mt-1">
+                        </div>
+                        <div class="form-group mt-2">
+                            <label>Descreva as informações que deverão constar no relatório <span
+                                    class="required">*</span></label>
+                            <span class="help-text">Descrição: Informe detalhadamente quais informações devem constar no
+                                relatório...</span>
+                            <textarea rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. LÓGICA PARA DOCUMENTOS ELETRÔNICOS -->
+                <div id="sec_docs" class="card hidden secao-dinamica">
+                    <label class="section-title"><span class="blue-diamond">◆</span> 6. LÓGICA PARA DOCUMENTOS
+                        ELETRÔNICOS</label>
+
+                    <div id="docs_ajuste" class="hidden sub-section" style="margin-bottom: 20px;">
+                        <label>Informação do Ajuste</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="doc_erro_msg" onchange="toggleCampo(this, 'txt_doc_erro_msg')">
+                            <label for="doc_erro_msg">Mensagens de erro (+ anexo obrigatório)</label>
+                            <input type="text" id="txt_doc_erro_msg" class="hidden mt-1"
+                                placeholder="Descreva a mensagem de erro">
+                        </div>
+                    </div>
+
+                    <div id="docs_novo" class="hidden">
+                        <div class="form-group">
+                            <label>O documento já possui um modelo definido?</label>
+                            <div class="radio-group"><input type="radio" name="doc_modelo" value="sim"
+                                    onchange="toggleRadioCondicional('doc_modelo', 'txt_doc_modelo')">
+                                <label>Sim</label></div>
+                            <div class="radio-group"><input type="radio" name="doc_modelo" value="nao"
+                                    onchange="toggleRadioCondicional('doc_modelo', 'txt_doc_modelo')">
+                                <label>Não</label></div>
+                            <input type="text" id="txt_doc_modelo" class="hidden mt-1"
+                                placeholder="Informe o nome ou referência do modelo definido...">
+                        </div>
+                        <div class="form-group">
+                            <label>O documento terá campos obrigatórios?<br><span class="help-text">Campos que precisam
+                                    ser preenchidos antes de salvar</span></label>
+                            <div class="radio-group"><input type="radio" name="doc_req" value="sim"
+                                    onchange="toggleRadioCondicional('doc_req', 'txt_doc_req')"> <label>Sim</label>
+                            </div>
+                            <div class="radio-group"><input type="radio" name="doc_req" value="nao"
+                                    onchange="toggleRadioCondicional('doc_req', 'txt_doc_req')"> <label>Não</label>
+                            </div>
+                            <input type="text" id="txt_doc_req" class="hidden mt-1"
+                                placeholder="Liste quais campos serão obrigatórios...">
+                        </div>
+                        <!-- Demais perguntas Sim/Não omitidas por brevidade (já validadas no código anterior) -->
+                    </div>
+                </div>
+
+                <!-- 7. LÓGICA PARA NOTIFICAÇÃO INTELIGENTE -->
+                <div id="sec_notificacao" class="card hidden secao-dinamica">
+                    <label class="section-title"><span class="blue-diamond">◆</span> 7. LÓGICA PARA NOTIFICAÇÃO
+                        INTELIGENTE</label>
+                    <div id="notif_ajuste" class="hidden sub-section">
+                        <label>Informação do Ajuste</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="not_email" onchange="toggleCampo(this, 'txt_not_email')"> <label
+                                for="not_email">Não estou recebendo / Inclusão de e-mail</label>
+                            <input type="text" id="txt_not_email" class="hidden mt-1"
+                                placeholder="Inserir o e-mail (obrigatório)">
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="not_vazio"> <label for="not_vazio">E-mail sem informações no
+                                corpo (Anexo obrigatório)</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="not_hora" onchange="toggleCampo(this, 'txt_not_hora')"> <label
+                                for="not_hora">Alteração de horário e frequência</label>
+                            <input type="text" id="txt_not_hora" class="hidden mt-1"
+                                placeholder="Descrever horário/frequência (obrigatório)">
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="not_nome" onchange="toggleCampo(this, 'txt_not_nome')"> <label
+                                for="not_nome">Alteração de nomenclatura</label>
+                            <input type="text" id="txt_not_nome" class="hidden mt-1"
+                                placeholder="Descrever nomenclatura (obrigatório)">
+                        </div>
+                    </div>
+                    <div id="notif_novo" class="hidden">
+                        <div class="form-group">
+                            <label>Descreva as informações que deverão constar na notificação <span
+                                    class="required">*</span></label>
+                            <span class="help-text">Informe detalhadamente quais informações devem constar na
+                                notificação, incluindo a origem dos dados (de onde as informações serão
+                                extraídas).</span>
+                            <textarea rows="3"></textarea>
+                        </div>
+                        <h3>Requisitos Obrigatórios</h3>
+                        <div class="form-group"><label>Colunas <span class="required">*</span></label><input
+                                type="text"></div>
+                        <div class="form-group"><label>Ordenação <span class="required">*</span></label><input
+                                type="text"></div>
+                        <div class="form-group"><label>Quem receberá a notificação? <span
+                                    class="required">*</span></label><input type="text"></div>
+                        <div class="form-group"><label>Horário e frequência</label><span class="help-text">Verificar
+                                regra do notificador</span><input type="text"></div>
+                        <p class="alert-warning">⚠️ Anexos obrigatórios no final do formulário.</p>
+                    </div>
+                </div>
+
+                <!-- 8. LÓGICA PARA BI / METABASE -->
+                <div id="sec_metabase" class="card hidden secao-dinamica">
+                    <label class="section-title"><span class="blue-diamond">◆</span> 8. LÓGICA PARA BI /
+                        METABASE</label>
+                    <div id="bi_ajuste" class="hidden">
+                        <label>Informação do ajuste <span class="required">*</span></label>
+                        <div class="radio-group"><input type="radio" name="bi_tipo_ajuste" id="bi_ajuste_erro"
+                                value="erro" onchange="handleBIAjuste()"> <label for="bi_ajuste_erro">Erro</label></div>
+                        <div class="radio-group"><input type="radio" name="bi_tipo_ajuste" id="bi_ajuste_melhoria"
+                                value="melhoria" onchange="handleBIAjuste()"> <label
+                                for="bi_ajuste_melhoria">Melhoria</label></div>
+
+                        <div id="bi_erro" class="hidden sub-section">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="bi_err_dados"
+                                    onchange="toggleCampo(this, 'txt_bi_err_dados')"> <label for="bi_err_dados">Dados
+                                    incorretos ou ausentes</label>
+                                <input type="text" id="txt_bi_err_dados" class="hidden mt-1"
+                                    placeholder="Detalhar quais informações estão ausentes ou incorretas">
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="bi_err_filtros"
+                                    onchange="toggleCampo(this, 'txt_bi_err_filtros')"> <label
+                                    for="bi_err_filtros">Filtros inoperantes</label>
+                                <input type="text" id="txt_bi_err_filtros" class="hidden mt-1"
+                                    placeholder="Detalhar quais filtros estão inoperantes ou incorretos e o comportamento esperado">
+                            </div>
+                            <div class="checkbox-group"><input type="checkbox" id="bi_err_msg"> <label
+                                    for="bi_err_msg">Mensagens de erro</label></div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="bi_err_outros"
+                                    onchange="toggleCampo(this, 'txt_bi_err_outros')"> <label
+                                    for="bi_err_outros">Outros</label>
+                                <input type="text" id="txt_bi_err_outros" class="hidden mt-1"
+                                    placeholder="Detalhar o erro apresentado">
+                            </div>
+                            <p class="alert-warning">⚠️ Anexo obrigatório para todos os itens.</p>
+                        </div>
+
+                        <div id="bi_melhoria" class="hidden sub-section">
+                            <p class="help-text" style="color:var(--text-dark); margin-bottom: 15px;">Somente alterações
+                                simples serão consideradas como melhoria.</p>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="bi_mel_filtro" onchange="toggleCampo(this, 'box_bi_filtro')">
+                                <label for="bi_mel_filtro">Filtros</label>
+                                <div id="box_bi_filtro" class="hidden">
+                                    <input type="text"
+                                        placeholder="Informar qual é o filtro e como ele deve ser aplicado">
+                                    <div class="inline-options"><label><input type="checkbox"> Inclusão</label>
+                                        <label><input type="checkbox"> Alteração</label> <label><input type="checkbox">
+                                            Exclusão</label></div>
+                                </div>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="bi_mel_coluna" onchange="toggleCampo(this, 'box_bi_coluna')">
+                                <label for="bi_mel_coluna">Coluna</label>
+                                <div id="box_bi_coluna" class="hidden">
+                                    <input type="text"
+                                        placeholder="Informar qual é a coluna e como ela deve ser aplicada">
+                                    <div class="inline-options"><label><input type="checkbox"> Inclusão</label>
+                                        <label><input type="checkbox"> Alteração</label> <label><input type="checkbox">
+                                            Exclusão</label></div>
+                                </div>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="bi_mel_ordem" onchange="toggleCampo(this, 'box_bi_ordem')">
+                                <label for="bi_mel_ordem">Ordenação</label>
+                                <div id="box_bi_ordem" class="hidden">
+                                    <input type="text" placeholder="Informar qual ordenação deve ser aplicada">
+                                    <div class="inline-options"><label><input type="checkbox"> Alteração</label></div>
+                                </div>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="bi_mel_visao" onchange="toggleCampo(this, 'box_bi_visao')">
+                                <label for="bi_mel_visao">Visão (tipo de gráfico)</label>
+                                <div id="box_bi_visao" class="hidden">
+                                    <input type="text" placeholder="Descrever detalhadamente a visão desejada">
+                                    <div class="inline-options"><label><input type="checkbox"> Alteração</label>
+                                        <label><input type="checkbox"> Inclusão</label> <label><input type="checkbox">
+                                            Exclusão</label></div>
+                                </div>
+                            </div>
+                            <p class="alert-warning">⚠️ Anexo obrigatório – Mensagem: Insira um anexo como modelo do
+                                layout esperado.</p>
+                        </div>
+                    </div>
+
+                    <div id="bi_novo" class="hidden">
+                        <h3>Extração das Informações</h3>
+                        <div class="form-group"><label>Caminho das telas e dos documentos <span
+                                    class="required">*</span></label><input type="text"></div>
+                        <div class="form-group"><label>Origem dos dados <span class="help-text">Qual sistema ou tabela
+                                    alimenta?</span></label><input type="text"></div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="req_prints_bi"> <label for="req_prints_bi">Prints das telas –
+                                Informar quais campos deverão ser considerados (anexo obrigatório)</label>
+                            <input type="text" placeholder="Quais campos..." class="mt-1">
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="req_doc_bi"> <label for="req_doc_bi">Print do documento
+                                assistencial – Informar quais campos deverão ser considerados (anexo
+                                obrigatório)</label>
+                            <input type="text" placeholder="Quais campos..." class="mt-1">
+                        </div>
+                        <div class="form-group mt-2">
+                            <label>Descreva as informações que deverão constar no BI <span
+                                    class="required">*</span></label>
+                            <div class="help-text">
+                                Informe detalhadamente quais informações devem constar no BI, incluindo:
+                                <ul style="margin-top: 5px; margin-bottom: 5px; padding-left: 20px;">
+                                    <li>Dados das colunas;</li>
+                                    <li>Tipo de visão (analítica ou gerencial);</li>
+                                    <li>Cálculos aplicáveis;</li>
+                                    <li>Percentuais;</li>
+                                    <li>Médias;</li>
+                                    <li>Totais;</li>
+                                    <li>Indicadores;</li>
+                                    <li>Demais métricas necessárias.</li>
+                                </ul>
+                            </div>
+                            <textarea rows="4"></textarea>
+                        </div>
+
+                        <h3>Requisitos Obrigatórios</h3>
+                        <div class="form-group"><label>Filtros <span class="required">*</span></label><input
+                                type="text"></div>
+                        <div class="form-group"><label>Colunas <span class="required">*</span></label><input
+                                type="text"></div>
+                        <div class="form-group"><label>Ordenação <span class="required">*</span></label><input
+                                type="text"></div>
+                        <p class="alert-warning">⚠️ Anexos obrigatórios no final do formulário.</p>
+                    </div>
+                </div>
+
+                <!-- 9. LÓGICA PARA AUTOMATIZAÇÃO -->
+                <div id="sec_processos" class="card hidden secao-dinamica">
+                    <label class="section-title"><span class="blue-diamond">◆</span> 9. LÓGICA PARA AUTOMATIZAÇÃO E
+                        SISTEMAS INTERNOS</label>
+                    <div id="proc_ajuste" class="hidden sub-section">
+                        <label>Automatizações – Ajuste</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="aut_erro" onchange="toggleCampo(this, 'txt_aut_erro')"> <label
+                                for="aut_erro">Erro na execução da automatização</label>
+                            <input type="text" id="txt_aut_erro" class="hidden mt-1"
+                                placeholder="Descrever erro (obrigatório)">
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="aut_dest" onchange="toggleCampo(this, 'txt_aut_dest')"> <label
+                                for="aut_dest">Alteração de destinatários</label>
+                            <input type="text" id="txt_aut_dest" class="hidden mt-1"
+                                placeholder="Descrever alteração (obrigatório)">
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="aut_outro" onchange="toggleCampo(this, 'txt_aut_outro')"> <label
+                                for="aut_outro">Outro (descrever)</label>
+                            <input type="text" id="txt_aut_outro" class="hidden mt-1"
+                                placeholder="Descrever (obrigatório)">
+                        </div>
+                        <p class="alert-warning">⚠️ Anexo obrigatório para todos os itens.</p>
+                    </div>
+
+                    <div id="proc_novo" class="hidden">
+                        <div class="alert-warning"
+                            style="background-color: var(--coe-light-blue); border-color: var(--coe-blue); color: #004085;">
+                            <strong>Anexos (OBRIGATÓRIO)</strong><br><br>
+                            Para análise da solicitação, é obrigatório anexar no final do formulário:<br>
+                            <ul>
+                                <li>Fluxo do processo atual (desenho ou fluxograma demonstrando como funciona
+                                    atualmente).</li>
+                                <li>Fluxo do processo esperado (desenho ou fluxograma demonstrando como deverá funcionar
+                                    após a automação).</li>
+                                <li>Prints de todas as etapas do processo atual, evidenciando telas e campos envolvidos.
+                                </li>
+                                <li>Caso necessário, vídeo curto demonstrando o processo completo, do início ao fim.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UPLOADS FINAIS -->
+                <div class="card">
+                    <label class="section-title">📎 ANEXOS GERAIS</label>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>Faça o upload de Imagens, Documentos ou Vídeos pertinentes à solicitação.</label>
+                        <input type="file" name="anexos[]" multiple accept="image/*,.pdf,.doc,.docx,.mp4">
+                    </div>
+                </div>
+
+                <!-- RESPONSABILIDADES -->
+                <div class="card">
+                    <div class="info-box">
+                        <h3 style="margin-top: 0; color: var(--coe-blue);">Das responsabilidades:</h3>
+                        <ul style="margin-bottom: 0; padding-left: 20px;">
+                            <li>Todos os envolvidos neste chamado deverão conferir atentamente todas as informações
+                                relacionadas...</li>
+                            <li>A validação do processo deverá ser formalizada por todos os responsáveis...</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- BOTÃO DE ENVIO -->
+                <div style="text-align: right; margin-bottom: 40px;">
+                    <button type="submit" id="btnSubmit" class="btn-submit">Enviar Solicitação</button>
+                </div>
+
+            </div> <!-- Fim container_final -->
+
+        </form>
+    </div>
+
+    <script>
+        // ----------------------------------------------------
+        // LÓGICA DE SUBMISSÃO (Simulação para GitHub Pages)
+        // ----------------------------------------------------
+        function enviarFormulario(event) {
+            event.preventDefault(); // Impede o recarregamento da página (comportamento padrão de submit)
+
+            // Exibe a mensagem de sucesso
+            const msgSucesso = document.getElementById('mensagem_sucesso');
+            msgSucesso.classList.remove('hidden');
+
+            // Rola a página para o topo para que o usuário veja a mensagem
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Reseta o formulário
+            document.getElementById('coeForm').reset();
+
+            // Oculta todas as seções (Volta ao estado inicial do passo 1)
+            document.getElementById('card_passo_2').classList.add('hidden');
+            document.getElementById('card_passo_3').classList.add('hidden');
+            document.getElementById('card_passo_4').classList.add('hidden');
+            document.getElementById('container_final').classList.add('hidden');
+            document.getElementById('msgAjuste').classList.add('hidden');
+            document.querySelectorAll('.secao-dinamica').forEach(el => el.classList.add('hidden'));
+            document.getElementById('blocoProcessoAtual').classList.add('hidden');
+            document.getElementById('blocoSituacaoAtual').classList.add('hidden');
+            document.getElementById('blocoCiente').classList.add('hidden');
+            document.getElementById('btnSubmit').disabled = false;
+
+            // Após 5 segundos, oculta a mensagem de sucesso novamente
+            setTimeout(() => {
+                msgSucesso.classList.add('hidden');
+            }, 5000);
+        }
+
+        // Função Auxiliar
+        function toggleRadioCondicional(radioName, idCampoTexto) {
+            const valor = document.querySelector(`input[name="${radioName}"]:checked`)?.value;
+            const campo = document.getElementById(idCampoTexto);
+            if (valor === 'sim') {
+                campo.classList.remove('hidden');
+                campo.setAttribute('required', 'true');
+            } else {
+                campo.classList.add('hidden');
+                campo.removeAttribute('required');
+            }
+        }
+
+        function toggleCampo(checkbox, idCampoTexto) {
+            const campo = document.getElementById(idCampoTexto);
+            if (checkbox.checked) {
+                campo.classList.remove('hidden');
+                campo.setAttribute('required', 'true');
+            } else {
+                campo.classList.add('hidden');
+                campo.removeAttribute('required');
+            }
+        }
+
+        // ----------------------------------------------------
+        // LÓGICA DE REVELAÇÃO PROGRESSIVA (CASCATA)
+        // ----------------------------------------------------
+
+        // Passo 1 libera o Passo 2
+        function handleTipoSolicitacao() {
+            const tipo = document.querySelector('input[name="tipo_solicitacao"]:checked')?.value;
+            const msgAjuste = document.getElementById('msgAjuste');
+
+            if (tipo === 'ajuste') msgAjuste.classList.remove('hidden');
+            else msgAjuste.classList.add('hidden');
+
+            // Revela o Passo 2 com animação
+            document.getElementById('card_passo_2').classList.remove('hidden');
+            atualizarSecoesDinamicas();
+        }
+
+        // Passo 2 libera o Passo 3
+        function handleTipoDesenvolvimento() {
+            // Revela o Passo 3
+            document.getElementById('card_passo_3').classList.remove('hidden');
+            atualizarSecoesDinamicas();
+        }
+
+        // Passo 3 libera o Passo 4 (Acionado pela última pergunta do card 3)
+        function handleProcessoAtual() {
+            const valor = document.querySelector('input[name="processo_atual"]:checked')?.value;
+            const blocoSim = document.getElementById('blocoProcessoAtual');
+            const blocoNao = document.getElementById('blocoSituacaoAtual');
+
+            if (valor === 'sim') {
+                blocoSim.classList.remove('hidden');
+                blocoSim.querySelector('textarea').setAttribute('required', 'true');
+
+                blocoNao.classList.add('hidden');
+                blocoNao.querySelector('textarea').removeAttribute('required');
+            } else if (valor === 'nao') {
+                blocoNao.classList.remove('hidden');
+                blocoNao.querySelector('textarea').setAttribute('required', 'true');
+
+                blocoSim.classList.add('hidden');
+                blocoSim.querySelector('textarea').removeAttribute('required');
+            }
+
+            // Revela o Passo 4
+            document.getElementById('card_passo_4').classList.remove('hidden');
+        }
+
+        // Passo 4 libera o Restante do Formulário (Seções Dinâmicas + Uploads + Botão)
+        function handleOutrosSetores() {
+            const valor = document.querySelector('input[name="outros_setores"]:checked')?.value;
+            const blocoCiente = document.getElementById('blocoCiente');
+
+            if (valor === 'sim') {
+                blocoCiente.classList.remove('hidden');
+                document.querySelectorAll('input[name="setor_ciente"]').forEach(el => el.setAttribute('required', 'true'));
+
+                // Se marcou SIM, esconde o final e obriga a responder se o setor está ciente
+                document.getElementById('container_final').classList.add('hidden');
+            } else {
+                blocoCiente.classList.add('hidden');
+                document.querySelectorAll('input[name="setor_ciente"]').forEach(el => { el.removeAttribute('required'); el.checked = false; });
+                document.getElementById('msgBloqueio').classList.add('hidden');
+                document.getElementById('blocoObservador').classList.add('hidden');
+                document.getElementById('btnSubmit').disabled = false;
+
+                // Se marcou NÃO (não tem outros setores), libera o resto do form!
+                document.getElementById('container_final').classList.remove('hidden');
+                atualizarSecoesDinamicas();
+            }
+        }
+
+        // Lógica do bloqueio interno do Passo 4
+        function handleSetorCiente() {
+            const ciente = document.querySelector('input[name="setor_ciente"]:checked')?.value;
+            const msgBloqueio = document.getElementById('msgBloqueio');
+            const blocoObs = document.getElementById('blocoObservador');
+            const btnSubmit = document.getElementById('btnSubmit');
+
+            if (ciente === 'nao') {
+                msgBloqueio.classList.remove('hidden');
+                blocoObs.classList.add('hidden');
+                btnSubmit.disabled = true; // BLOQUEIA
+
+                // Oculta tudo que vem depois
+                document.getElementById('container_final').classList.add('hidden');
+            } else if (ciente === 'sim') {
+                msgBloqueio.classList.add('hidden');
+                blocoObs.classList.remove('hidden');
+                blocoObs.querySelector('input').setAttribute('required', 'true');
+                btnSubmit.disabled = false; // LIBERA
+
+                // Mostra tudo que vem depois
+                document.getElementById('container_final').classList.remove('hidden');
+                atualizarSecoesDinamicas();
+            }
+        }
+
+
+        // ----------------------------------------------------
+        // GERENCIADOR DAS SEÇÕES DINÂMICAS 
+        // ----------------------------------------------------
+        function atualizarSecoesDinamicas() {
+            const tipoSolicitacao = document.querySelector('input[name="tipo_solicitacao"]:checked')?.value;
+            const tipoDesenvolvimento = document.querySelector('input[name="tipo_desenvolvimento"]:checked')?.value;
+
+            // Esconder todas as dinâmicas preventivamente
+            document.querySelectorAll('.secao-dinamica').forEach(el => el.classList.add('hidden'));
+
+            if (!tipoSolicitacao || !tipoDesenvolvimento) return;
+
+            // Exibe Relatórios
+            if (tipoDesenvolvimento === 'relatorios') {
+                document.getElementById('sec_relatorios').classList.remove('hidden');
+                if (tipoSolicitacao === 'ajuste') {
+                    document.getElementById('relatorios_ajuste').classList.remove('hidden');
+                    document.getElementById('relatorios_novo').classList.add('hidden');
+                } else {
+                    document.getElementById('relatorios_ajuste').classList.add('hidden');
+                    document.getElementById('relatorios_novo').classList.remove('hidden');
+                }
+            }
+
+            // Exibe Docs
+            if (tipoDesenvolvimento === 'docs') {
+                document.getElementById('sec_docs').classList.remove('hidden');
+                if (tipoSolicitacao === 'ajuste') {
+                    document.getElementById('docs_ajuste').classList.remove('hidden');
+                    document.getElementById('docs_novo').classList.add('hidden');
+                } else {
+                    document.getElementById('docs_ajuste').classList.add('hidden');
+                    document.getElementById('docs_novo').classList.remove('hidden');
+                }
+            }
+
+            // Exibe Notificação Inteligente
+            if (tipoDesenvolvimento === 'notificacao') {
+                document.getElementById('sec_notificacao').classList.remove('hidden');
+                if (tipoSolicitacao === 'ajuste') {
+                    document.getElementById('notif_ajuste').classList.remove('hidden');
+                    document.getElementById('notif_novo').classList.add('hidden');
+                } else {
+                    document.getElementById('notif_ajuste').classList.add('hidden');
+                    document.getElementById('notif_novo').classList.remove('hidden');
+                }
+            }
+
+            // Exibe Metabase / BI
+            if (tipoDesenvolvimento === 'metabase') {
+                document.getElementById('sec_metabase').classList.remove('hidden');
+                if (tipoSolicitacao === 'ajuste') {
+                    document.getElementById('bi_ajuste').classList.remove('hidden');
+                    document.getElementById('bi_novo').classList.add('hidden');
+                } else {
+                    document.getElementById('bi_ajuste').classList.add('hidden');
+                    document.getElementById('bi_novo').classList.remove('hidden');
+                }
+            }
+
+            // Exibe Processos / Automatização / Sistemas
+            if (tipoDesenvolvimento === 'automacao' || tipoDesenvolvimento === 'sistemas') {
+                document.getElementById('sec_processos').classList.remove('hidden');
+                if (tipoSolicitacao === 'ajuste') {
+                    document.getElementById('proc_ajuste').classList.remove('hidden');
+                    document.getElementById('proc_novo').classList.add('hidden');
+                } else {
+                    document.getElementById('proc_ajuste').classList.add('hidden');
+                    document.getElementById('proc_novo').classList.remove('hidden');
+                }
+            }
+        }
+
+        function handleRelatorioAjuste() {
+            const tipo = document.querySelector('input[name="rel_ajuste_tipo"]:checked')?.value;
+            if (tipo === 'erro') {
+                document.getElementById('rel_erro').classList.remove('hidden');
+                document.getElementById('rel_melhoria').classList.add('hidden');
+            } else {
+                document.getElementById('rel_erro').classList.add('hidden');
+                document.getElementById('rel_melhoria').classList.remove('hidden');
+            }
+        }
+
+        function handleBIAjuste() {
+            const tipo = document.querySelector('input[name="bi_tipo_ajuste"]:checked')?.value;
+            if (tipo === 'erro') {
+                document.getElementById('bi_erro').classList.remove('hidden');
+                document.getElementById('bi_melhoria').classList.add('hidden');
+            } else {
+                document.getElementById('bi_erro').classList.add('hidden');
+                document.getElementById('bi_melhoria').classList.remove('hidden');
+            }
+        }
+    </script>
+
+</body>
+
+</html>

@@ -253,7 +253,6 @@
             ✅ <strong>Formulário enviado com sucesso!</strong> Os dados foram processados (Modo Protótipo).
         </div>
 
-        <!-- Modificado para não fazer post no PHP e usar JS no onsubmit -->
         <form id="coeForm" onsubmit="enviarFormulario(event)">
 
             <!-- CABEÇALHO -->
@@ -346,13 +345,16 @@
                     <input type="text" name="responsavel" placeholder="Buscar usuário..." required>
                 </div>
 
-                <div class="form-group" style="margin-bottom: 0;">
-                    <label>O processo já é realizado atualmente? <span class="required">*</span></label>
-                    <div class="radio-group"><input type="radio" name="processo_atual" id="proc_atual_nao" value="nao"
-                            required onchange="handleProcessoAtual()"> <label for="proc_atual_nao">Não</label></div>
-                    <div class="radio-group"><input type="radio" name="processo_atual" id="proc_atual_sim" value="sim"
-                            required onchange="handleProcessoAtual()"> <label for="proc_atual_sim">Sim, já realizamos
-                            esse processo</label></div>
+                <!-- Wrapper para Ocultar em caso de Ajuste -->
+                <div id="wrapper_processo_atual">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>O processo já é realizado atualmente? <span class="required">*</span></label>
+                        <div class="radio-group"><input type="radio" name="processo_atual" id="proc_atual_nao" value="nao"
+                                onchange="handleProcessoAtual()"> <label for="proc_atual_nao">Não</label></div>
+                        <div class="radio-group"><input type="radio" name="processo_atual" id="proc_atual_sim" value="sim"
+                                onchange="handleProcessoAtual()"> <label for="proc_atual_sim">Sim, já realizamos
+                                esse processo</label></div>
+                    </div>
                 </div>
 
                 <div id="blocoSituacaoAtual" class="hidden sub-section">
@@ -449,8 +451,12 @@
                                 <input type="text" id="txt_err_filtros" class="hidden mt-1"
                                     placeholder="Detalhar quais filtros estão inoperantes ou incorretos e descrever o comportamento esperado">
                             </div>
-                            <div class="checkbox-group"><input type="checkbox" id="err_msg"> <label
-                                    for="err_msg">Mensagem de erro ao gerar relatório</label></div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="err_msg" onchange="toggleCampo(this, 'txt_err_msg_rel')"> <label
+                                    for="err_msg">Mensagem de erro ao gerar relatório</label>
+                                <input type="text" id="txt_err_msg_rel" class="hidden mt-1"
+                                    placeholder="Descreva a mensagem de erro...">
+                            </div>
                             <div class="checkbox-group">
                                 <input type="checkbox" id="err_outros" onchange="toggleCampo(this, 'txt_err_outros')">
                                 <label for="err_outros">Outros</label>
@@ -465,7 +471,7 @@
                                 <div id="box_quebra" class="hidden">
                                     <input type="text"
                                         placeholder="Informar qual é a quebra e como ela deve ser aplicada">
-                                    <div class="inline-options"><label><input type="checkbox"> Adição</label>
+                                    <div class="inline-options"><label><input type="checkbox"> Inclusão</label>
                                         <label><input type="checkbox"> Alteração</label> <label><input type="checkbox">
                                             Exclusão</label></div>
                                 </div>
@@ -476,7 +482,7 @@
                                 <div id="box_filtro" class="hidden">
                                     <input type="text"
                                         placeholder="Informar qual é o filtro e como ele deve ser aplicado">
-                                    <div class="inline-options"><label><input type="checkbox"> Adição</label>
+                                    <div class="inline-options"><label><input type="checkbox"> Inclusão</label>
                                         <label><input type="checkbox"> Alteração</label> <label><input type="checkbox">
                                             Exclusão</label></div>
                                 </div>
@@ -487,7 +493,7 @@
                                 <div id="box_coluna" class="hidden">
                                     <input type="text"
                                         placeholder="Informar qual é a coluna e como ela deve ser aplicada">
-                                    <div class="inline-options"><label><input type="checkbox"> Adição</label>
+                                    <div class="inline-options"><label><input type="checkbox"> Inclusão</label>
                                         <label><input type="checkbox"> Alteração</label> <label><input type="checkbox">
                                             Exclusão</label></div>
                                 </div>
@@ -497,7 +503,7 @@
                                     for="mel_ordem">Ordenação</label>
                                 <div id="box_ordem" class="hidden">
                                     <input type="text" placeholder="Informar qual ordenação deve ser aplicada">
-                                    <div class="inline-options"><label><input type="checkbox"> Adição</label>
+                                    <div class="inline-options"><label><input type="checkbox"> Inclusão</label>
                                         <label><input type="checkbox"> Alteração</label> <label><input type="checkbox">
                                             Exclusão</label></div>
                                 </div>
@@ -512,11 +518,7 @@
                             <label>Caminho das telas e dos documentos <span class="required">*</span></label>
                             <input type="text">
                         </div>
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="req_prints_rel"> <label for="req_prints_rel">Prints das telas –
-                                Informar quais campos deverão ser considerados (anexo obrigatório)</label>
-                            <input type="text" placeholder="Quais campos..." class="mt-1">
-                        </div>
+
                         <div class="form-group mt-2">
                             <label>Descreva as informações que deverão constar no relatório <span
                                     class="required">*</span></label>
@@ -539,6 +541,16 @@
                             <label for="doc_erro_msg">Mensagens de erro (+ anexo obrigatório)</label>
                             <input type="text" id="txt_doc_erro_msg" class="hidden mt-1"
                                 placeholder="Descreva a mensagem de erro">
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="doc_erro_regra" onchange="toggleCampo(this, 'txt_doc_erro_regra')"> 
+                            <label for="doc_erro_regra">Erros ou alterações em regras (+ anexo obrigatório)</label>
+                            <input type="text" id="txt_doc_erro_regra" class="hidden mt-1" placeholder="Descreva o erro ou alteração">
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="doc_format" onchange="toggleCampo(this, 'txt_doc_format')"> 
+                            <label for="doc_format">Formatação de campos (+ anexo obrigatório)</label>
+                            <input type="text" id="txt_doc_format" class="hidden mt-1" placeholder="Descreva a formatação desejada">
                         </div>
                     </div>
 
@@ -566,7 +578,60 @@
                             <input type="text" id="txt_doc_req" class="hidden mt-1"
                                 placeholder="Liste quais campos serão obrigatórios...">
                         </div>
-                        <!-- Demais perguntas Sim/Não omitidas por brevidade (já validadas no código anterior) -->
+                        <div class="form-group">
+                            <label>Algum campo precisa aparecer em negrito?</label>
+                            <div class="radio-group"><input type="radio" name="doc_bold" value="sim" onchange="toggleRadioCondicional('doc_bold', 'txt_doc_bold')"> <label>Sim</label></div>
+                            <div class="radio-group"><input type="radio" name="doc_bold" value="nao" onchange="toggleRadioCondicional('doc_bold', 'txt_doc_bold')"> <label>Não</label></div>
+                            <input type="text" id="txt_doc_bold" class="hidden mt-1" placeholder="Especifique quais campos devem ficar em negrito...">
+                        </div>
+                        <div class="form-group">
+                            <label>Algum campo será uma lista de opções para escolher?<br><span class="help-text">Ex: clicar e escolher entre "Cidade", "Status"</span></label>
+                            <div class="radio-group"><input type="radio" name="doc_lista" value="sim" onchange="toggleRadioCondicional('doc_lista', 'txt_doc_lista')"> <label>Sim – lista de opções</label></div>
+                            <div class="radio-group"><input type="radio" name="doc_lista" value="nao" onchange="toggleRadioCondicional('doc_lista', 'txt_doc_lista')"> <label>Não</label></div>
+                            <input type="text" id="txt_doc_lista" class="hidden mt-1" placeholder="Informe o nome do campo e as opções disponíveis...">
+                        </div>
+                        <div class="form-group">
+                            <label>Algum campo permite escolher apenas uma opção entre várias?<br><span class="help-text">Ex: ○ Masculino ○ Feminino</span></label>
+                            <div class="radio-group"><input type="radio" name="doc_radio" value="sim" onchange="toggleRadioCondicional('doc_radio', 'txt_doc_radio')"> <label>Sim</label></div>
+                            <div class="radio-group"><input type="radio" name="doc_radio" value="nao" onchange="toggleRadioCondicional('doc_radio', 'txt_doc_radio')"> <label>Não</label></div>
+                            <input type="text" id="txt_doc_radio" class="hidden mt-1" placeholder="Informe o nome do campo e as opções de escolha...">
+                        </div>
+                        <div class="form-group">
+                            <label>Algum campo permite marcar várias opções ao mesmo tempo?<br><span class="help-text">Ex: ☑ E-mail ☑ Telefone</span></label>
+                            <div class="radio-group"><input type="radio" name="doc_check" value="sim" onchange="toggleRadioCondicional('doc_check', 'txt_doc_check')"> <label>Sim</label></div>
+                            <div class="radio-group"><input type="radio" name="doc_check" value="nao" onchange="toggleRadioCondicional('doc_check', 'txt_doc_check')"> <label>Não</label></div>
+                            <input type="text" id="txt_doc_check" class="hidden mt-1" placeholder="Informe o nome do campo e as opções de múltipla escolha...">
+                        </div>
+                        <div class="form-group">
+                            <label>O documento terá botões de ação?<br><span class="help-text">Ex: Salvar, Enviar, Gerar PDF</span></label>
+                            <div class="radio-group"><input type="radio" name="doc_btn" value="sim" onchange="toggleRadioCondicional('doc_btn', 'txt_doc_btn')"> <label>Sim</label></div>
+                            <div class="radio-group"><input type="radio" name="doc_btn" value="nao" onchange="toggleRadioCondicional('doc_btn', 'txt_doc_btn')"> <label>Não</label></div>
+                            <input type="text" id="txt_doc_btn" class="hidden mt-1" placeholder="Quais botões e o que eles devem fazer? (Ex: Salvar, Imprimir)...">
+                        </div>
+                        <div class="form-group">
+                            <label>O documento terá campo para digitar texto livre?<br><span class="help-text">Ex: observações ou descrição</span></label>
+                            <div class="radio-group"><input type="radio" name="doc_texto" value="sim" onchange="toggleRadioCondicional('doc_texto', 'txt_doc_texto')"> <label>Sim</label></div>
+                            <div class="radio-group"><input type="radio" name="doc_texto" value="nao" onchange="toggleRadioCondicional('doc_texto', 'txt_doc_texto')"> <label>Não</label></div>
+                            <input type="text" id="txt_doc_texto" class="hidden mt-1" placeholder="Especifique os campos de texto livre...">
+                        </div>
+                        <div class="form-group">
+                            <label>Algum campo deve ficar bloqueado para edição?<br><span class="help-text">Apenas visualização ou preenchido automaticamente</span></label>
+                            <div class="radio-group"><input type="radio" name="doc_block" value="sim" onchange="toggleRadioCondicional('doc_block', 'txt_doc_block')"> <label>Sim</label></div>
+                            <div class="radio-group"><input type="radio" name="doc_block" value="nao" onchange="toggleRadioCondicional('doc_block', 'txt_doc_block')"> <label>Não</label></div>
+                            <input type="text" id="txt_doc_block" class="hidden mt-1" placeholder="Quais campos e qual a regra de bloqueio? (Ex: Data atual)...">
+                        </div>
+                        <div class="form-group">
+                            <label>Algum campo aparece apenas quando outro é selecionado?<br><span class="help-text">Ex: se escolher “Outro”, aparece um campo para explicar</span></label>
+                            <div class="radio-group"><input type="radio" name="doc_cond" value="sim" onchange="toggleRadioCondicional('doc_cond', 'txt_doc_cond')"> <label>Sim</label></div>
+                            <div class="radio-group"><input type="radio" name="doc_cond" value="nao" onchange="toggleRadioCondicional('doc_cond', 'txt_doc_cond')"> <label>Não</label></div>
+                            <input type="text" id="txt_doc_cond" class="hidden mt-1" placeholder="Explique a regra (Ex: Se escolher convênio, abre aba de carteirinha)...">
+                        </div>
+                        <div class="form-group">
+                            <label>Foram anexados prints ou exemplos do documento desejado?</label>
+                            <div class="radio-group"><input type="radio" name="doc_prints" value="sim" onchange="toggleRadioCondicional('doc_prints', 'txt_doc_prints')"> <label>Sim</label></div>
+                            <div class="radio-group"><input type="radio" name="doc_prints" value="nao" onchange="toggleRadioCondicional('doc_prints', 'txt_doc_prints')"> <label>Não</label></div>
+                            <input type="text" id="txt_doc_prints" class="hidden mt-1" placeholder="Descreva brevemente o que está nos anexos... (Nome do arquivo, etc)">
+                        </div>
                     </div>
                 </div>
 
@@ -583,8 +648,9 @@
                                 placeholder="Inserir o e-mail (obrigatório)">
                         </div>
                         <div class="checkbox-group">
-                            <input type="checkbox" id="not_vazio"> <label for="not_vazio">E-mail sem informações no
+                            <input type="checkbox" id="not_vazio" onchange="toggleCampo(this, 'txt_not_vazio')"> <label for="not_vazio">E-mail sem informações no
                                 corpo (Anexo obrigatório)</label>
+                            <input type="text" id="txt_not_vazio" class="hidden mt-1" placeholder="Descreva o problema...">
                         </div>
                         <div class="checkbox-group">
                             <input type="checkbox" id="not_hora" onchange="toggleCampo(this, 'txt_not_hora')"> <label
@@ -648,8 +714,11 @@
                                 <input type="text" id="txt_bi_err_filtros" class="hidden mt-1"
                                     placeholder="Detalhar quais filtros estão inoperantes ou incorretos e o comportamento esperado">
                             </div>
-                            <div class="checkbox-group"><input type="checkbox" id="bi_err_msg"> <label
-                                    for="bi_err_msg">Mensagens de erro</label></div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="bi_err_msg" onchange="toggleCampo(this, 'txt_bi_err_msg_rel')"> <label
+                                    for="bi_err_msg">Mensagens de erro</label>
+                                <input type="text" id="txt_bi_err_msg_rel" class="hidden mt-1" placeholder="Descreva a mensagem de erro...">
+                            </div>
                             <div class="checkbox-group">
                                 <input type="checkbox" id="bi_err_outros"
                                     onchange="toggleCampo(this, 'txt_bi_err_outros')"> <label
@@ -710,10 +779,17 @@
 
                     <div id="bi_novo" class="hidden">
                         <h3>Extração das Informações</h3>
-                        <div class="form-group"><label>Caminho das telas e dos documentos <span
-                                    class="required">*</span></label><input type="text"></div>
-                        <div class="form-group"><label>Origem dos dados <span class="help-text">Qual sistema ou tabela
-                                    alimenta?</span></label><input type="text"></div>
+                        
+                        <div class="form-group">
+                            <label>Caminho das telas e dos documentos <span class="required">*</span></label>
+                            <input type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Origem dos dados</label>
+                            <span class="help-text">Qual sistema ou tabela alimenta?</span>
+                            <input type="text">
+                        </div>
+
                         <div class="checkbox-group">
                             <input type="checkbox" id="req_prints_bi"> <label for="req_prints_bi">Prints das telas –
                                 Informar quais campos deverão ser considerados (anexo obrigatório)</label>
@@ -783,6 +859,10 @@
                     </div>
 
                     <div id="proc_novo" class="hidden">
+                        <div class="form-group">
+                            <label>Informações Importantes</label>
+                            <textarea rows="3" placeholder="Descreva informações adicionais ou importantes para a automação..."></textarea>
+                        </div>
                         <div class="alert-warning"
                             style="background-color: var(--coe-light-blue); border-color: var(--coe-blue); color: #004085;">
                             <strong>Anexos (OBRIGATÓRIO)</strong><br><br>
@@ -859,6 +939,7 @@
             document.getElementById('blocoProcessoAtual').classList.add('hidden');
             document.getElementById('blocoSituacaoAtual').classList.add('hidden');
             document.getElementById('blocoCiente').classList.add('hidden');
+            document.getElementById('wrapper_processo_atual').classList.add('hidden');
             document.getElementById('btnSubmit').disabled = false;
 
             // Após 5 segundos, oculta a mensagem de sucesso novamente
@@ -895,6 +976,49 @@
         // LÓGICA DE REVELAÇÃO PROGRESSIVA (CASCATA)
         // ----------------------------------------------------
 
+        // Atualiza o Passo 3 baseado se é Ajuste ou Novo Desenvolvimento
+        function atualizarLogicaPasso3() {
+            const tipoSolicitacao = document.querySelector('input[name="tipo_solicitacao"]:checked')?.value;
+
+            if (tipoSolicitacao === 'ajuste') {
+                // Esconde a pergunta Sim/Não de novo dev
+                document.getElementById('wrapper_processo_atual').classList.add('hidden');
+                document.querySelectorAll('input[name="processo_atual"]').forEach(el => el.removeAttribute('required'));
+
+                // Esconde o bloco de "Como é realizado hoje" (caso estivesse aberto pelo Sim)
+                document.getElementById('blocoProcessoAtual').classList.add('hidden');
+                document.getElementById('blocoProcessoAtual').querySelector('textarea').removeAttribute('required');
+
+                // Mostra o bloco "Situação Atual" obrigatório para Ajuste
+                document.getElementById('blocoSituacaoAtual').classList.remove('hidden');
+                document.getElementById('blocoSituacaoAtual').querySelector('textarea').setAttribute('required', 'true');
+
+                // Como não há pergunta condicional de rádio no passo 3 de Ajuste, revela o Passo 4 automaticamente
+                document.getElementById('card_passo_4').classList.remove('hidden');
+            } else if (tipoSolicitacao === 'novo') {
+                // Mostra a pergunta Sim/Não
+                document.getElementById('wrapper_processo_atual').classList.remove('hidden');
+                document.querySelectorAll('input[name="processo_atual"]').forEach(el => el.setAttribute('required', 'true'));
+
+                const radioSelecionado = document.querySelector('input[name="processo_atual"]:checked');
+
+                if (radioSelecionado) {
+                    // Se a pessoa já tinha escolhido Sim/Não antes, reaplica a visualização correta
+                    handleProcessoAtual(); 
+                } else {
+                    // Se ainda não escolheu, esconde todos os sub-blocos e o passo 4
+                    document.getElementById('blocoSituacaoAtual').classList.add('hidden');
+                    document.getElementById('blocoSituacaoAtual').querySelector('textarea').removeAttribute('required');
+
+                    document.getElementById('blocoProcessoAtual').classList.add('hidden');
+                    document.getElementById('blocoProcessoAtual').querySelector('textarea').removeAttribute('required');
+
+                    document.getElementById('card_passo_4').classList.add('hidden');
+                    document.getElementById('container_final').classList.add('hidden');
+                }
+            }
+        }
+
         // Passo 1 libera o Passo 2
         function handleTipoSolicitacao() {
             const tipo = document.querySelector('input[name="tipo_solicitacao"]:checked')?.value;
@@ -905,6 +1029,12 @@
 
             // Revela o Passo 2 com animação
             document.getElementById('card_passo_2').classList.remove('hidden');
+
+            // SE o Passo 3 já estiver visível e a pessoa voltar para mudar o Passo 1, atualiza o Passo 3 na hora!
+            if (!document.getElementById('card_passo_3').classList.contains('hidden')) {
+                atualizarLogicaPasso3();
+            }
+
             atualizarSecoesDinamicas();
         }
 
@@ -912,10 +1042,14 @@
         function handleTipoDesenvolvimento() {
             // Revela o Passo 3
             document.getElementById('card_passo_3').classList.remove('hidden');
+            
+            // Aplica a inteligência do Passo 3 baseada no Passo 1
+            atualizarLogicaPasso3();
+            
             atualizarSecoesDinamicas();
         }
 
-        // Passo 3 libera o Passo 4 (Acionado pela última pergunta do card 3)
+        // Passo 3 libera o Passo 4 (Acionado pela última pergunta do card 3 se for Novo)
         function handleProcessoAtual() {
             const valor = document.querySelector('input[name="processo_atual"]:checked')?.value;
             const blocoSim = document.getElementById('blocoProcessoAtual');

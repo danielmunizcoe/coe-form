@@ -445,7 +445,7 @@
                         <textarea name="desc_processo_hoje" rows="3"></textarea>
                     </div>
                     <div class="form-group">
-                        <label>Tempo do gasto com o processo atual</label>
+                        <label>Tempo gasto com o processo atual</label>
                         <input type="time" name="tempo_atual">
                     </div>
                     <div class="form-group" style="margin-bottom: 0;">
@@ -541,7 +541,7 @@
                             <div class="checkbox-group">
                                 <input type="checkbox" id="mel_quebra" name="rel_ajuste_melhoria_opts" required onchange="toggleCampo(this, 'box_quebra'); validarGrupoCheckbox('rel_ajuste_melhoria_opts')">
                                 <label for="mel_quebra">Quebra</label>
-                                <div id="box_quebra" class="hidden">
+                                <div id="box_quebra" class="hidden mt-1">
                                     <input type="text"
                                         placeholder="Informar qual é a quebra e como ela deve ser aplicada">
                                     <div class="inline-options"><label><input type="checkbox"> Inclusão</label>
@@ -552,7 +552,7 @@
                             <div class="checkbox-group">
                                 <input type="checkbox" id="mel_filtro" name="rel_ajuste_melhoria_opts" required onchange="toggleCampo(this, 'box_filtro'); validarGrupoCheckbox('rel_ajuste_melhoria_opts')">
                                 <label for="mel_filtro">Filtro</label>
-                                <div id="box_filtro" class="hidden">
+                                <div id="box_filtro" class="hidden mt-1">
                                     <input type="text"
                                         placeholder="Informar qual é o filtro e como ele deve ser aplicado">
                                     <div class="inline-options"><label><input type="checkbox"> Inclusão</label>
@@ -563,7 +563,7 @@
                             <div class="checkbox-group">
                                 <input type="checkbox" id="mel_coluna" name="rel_ajuste_melhoria_opts" required onchange="toggleCampo(this, 'box_coluna'); validarGrupoCheckbox('rel_ajuste_melhoria_opts')">
                                 <label for="mel_coluna">Coluna</label>
-                                <div id="box_coluna" class="hidden">
+                                <div id="box_coluna" class="hidden mt-1">
                                     <input type="text"
                                         placeholder="Informar qual é a coluna e como ela deve ser aplicada">
                                     <div class="inline-options"><label><input type="checkbox"> Inclusão</label>
@@ -574,7 +574,7 @@
                             <div class="checkbox-group">
                                 <input type="checkbox" id="mel_ordem" name="rel_ajuste_melhoria_opts" required onchange="toggleCampo(this, 'box_ordem'); validarGrupoCheckbox('rel_ajuste_melhoria_opts')"> <label
                                     for="mel_ordem">Ordenação</label>
-                                <div id="box_ordem" class="hidden">
+                                <div id="box_ordem" class="hidden mt-1">
                                     <input type="text" placeholder="Informar qual ordenação deve ser aplicada">
                                     <div class="inline-options"><label><input type="checkbox"> Inclusão</label>
                                         <label><input type="checkbox"> Alteração</label> <label><input type="checkbox">
@@ -587,11 +587,11 @@
                     <div id="relatorios_novo" class="hidden">
                         <div class="form-group">
                             <label>Caminho das telas e dos documentos <span class="required">*</span></label>
-                            <input type="text" name="req_caminho_telas" required>
+                            <input type="text" required>
                         </div>
                         <div class="form-group">
                             <label>Qual sistema ou tabela é a fonte desses dados? <span class="required">*</span></label>
-                            <input type="text" name="req_origem_dados" required>
+                            <input type="text" required>
                         </div>
                         
                         <div class="form-group">
@@ -632,7 +632,7 @@
                             <label>Descreva as informações que deverão constar no relatório <span
                                     class="required">*</span></label>
                             <span class="help-text">Descrição: Informe detalhadamente quais informações devem constar no relatório, incluindo: dados das colunas, tipo de relatório (analítico ou gerencial), cálculos aplicáveis, percentuais, médias, totais, indicadores e demais métricas necessárias.</span>
-                            <textarea name="req_desc_info" rows="4" required></textarea>
+                            <textarea rows="4" required></textarea>
                         </div>
                     </div>
                 </div>
@@ -841,7 +841,7 @@
                             <div class="checkbox-group">
                                 <input type="checkbox" id="bi_mel_filtro" name="bi_ajuste_melhoria_opts" required onchange="toggleCampo(this, 'box_bi_filtro'); validarGrupoCheckbox('bi_ajuste_melhoria_opts')">
                                 <label for="bi_mel_filtro">Filtros</label>
-                                <div id="box_bi_filtro" class="hidden">
+                                <div id="box_bi_filtro" class="hidden mt-1">
                                     <input type="text"
                                         placeholder="Informar qual é o filtro e como ele deve ser aplicado">
                                     <div class="inline-options"><label><input type="checkbox"> Inclusão</label>
@@ -852,7 +852,7 @@
                             <div class="checkbox-group">
                                 <input type="checkbox" id="bi_mel_coluna" name="bi_ajuste_melhoria_opts" required onchange="toggleCampo(this, 'box_bi_coluna'); validarGrupoCheckbox('bi_ajuste_melhoria_opts')">
                                 <label for="bi_mel_coluna">Coluna</label>
-                                <div id="box_bi_coluna" class="hidden">
+                                <div id="box_bi_coluna" class="hidden mt-1">
                                     <input type="text"
                                         placeholder="Informar qual é a coluna e como ela deve ser aplicada">
                                     <div class="inline-options"><label><input type="checkbox"> Inclusão</label>
@@ -863,7 +863,7 @@
                             <div class="checkbox-group">
                                 <input type="checkbox" id="bi_mel_ordem" name="bi_ajuste_melhoria_opts" required onchange="toggleCampo(this, 'box_bi_ordem'); validarGrupoCheckbox('bi_ajuste_melhoria_opts')">
                                 <label for="bi_mel_ordem">Ordenação</label>
-                                <div id="box_bi_ordem" class="hidden">
+                                <div id="box_bi_ordem" class="hidden mt-1">
                                     <input type="text" placeholder="Informar qual ordenação deve ser aplicada">
                                     <div class="inline-options"><label><input type="checkbox"> Alteração</label></div>
                                 </div>
@@ -871,7 +871,7 @@
                             <div class="checkbox-group">
                                 <input type="checkbox" id="bi_mel_visao" name="bi_ajuste_melhoria_opts" required onchange="toggleCampo(this, 'box_bi_visao'); validarGrupoCheckbox('bi_ajuste_melhoria_opts')">
                                 <label for="bi_mel_visao">Visão (tipo de gráfico)</label>
-                                <div id="box_bi_visao" class="hidden">
+                                <div id="box_bi_visao" class="hidden mt-1">
                                     <input type="text" placeholder="Descrever detalhadamente a visão desejada">
                                     <div class="inline-options"><label><input type="checkbox"> Alteração</label>
                                         <label><input type="checkbox"> Inclusão</label> <label><input type="checkbox">
@@ -1074,10 +1074,10 @@
             const form = document.getElementById('coeForm');
             const formData = new FormData(form);
 
-            const titulo = formData.get('titulo') || 'Sem título';
-            const responsavel = formData.get('responsavel') || 'Usuário Requerente';
+            // ================== PASSO 3 ==================
+            const titulo = document.querySelector('input[name="titulo"]')?.value || 'Sem título';
+            const responsavel = document.querySelector('input[name="responsavel"]')?.value || 'Usuário Requerente';
             
-            // Textos de rádio selecionados
             const radSolicitacao = document.querySelector('input[name="tipo_solicitacao"]:checked');
             const radDesenvolvimento = document.querySelector('input[name="tipo_desenvolvimento"]:checked');
             const tipoSolicitacao = radSolicitacao ? radSolicitacao.nextElementSibling.innerText : '';
@@ -1103,77 +1103,116 @@
             let num = 2; // Contador de campos
 
             const addField = (label, value) => {
-                if (value && value.trim() !== '') {
-                    camposHTML += `<p style="margin-bottom: 15px; margin-top: 0;"><strong>${num}) ${label} :</strong><br><span style="white-space: pre-wrap;">${value}</span></p>`;
+                if (label && value && value.trim() !== '') {
+                    // Limpar label
+                    let cleanLabel = label.replace(/\*/g, '').replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
+                    camposHTML += `<p style="margin-bottom: 15px; margin-top: 0;"><strong>${num}) ${cleanLabel} :</strong><br><span style="white-space: pre-wrap; display: block; margin-top: 4px; color: #1a4f2c;">${value.trim()}</span></p>`;
                     num++;
                 }
             };
 
-            let descricaoCombinada = '';
-            const situacaoAtual = formData.get('situacao_atual') || '';
-            const motivacaoDemanda = formData.get('motivacao_demanda') || '';
-            const descProcessoHoje = formData.get('desc_processo_hoje') || '';
-
-            const elSitAtual = document.querySelector('textarea[name="situacao_atual"]');
-            const elMotivacao = document.querySelector('textarea[name="motivacao_demanda"]');
-            const elDescHoje = document.querySelector('textarea[name="desc_processo_hoje"]');
-
-            if (situacaoAtual && elSitAtual && !elSitAtual.closest('.hidden')) {
-                descricaoCombinada += `SITUAÇÃO ATUAL:\n${situacaoAtual}\n\n`;
-            }
-            if (motivacaoDemanda && elMotivacao && !elMotivacao.closest('.hidden')) {
-                descricaoCombinada += `MOTIVAÇÃO DA DEMANDA:\n${motivacaoDemanda}\n\n`;
-            }
-            if (descProcessoHoje && elDescHoje && !elDescHoje.closest('.hidden')) {
-                descricaoCombinada += `COMO O PROCESSO É REALIZADO HOJE:\n${descProcessoHoje}\n\n`;
-            }
+            // ====== EXTRAÇÃO SEQUENCIAL DE TODOS OS CAMPOS VÍSIVEIS ======
             
-            if (descricaoCombinada.trim() !== '') {
-                addField('Descrição', descricaoCombinada.trim());
-            }
+            addField('Título da Solicitação', titulo);
+            addField('Responsável pela homologação e testes', responsavel);
 
-            const objetivo = formData.get('objetivo');
-            if (objetivo) {
-                addField('Objetivo Esperado', objetivo.trim());
-            }
+            const procAtual = document.querySelector('input[name="processo_atual"]:checked');
+            if (procAtual && !procAtual.disabled) addField('O processo já é realizado atualmente?', procAtual.parentElement.innerText);
+            
+            const sitAtual = document.querySelector('textarea[name="situacao_atual"]');
+            if (sitAtual && !sitAtual.disabled) addField('Situação Atual', sitAtual.value);
+            
+            const motDemanda = document.querySelector('textarea[name="motivacao_demanda"]');
+            if (motDemanda && !motDemanda.disabled) addField('Motivação da demanda', motDemanda.value);
+            
+            const descHoje = document.querySelector('textarea[name="desc_processo_hoje"]');
+            if (descHoje && !descHoje.disabled) addField('Como o processo é realizado hoje', descHoje.value);
+            
+            const tempoAtual = document.querySelector('input[name="tempo_atual"]');
+            if (tempoAtual && !tempoAtual.disabled) addField('Tempo gasto com o processo atual', tempoAtual.value);
+            
+            const tempoNovo = document.querySelector('input[name="tempo_novo"]');
+            if (tempoNovo && !tempoNovo.disabled) addField('Tempo estimado do novo processo', tempoNovo.value);
+            
+            const objetivo = document.querySelector('textarea[name="objetivo"]');
+            if (objetivo && !objetivo.disabled) addField('Objetivo Esperado', objetivo.value);
 
-            // Loop por todos os text inputs visíveis do container_final (incluindo tratamento de inline checkboxes)
-            const detalhesContainer = document.getElementById('container_final');
-            if(detalhesContainer) {
-                const visiveis = detalhesContainer.querySelectorAll('input[type="text"]:not(.hidden), textarea:not(.hidden)');
-                visiveis.forEach(el => {
-                    if (!el.disabled) {
-                        let finalValue = el.value.trim();
-                        let hasInlineChecked = false;
-                        let inlineText = '';
+            // ================== PASSO 4 ==================
+            const outrosSetores = document.querySelector('input[name="outros_setores"]:checked');
+            if (outrosSetores && !outrosSetores.disabled) addField('Existem outros setores envolvidos no processo?', outrosSetores.parentElement.innerText);
+            
+            const setorCiente = document.querySelector('input[name="setor_ciente"]:checked');
+            if (setorCiente && !setorCiente.disabled) addField('O setor está ciente e de acordo?', setorCiente.parentElement.innerText);
+            
+            const obsSetor = document.querySelector('input[name="observador_setor"]');
+            if (obsSetor && !obsSetor.disabled) addField('Incluir responsável como observador', obsSetor.value);
 
-                        // Verifica se há opções embutidas marcadas (Inclusão, Alteração, Exclusão)
-                        const inlineContainer = el.parentElement.querySelector('.inline-options');
-                        if (inlineContainer) {
-                            const checkedBoxes = Array.from(inlineContainer.querySelectorAll('input[type="checkbox"]:checked'));
-                            if (checkedBoxes.length > 0) {
-                                hasInlineChecked = true;
-                                inlineText = checkedBoxes.map(cb => cb.parentElement.innerText.trim()).join(' | ');
+            // ================== SEÇÕES DINÂMICAS ==================
+            const activeSection = document.querySelector('.secao-dinamica:not(.hidden)');
+            if(activeSection) {
+                
+                // 1. Extrair Radios Exclusivos (ex: Informação do Ajuste, O documento já possui modelo?)
+                const checkedRadios = activeSection.querySelectorAll('input[type="radio"]:checked');
+                checkedRadios.forEach(radio => {
+                    if (!radio.disabled) {
+                        let formGroup = radio.closest('.form-group, .sub-section');
+                        let questionLabel = formGroup ? formGroup.querySelector('label:first-child').innerText : 'Opção Selecionada';
+                        let answerLabel = radio.parentElement.innerText;
+                        addField(questionLabel, answerLabel);
+                    }
+                });
+
+                // 2. Extrair Checkboxes (com tratamento para input text interno e inline options)
+                const checkboxGroups = activeSection.querySelectorAll('.checkbox-group');
+                checkboxGroups.forEach(group => {
+                    if (group.closest('.hidden')) return; // Ignora se a subsection estiver oculta
+                    const cb = group.querySelector('input[type="checkbox"]');
+                    if (cb && cb.checked && !cb.disabled) {
+                        let label = group.querySelector('label[for]') ? group.querySelector('label[for]').innerText : group.innerText;
+                        let val = "Sim";
+                        
+                        // Verifica se tem Input Text atrelado ao Checkbox
+                        const txtInput = group.querySelector('input[type="text"]:not(.hidden)');
+                        if (txtInput && !txtInput.disabled && txtInput.value.trim() !== '') {
+                            val = txtInput.value;
+                        }
+                        
+                        // Verifica se tem opções inline (Inclusão, Alteração, Exclusão)
+                        const inlineOpts = group.querySelector('.inline-options:not(.hidden)');
+                        if (inlineOpts) {
+                            const inlinesChecked = Array.from(inlineOpts.querySelectorAll('input[type="checkbox"]:checked'));
+                            if (inlinesChecked.length > 0) {
+                                let inlineText = inlinesChecked.map(icb => icb.parentElement.innerText.trim()).join(' | ');
+                                val = val === "Sim" ? `👉 Tipo de Alteração: [ ${inlineText} ]` : `${val}\n👉 Tipo de Alteração: [ ${inlineText} ]`;
                             }
                         }
+                        addField(label, val);
+                    }
+                });
 
-                        // Só adiciona ao preview se tiver texto OU tiver alguma checkbox embutida marcada
-                        if (finalValue !== '' || hasInlineChecked) {
-                            const parentGroup = el.closest('.form-group, .checkbox-group');
-                            if (parentGroup && !parentGroup.classList.contains('hidden')) {
-                                let label = parentGroup.querySelector('label');
-                                if (label) {
-                                    let labelText = label.innerText.replace('*', '').trim();
-                                    
-                                    // Junta o valor do texto com a ação selecionada nos checkboxes
-                                    if (hasInlineChecked) {
-                                        finalValue = finalValue ? `${finalValue}\n👉 Tipo de Alteração: [ ${inlineText} ]` : `👉 Tipo de Alteração: [ ${inlineText} ]`;
-                                    }
-                                    
-                                    addField(labelText, finalValue);
-                                }
-                            }
+                // 3. Extrair Textareas
+                const textareas = activeSection.querySelectorAll('textarea:not(.hidden)');
+                textareas.forEach(ta => {
+                    if (!ta.disabled && ta.value.trim() !== '') {
+                        let labelElement = ta.closest('.form-group')?.querySelector('label');
+                        let label = labelElement ? labelElement.innerText : 'Descrição';
+                        addField(label, ta.value);
+                    }
+                });
+
+                // 4. Extrair Input Texts que NÃO estão dentro de checkbox-groups (inputs normais)
+                const standaloneInputs = activeSection.querySelectorAll('.form-group > input[type="text"]:not(.hidden)');
+                standaloneInputs.forEach(input => {
+                    if (!input.disabled && input.value.trim() !== '') {
+                        let labelElement = input.closest('.form-group')?.querySelector('label:first-child');
+                        let label = labelElement ? labelElement.innerText : input.placeholder;
+                        
+                        // Tratar se a label na verdade era de uma pergunta Radio anterior
+                        if(input.closest('.form-group').querySelector('.radio-group')) {
+                            label = "Detalhes: " + label;
                         }
+
+                        addField(label, input.value);
                     }
                 });
             }

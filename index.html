@@ -241,6 +241,10 @@
             padding: 15px;
             border-radius: 0 8px 8px 0;
         }
+
+        .mt-1 { margin-top: 8px; }
+        .mt-2 { margin-top: 16px; }
+        .mt-3 { margin-top: 24px; }
     </style>
 </head>
 
@@ -366,6 +370,14 @@
                     </div>
                 </div>
 
+                <div id="blocoMotivacao" class="hidden sub-section">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>Motivação da demanda <span class="required">*</span></label>
+                        <span class="help-text">Descreva o contexto ou necessidade que originou esta solicitação.</span>
+                        <textarea name="motivacao_demanda" rows="3"></textarea>
+                    </div>
+                </div>
+
                 <div id="blocoProcessoAtual" class="hidden sub-section">
                     <div class="form-group">
                         <label>Descreva como o processo é realizado hoje <span class="required">*</span></label>
@@ -420,14 +432,12 @@
                 </div>
             </div>
 
-            <!-- ==========================================
-             CONTAINER DAS SEÇÕES FINAIS (Oculto até o Passo 4)
-             ========================================== -->
+            <!--  ATENÇÃO AO DESENVOLVEDOR:  As seções de ID sec_relatorios, sec_docs, sec_notificacao, sec_metabase e sec_processos  são MUTUAMENTE EXCLUSIVAS — apenas uma delas é exibida por vez, de acordo com a seleção  feita no Passo 2 (tipo_desenvolvimento). A numeração exibida ao usuário deve sempre ser "5",  independente de qual seção estiver visível. Ajuste a numeração dinamicamente via JS se necessário.-->
             <div id="container_final" class="hidden fade-in">
 
                 <!-- 5. LÓGICA PARA RELATÓRIOS -->
                 <div id="sec_relatorios" class="card hidden secao-dinamica">
-                    <label class="section-title"><span class="blue-diamond">◆</span> 5. LÓGICA PARA RELATÓRIOS</label>
+                    <label class="section-title"><span class="blue-diamond">◆</span> 5. DETALHES DO RELATÓRIO</label>
 
                     <div id="relatorios_ajuste" class="hidden">
                         <label>Informação do Ajuste <span class="required">*</span></label>
@@ -565,8 +575,7 @@
 
                 <!-- 6. LÓGICA PARA DOCUMENTOS ELETRÔNICOS -->
                 <div id="sec_docs" class="card hidden secao-dinamica">
-                    <label class="section-title"><span class="blue-diamond">◆</span> 6. LÓGICA PARA DOCUMENTOS
-                        ELETRÔNICOS</label>
+                    <label class="section-title"><span class="blue-diamond">◆</span> 6. DETALHES DO DOCUMENTO ELETRÔNICO</label>
 
                     <div id="docs_ajuste" class="hidden sub-section" style="margin-bottom: 20px;">
                         <label>Informação do Ajuste <span class="required">*</span></label>
@@ -670,8 +679,7 @@
 
                 <!-- 7. LÓGICA PARA NOTIFICAÇÃO INTELIGENTE -->
                 <div id="sec_notificacao" class="card hidden secao-dinamica">
-                    <label class="section-title"><span class="blue-diamond">◆</span> 7. LÓGICA PARA NOTIFICAÇÃO
-                        INTELIGENTE</label>
+                    <label class="section-title"><span class="blue-diamond">◆</span> 7. DETALHES DA NOTIFICAÇÃO</label>
                     <div id="notif_ajuste" class="hidden sub-section">
                         <label>Informação do Ajuste <span class="required">*</span></label>
                         <div class="checkbox-group">
@@ -721,8 +729,7 @@
 
                 <!-- 8. LÓGICA PARA BI / METABASE -->
                 <div id="sec_metabase" class="card hidden secao-dinamica">
-                    <label class="section-title"><span class="blue-diamond">◆</span> 8. LÓGICA PARA BI /
-                        METABASE</label>
+                    <label class="section-title"><span class="blue-diamond">◆</span> 8. DETALHES DO BI / METABASE</label>
                     <div id="bi_ajuste" class="hidden">
                         <label>Informação do ajuste <span class="required">*</span></label>
                         <div class="radio-group"><input type="radio" name="bi_tipo_ajuste" id="bi_ajuste_erro"
@@ -857,8 +864,7 @@
 
                 <!-- 9. LÓGICA PARA AUTOMATIZAÇÃO -->
                 <div id="sec_processos" class="card hidden secao-dinamica">
-                    <label class="section-title"><span class="blue-diamond">◆</span> 9. LÓGICA PARA AUTOMATIZAÇÃO E
-                        SISTEMAS INTERNOS</label>
+                    <label class="section-title"><span class="blue-diamond">◆</span> 9. DETALHES DA AUTOMATIZAÇÃO</label>
                     <div id="proc_ajuste" class="hidden sub-section">
                         <label>Automatizações – Ajuste <span class="required">*</span></label>
                         <div class="checkbox-group">
@@ -964,6 +970,7 @@
             document.getElementById('container_final').classList.add('hidden');
             document.getElementById('msgAjuste').classList.add('hidden');
             document.querySelectorAll('.secao-dinamica').forEach(el => el.classList.add('hidden'));
+            document.getElementById('blocoMotivacao').classList.add('hidden');
             document.getElementById('blocoProcessoAtual').classList.add('hidden');
             document.getElementById('blocoSituacaoAtual').classList.add('hidden');
             document.getElementById('blocoCiente').classList.add('hidden');
@@ -1034,9 +1041,12 @@
                 document.getElementById('wrapper_processo_atual').classList.add('hidden');
                 document.querySelectorAll('input[name="processo_atual"]').forEach(el => el.removeAttribute('required'));
 
-                // Esconde o bloco de "Como é realizado hoje" (caso estivesse aberto pelo Sim)
+                // Esconde o bloco de "Como é realizado hoje" e "Motivação" (caso estivessem abertos pelo Novo)
                 document.getElementById('blocoProcessoAtual').classList.add('hidden');
                 document.getElementById('blocoProcessoAtual').querySelector('textarea').removeAttribute('required');
+                
+                document.getElementById('blocoMotivacao').classList.add('hidden');
+                document.getElementById('blocoMotivacao').querySelector('textarea').removeAttribute('required');
 
                 // Mostra o bloco "Situação Atual" obrigatório para Ajuste
                 document.getElementById('blocoSituacaoAtual').classList.remove('hidden');
@@ -1045,6 +1055,10 @@
                 // Como não há pergunta condicional de rádio no passo 3 de Ajuste, revela o Passo 4 automaticamente
                 document.getElementById('card_passo_4').classList.remove('hidden');
             } else if (tipoSolicitacao === 'novo') {
+                // Esconde o bloco de Situação Atual que é exclusivo do Ajuste
+                document.getElementById('blocoSituacaoAtual').classList.add('hidden');
+                document.getElementById('blocoSituacaoAtual').querySelector('textarea').removeAttribute('required');
+
                 // Mostra a pergunta Sim/Não
                 document.getElementById('wrapper_processo_atual').classList.remove('hidden');
                 document.querySelectorAll('input[name="processo_atual"]').forEach(el => el.setAttribute('required', 'true'));
@@ -1056,8 +1070,8 @@
                     handleProcessoAtual(); 
                 } else {
                     // Se ainda não escolheu, esconde todos os sub-blocos e o passo 4
-                    document.getElementById('blocoSituacaoAtual').classList.add('hidden');
-                    document.getElementById('blocoSituacaoAtual').querySelector('textarea').removeAttribute('required');
+                    document.getElementById('blocoMotivacao').classList.add('hidden');
+                    document.getElementById('blocoMotivacao').querySelector('textarea').removeAttribute('required');
 
                     document.getElementById('blocoProcessoAtual').classList.add('hidden');
                     document.getElementById('blocoProcessoAtual').querySelector('textarea').removeAttribute('required');
@@ -1105,7 +1119,7 @@
         function handleProcessoAtual() {
             const valor = document.querySelector('input[name="processo_atual"]:checked')?.value;
             const blocoSim = document.getElementById('blocoProcessoAtual');
-            const blocoNao = document.getElementById('blocoSituacaoAtual');
+            const blocoNao = document.getElementById('blocoMotivacao');
 
             if (valor === 'sim') {
                 blocoSim.classList.remove('hidden');

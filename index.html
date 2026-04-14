@@ -194,16 +194,6 @@
             color: var(--danger);
         }
 
-        .alert-success {
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-            padding: 15px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            color: #155724;
-            font-weight: 500;
-        }
-
         .info-box {
             background-color: var(--coe-light-blue);
             padding: 15px;
@@ -242,9 +232,76 @@
             border-radius: 0 8px 8px 0;
         }
 
+        /* Correções Obrigatórias de Margem */
         .mt-1 { margin-top: 8px; }
         .mt-2 { margin-top: 16px; }
         .mt-3 { margin-top: 24px; }
+
+        /* =========================================
+           ESTILOS DA SIMULAÇÃO GLPI (PREVIEW)
+           ========================================= */
+        #glpi_ticket_view {
+            background-color: #eaf2e8; 
+            padding: 20px; 
+            border-radius: 8px; 
+            border: 1px solid #c0d1c0; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            color: #1a4f2c;
+        }
+        
+        .glpi-avatar-box {
+            width: 50px; 
+            height: 50px; 
+            background-color: #d1b854; 
+            color: #fff; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            border-radius: 4px; 
+            font-size: 20px; 
+            font-weight: bold; 
+            flex-shrink: 0;
+        }
+
+        .glpi-bubble-content {
+            flex-grow: 1; 
+            border: 1px solid #c0d1c0; 
+            border-radius: 4px; 
+            padding: 0; 
+            background-color: #eaf2e8; 
+            position: relative;
+        }
+
+        /* Setas do Balão */
+        .glpi-bubble-content::before {
+            content: '';
+            position: absolute; 
+            top: 15px; 
+            left: -10px; 
+            border-width: 10px 10px 10px 0; 
+            border-style: solid; 
+            border-color: transparent #c0d1c0 transparent transparent;
+        }
+        .glpi-bubble-content::after {
+            content: '';
+            position: absolute; 
+            top: 15px; 
+            left: -9px; 
+            border-width: 10px 10px 10px 0; 
+            border-style: solid; 
+            border-color: transparent #eaf2e8 transparent transparent;
+        }
+
+        .glpi-topbar {
+            background-color: #d3e3d3; 
+            padding: 8px 15px; 
+            border-radius: 4px 4px 0 0; 
+            font-size: 13px; 
+            color: #333; 
+            display: flex; 
+            gap: 15px; 
+            border-bottom: 1px solid #c0d1c0;
+        }
     </style>
 </head>
 
@@ -257,6 +314,9 @@
             ✅ <strong>Formulário enviado com sucesso!</strong> Os dados foram processados (Modo Protótipo).
         </div>
 
+        <!-- ==========================================
+             FORMULÁRIO PRINCIPAL DE ENTRADA
+             ========================================== -->
         <form id="coeForm" onsubmit="enviarFormulario(event)">
 
             <!-- CABEÇALHO -->
@@ -345,7 +405,7 @@
                 </div>
                 <div class="form-group">
                     <label>Responsável pela homologação e testes <span class="required">*</span></label>
-                    <span class="help-text">Seleção de usuário GLPI nativa (será adicionado como Observador)</span>
+                    <span class="help-text">Seleção de usuário GLPI nativa (será adicionado como Requerente)</span>
                     <input type="text" name="responsavel" placeholder="Buscar usuário..." required>
                 </div>
 
@@ -361,6 +421,7 @@
                     </div>
                 </div>
 
+                <!-- BLOCOS EXCLUSIVOS BASEADOS NA REGRA DE NEGÓCIO -->
                 <div id="blocoSituacaoAtual" class="hidden sub-section">
                     <div class="form-group" style="margin-bottom: 0;">
                         <label>Situação Atual <span class="required">*</span></label>
@@ -432,10 +493,10 @@
                 </div>
             </div>
 
-            <!--  ATENÇÃO AO DESENVOLVEDOR:  As seções de ID sec_relatorios, sec_docs, sec_notificacao, sec_metabase e sec_processos  são MUTUAMENTE EXCLUSIVAS — apenas uma delas é exibida por vez, de acordo com a seleção  feita no Passo 2 (tipo_desenvolvimento). A numeração exibida ao usuário deve sempre ser "5",  independente de qual seção estiver visível. Ajuste a numeração dinamicamente via JS se necessário.-->
+            <!-- ATENÇÃO AO DESENVOLVEDOR: As seções de ID sec_relatorios, sec_docs, sec_notificacao, sec_metabase e sec_processos são MUTUAMENTE EXCLUSIVAS — apenas uma delas é exibida por vez, de acordo com a seleção feita no Passo 2 (tipo_desenvolvimento). A numeração exibida ao usuário deve sempre ser "5", independente de qual seção estiver visível. Ajuste a numeração dinamicamente via JS se necessário. -->
             <div id="container_final" class="hidden fade-in">
 
-                <!-- 5. LÓGICA PARA RELATÓRIOS -->
+                <!-- 5. DETALHES DO RELATÓRIO -->
                 <div id="sec_relatorios" class="card hidden secao-dinamica">
                     <label class="section-title"><span class="blue-diamond">◆</span> 5. DETALHES DO RELATÓRIO</label>
 
@@ -524,11 +585,11 @@
                     <div id="relatorios_novo" class="hidden">
                         <div class="form-group">
                             <label>Caminho das telas e dos documentos <span class="required">*</span></label>
-                            <input type="text" required>
+                            <input type="text" name="req_caminho_telas" required>
                         </div>
                         <div class="form-group">
                             <label>Qual sistema ou tabela é a fonte desses dados? <span class="required">*</span></label>
-                            <input type="text" required>
+                            <input type="text" name="req_origem_dados" required>
                         </div>
                         
                         <div class="form-group">
@@ -568,12 +629,12 @@
                             <label>Descreva as informações que deverão constar no relatório <span
                                     class="required">*</span></label>
                             <span class="help-text">Descrição: Informe detalhadamente quais informações devem constar no relatório, incluindo: dados das colunas, tipo de relatório (analítico ou gerencial), cálculos aplicáveis, percentuais, médias, totais, indicadores e demais métricas necessárias.</span>
-                            <textarea rows="4" required></textarea>
+                            <textarea name="req_desc_info" rows="4" required></textarea>
                         </div>
                     </div>
                 </div>
 
-                <!-- 6. LÓGICA PARA DOCUMENTOS ELETRÔNICOS -->
+                <!-- 6. DETALHES DO DOCUMENTO ELETRÔNICO -->
                 <div id="sec_docs" class="card hidden secao-dinamica">
                     <label class="section-title"><span class="blue-diamond">◆</span> 6. DETALHES DO DOCUMENTO ELETRÔNICO</label>
 
@@ -677,7 +738,7 @@
                     </div>
                 </div>
 
-                <!-- 7. LÓGICA PARA NOTIFICAÇÃO INTELIGENTE -->
+                <!-- 7. DETALHES DA NOTIFICAÇÃO -->
                 <div id="sec_notificacao" class="card hidden secao-dinamica">
                     <label class="section-title"><span class="blue-diamond">◆</span> 7. DETALHES DA NOTIFICAÇÃO</label>
                     <div id="notif_ajuste" class="hidden sub-section">
@@ -727,7 +788,7 @@
                     </div>
                 </div>
 
-                <!-- 8. LÓGICA PARA BI / METABASE -->
+                <!-- 8. DETALHES DO BI / METABASE -->
                 <div id="sec_metabase" class="card hidden secao-dinamica">
                     <label class="section-title"><span class="blue-diamond">◆</span> 8. DETALHES DO BI / METABASE</label>
                     <div id="bi_ajuste" class="hidden">
@@ -862,14 +923,14 @@
                     </div>
                 </div>
 
-                <!-- 9. LÓGICA PARA AUTOMATIZAÇÃO -->
+                <!-- 9. DETALHES DA AUTOMATIZAÇÃO / SISTEMAS INTERNOS -->
                 <div id="sec_processos" class="card hidden secao-dinamica">
-                    <label class="section-title"><span class="blue-diamond">◆</span> 9. DETALHES DA AUTOMATIZAÇÃO</label>
+                    <label class="section-title" id="lbl_title_processos"><span class="blue-diamond">◆</span> 9. DETALHES DA AUTOMATIZAÇÃO</label>
                     <div id="proc_ajuste" class="hidden sub-section">
                         <label>Automatizações – Ajuste <span class="required">*</span></label>
                         <div class="checkbox-group">
                             <input type="checkbox" id="aut_erro" onchange="toggleCampo(this, 'txt_aut_erro')"> <label
-                                for="aut_erro">Erro na execução da automatização</label>
+                                for="aut_erro">Erro na execução</label>
                             <input type="text" id="txt_aut_erro" class="hidden mt-1"
                                 placeholder="Descrever erro (obrigatório)">
                         </div>
@@ -889,8 +950,8 @@
 
                     <div id="proc_novo" class="hidden">
                         <div class="form-group">
-                            <label>Informações Importantes</label>
-                            <textarea rows="3" placeholder="Descreva informações adicionais ou importantes para a automação..."></textarea>
+                            <label id="lbl_proc_info_importantes">Informações Importantes</label>
+                            <textarea id="txt_proc_novo_info" rows="3" placeholder="Descreva informações adicionais ou importantes para a automação..."></textarea>
                         </div>
                     </div>
                 </div>
@@ -900,21 +961,21 @@
                     <label class="section-title">📎 ANEXOS GERAIS E OBRIGATÓRIOS</label>
                     
                     <!-- Painel Central de Avisos de Anexo -->
-                    <div class="alert-warning" style="background-color: var(--coe-light-blue); border-color: var(--coe-blue); color: #004085; margin-top: 0; margin-bottom: 20px;">
-                        <strong>⚠️ Atenção aos Anexos Obrigatórios (conforme o tipo de solicitação):</strong>
-                        <ul style="margin-top: 8px; margin-bottom: 0; padding-left: 20px; font-size: 13px;">
-                            <li><strong>Ajustes ou Correções (Geral):</strong> Print ou evidência da mensagem de erro ou alteração necessária.</li>
-                            <li><strong>Relatórios / BI (Melhoria):</strong> Modelo do relatório ou layout esperado.</li>
-                            <li><strong>Relatórios / BI (Novo):</strong> Prints das telas e/ou do documento assistencial evidenciando os campos.</li>
-                            <li><strong>Documentos Eletrônicos:</strong> Prints ou exemplos do documento desejado (Novo) ou evidências do erro/formatação (Ajuste).</li>
-                            <li><strong>Notificação Inteligente (Ajuste):</strong> E-mail sem informações no corpo (se aplicável).</li>
-                            <li><strong>Automatizações / Sistemas Internos (Novo):</strong> Fluxo do processo atual, fluxo do processo esperado, prints das etapas e vídeo demonstrativo (se aplicável).</li>
+                    <div id="box_anexos_obrigatorios" class="alert-warning hidden" style="background-color: var(--coe-light-blue); border-color: var(--coe-blue); color: #004085; margin-top: 0; margin-bottom: 20px;">
+                        <strong>⚠️ Atenção aos Anexos Obrigatórios:</strong>
+                        <ul id="lista_anexos_obrigatorios" style="margin-top: 8px; margin-bottom: 0; padding-left: 20px; font-size: 13px;">
+                            <li id="anexo_ajuste_geral" class="hidden"><strong>Ajustes ou Correções (Geral):</strong> Print ou evidência da mensagem de erro ou alteração necessária.</li>
+                            <li id="anexo_rel_bi_melhoria" class="hidden"><strong>Relatórios / BI (Melhoria):</strong> Modelo do relatório ou layout esperado.</li>
+                            <li id="anexo_rel_bi_novo" class="hidden"><strong>Relatórios / BI (Novo):</strong> Prints das telas e/ou do documento assistencial evidenciando os campos.</li>
+                            <li id="anexo_docs" class="hidden"><strong>Documentos Eletrônicos:</strong> Prints ou exemplos do documento desejado (Novo) ou evidências do erro/formatação (Ajuste).</li>
+                            <li id="anexo_not_ajuste" class="hidden"><strong>Notificação Inteligente (Ajuste):</strong> E-mail sem informações no corpo (se aplicável).</li>
+                            <li id="anexo_aut_sist_novo" class="hidden"><strong>Automatizações / Sistemas Internos (Novo):</strong> Fluxo atual, fluxo esperado, prints das etapas e vídeo demonstrativo (se aplicável).</li>
                         </ul>
                     </div>
 
                     <div class="form-group" style="margin-bottom: 0;">
-                        <label>Faça o upload de Imagens, Documentos ou Vídeos pertinentes à solicitação. <span class="required">*</span></label>
-                        <input type="file" name="anexos[]" multiple accept="image/*,.pdf,.doc,.docx,.mp4" required>
+                        <label>Faça o upload de Imagens, Documentos ou Vídeos pertinentes à solicitação. <span id="lbl_anexo_req" class="required hidden">*</span></label>
+                        <input type="file" name="anexos[]" id="file_anexos" multiple accept="image/*,.pdf,.doc,.docx,.mp4">
                     </div>
                 </div>
 
@@ -941,50 +1002,196 @@
             </div> <!-- Fim container_final -->
 
         </form>
+
+        <!-- ==========================================
+             SIMULAÇÃO DA TELA DE CHAMADO DO GLPI
+             ========================================== -->
+        <div id="glpi_ticket_view" class="hidden fade-in" style="background-color: #eaf2e8; padding: 20px; border-radius: 8px; border: 1px solid #c0d1c0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #1a4f2c;">
+            <div style="display: flex; gap: 15px;">
+                <!-- Avatar -->
+                <div style="width: 50px; height: 50px; background-color: #d1b854; color: #fff; display: flex; align-items: center; justify-content: center; border-radius: 4px; font-size: 20px; font-weight: bold; flex-shrink: 0;" id="glpi_avatar">
+                    TI
+                </div>
+                
+                <!-- Bubble -->
+                <div style="flex-grow: 1; border: 1px solid #c0d1c0; border-radius: 4px; padding: 0; background-color: #eaf2e8; position: relative;">
+                    <!-- Seta do balão -->
+                    <div style="position: absolute; top: 15px; left: -10px; border-width: 10px 10px 10px 0; border-style: solid; border-color: transparent #c0d1c0 transparent transparent;"></div>
+                    <div style="position: absolute; top: 15px; left: -9px; border-width: 10px 10px 10px 0; border-style: solid; border-color: transparent #eaf2e8 transparent transparent;"></div>
+                    
+                    <!-- Header Bar -->
+                    <div style="background-color: #d3e3d3; padding: 8px 15px; border-radius: 4px 4px 0 0; font-size: 13px; color: #333; display: flex; gap: 15px; border-bottom: 1px solid #c0d1c0;">
+                        <span>Criado em: ⏱️ <span id="glpi_criado_data"></span> por 👤 <a href="#" style="color: #0c6382; text-decoration: none; font-weight: bold;" id="glpi_criado_por">Nome</a></span>
+                        <span>Última atualização: ⏱️ <span id="glpi_atualizado_data"></span> por 👤 <a href="#" style="color: #0c6382; text-decoration: none; font-weight: bold;" id="glpi_atualizado_por">Nome</a></span>
+                    </div>
+
+                    <!-- Body -->
+                    <div style="padding: 20px;">
+                        <h2 id="glpi_title" style="margin-top: 0; font-size: 18px; font-weight: 500; margin-bottom: 25px; color: #1a4f2c;">Título do Chamado</h2>
+                        
+                        <h2 style="font-size: 22px; font-weight: bold; margin-bottom: 15px; margin-top: 0; color: #1a4f2c;">Dados do formulário</h2>
+                        
+                        <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px; margin-top: 0; color: #1a4f2c;">Seção</h3>
+                        <p style="margin-bottom: 25px; font-size: 14px; margin-top: 0;"><strong>1) Selecione o Serviço :</strong> <span id="glpi_servico"></span></p>
+
+                        <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px; margin-top: 0; color: #1a4f2c;">Dados do Chamado</h3>
+                        
+                        <div id="glpi_dynamic_fields" style="font-size: 14px; line-height: 1.6;">
+                            <!-- Injetado via JS -->
+                        </div>
+
+                        <p style="margin-top: 20px; font-size: 14px;"><strong>Anexo :</strong> <span id="glpi_has_anexo"></span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px; text-align: center;">
+                <button type="button" class="btn-submit" style="background-color: #6c757d;" onclick="voltarAoFormulario()">Voltar ao Formulário</button>
+            </div>
+        </div>
+
     </div>
 
     <script>
         // ----------------------------------------------------
-        // LÓGICA DE SUBMISSÃO (Simulação para GitHub Pages)
+        // LÓGICA DE SUBMISSÃO E INTEGRAÇÃO DO GLPI
         // ----------------------------------------------------
         function enviarFormulario(event) {
-            event.preventDefault(); // Impede o recarregamento da página (comportamento padrão de submit)
+            event.preventDefault();
 
-            // Validação de segurança extra caso o HTML5 passe algo invisível
+            // 1. Validação de segurança
             tratarCamposOcultos();
 
-            // Exibe a mensagem de sucesso
-            const msgSucesso = document.getElementById('mensagem_sucesso');
-            msgSucesso.classList.remove('hidden');
+            // 2. Extração de Dados para o GLPI Preview
+            const form = document.getElementById('coeForm');
+            const formData = new FormData(form);
 
-            // Rola a página para o topo para que o usuário veja a mensagem
+            const titulo = formData.get('titulo') || 'Sem título';
+            const responsavel = formData.get('responsavel') || 'Usuário Requerente';
+            
+            // Textos de rádio selecionados
+            const radSolicitacao = document.querySelector('input[name="tipo_solicitacao"]:checked');
+            const radDesenvolvimento = document.querySelector('input[name="tipo_desenvolvimento"]:checked');
+            const tipoSolicitacao = radSolicitacao ? radSolicitacao.nextElementSibling.innerText : '';
+            const tipoDesenvolvimento = radDesenvolvimento ? radDesenvolvimento.nextElementSibling.innerText : '';
+
+            // Avatar & Tempo
+            let now = new Date();
+            let horaStr = "Hoje às " + now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
+            let init = responsavel.substring(0, 2).toUpperCase();
+
+            // Preencher a Tela GLPI Base
+            const setSafeText = (id, text) => { if(document.getElementById(id)) document.getElementById(id).innerText = text; };
+            setSafeText('glpi_title', titulo);
+            setSafeText('glpi_criado_por', responsavel);
+            setSafeText('glpi_atualizado_por', responsavel);
+            setSafeText('glpi_avatar', init);
+            setSafeText('glpi_criado_data', horaStr);
+            setSafeText('glpi_atualizado_data', horaStr);
+            setSafeText('glpi_servico', `${tipoDesenvolvimento} > ${tipoSolicitacao}`);
+
+            // Construir Descrição Dinâmica e Campos
+            let camposHTML = '';
+            let num = 2; // Contador de campos
+
+            const addField = (label, value) => {
+                if (value && value.trim() !== '') {
+                    camposHTML += `<p style="margin-bottom: 15px; margin-top: 0;"><strong>${num}) ${label} :</strong><br><span style="white-space: pre-wrap;">${value}</span></p>`;
+                    num++;
+                }
+            };
+
+            let descricaoCombinada = '';
+            const situacaoAtual = formData.get('situacao_atual') || '';
+            const motivacaoDemanda = formData.get('motivacao_demanda') || '';
+            const descProcessoHoje = formData.get('desc_processo_hoje') || '';
+
+            const elSitAtual = document.querySelector('textarea[name="situacao_atual"]');
+            const elMotivacao = document.querySelector('textarea[name="motivacao_demanda"]');
+            const elDescHoje = document.querySelector('textarea[name="desc_processo_hoje"]');
+
+            if (situacaoAtual && elSitAtual && !elSitAtual.closest('.hidden')) {
+                descricaoCombinada += `SITUAÇÃO ATUAL:\n${situacaoAtual}\n\n`;
+            }
+            if (motivacaoDemanda && elMotivacao && !elMotivacao.closest('.hidden')) {
+                descricaoCombinada += `MOTIVAÇÃO DA DEMANDA:\n${motivacaoDemanda}\n\n`;
+            }
+            if (descProcessoHoje && elDescHoje && !elDescHoje.closest('.hidden')) {
+                descricaoCombinada += `COMO O PROCESSO É REALIZADO HOJE:\n${descProcessoHoje}\n\n`;
+            }
+            
+            if (descricaoCombinada.trim() !== '') {
+                addField('Descrição', descricaoCombinada.trim());
+            }
+
+            const objetivo = formData.get('objetivo');
+            if (objetivo) {
+                addField('Objetivo Esperado', objetivo.trim());
+            }
+
+            // Loop por todos os text inputs visíveis do container_final
+            const detalhesContainer = document.getElementById('container_final');
+            if(detalhesContainer) {
+                const visiveis = detalhesContainer.querySelectorAll('input[type="text"]:not(.hidden), textarea:not(.hidden)');
+                visiveis.forEach(el => {
+                    if (!el.disabled && el.value.trim() !== '') {
+                        const parentGroup = el.closest('.form-group, .checkbox-group');
+                        if (parentGroup && !parentGroup.classList.contains('hidden')) {
+                            let label = parentGroup.querySelector('label');
+                            if (label) {
+                                let labelText = label.innerText.replace('*', '').trim();
+                                addField(labelText, el.value.trim());
+                            }
+                        }
+                    }
+                });
+            }
+
+            if(document.getElementById('glpi_dynamic_fields')) {
+                document.getElementById('glpi_dynamic_fields').innerHTML = camposHTML;
+            }
+
+            // Checar arquivos
+            const fileInput = document.getElementById('file_anexos');
+            const hasFiles = fileInput && fileInput.files.length > 0;
+            setSafeText('glpi_has_anexo', hasFiles ? 'Documento(s) anexado(s)' : 'Nenhum documento anexado');
+
+            // 4. Mostrar Mensagem Rápida e Trocar de Tela
+            document.getElementById('mensagem_sucesso')?.classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            // Reseta o formulário
-            document.getElementById('coeForm').reset();
-
-            // Oculta todas as seções (Volta ao estado inicial do passo 1)
-            document.getElementById('card_passo_2').classList.add('hidden');
-            document.getElementById('card_passo_3').classList.add('hidden');
-            document.getElementById('card_passo_4').classList.add('hidden');
-            document.getElementById('container_final').classList.add('hidden');
-            document.getElementById('msgAjuste').classList.add('hidden');
-            document.querySelectorAll('.secao-dinamica').forEach(el => el.classList.add('hidden'));
-            document.getElementById('blocoMotivacao').classList.add('hidden');
-            document.getElementById('blocoProcessoAtual').classList.add('hidden');
-            document.getElementById('blocoSituacaoAtual').classList.add('hidden');
-            document.getElementById('blocoCiente').classList.add('hidden');
-            document.getElementById('wrapper_processo_atual').classList.add('hidden');
-            document.getElementById('btnSubmit').disabled = false;
-
-            // Restaura os campos ocultos para o estado inicial
-            tratarCamposOcultos();
-
-            // Após 5 segundos, oculta a mensagem de sucesso novamente
             setTimeout(() => {
-                msgSucesso.classList.add('hidden');
-            }, 5000);
+                // Esconde a mensagem e o form
+                document.getElementById('mensagem_sucesso')?.classList.add('hidden');
+                document.getElementById('coeForm')?.classList.add('hidden');
+                
+                // Exibe a tela do GLPI
+                document.getElementById('glpi_ticket_view')?.classList.remove('hidden');
+            }, 1000); 
         }
+
+        // Função para resetar e voltar ao formulário inicial
+        function voltarAoFormulario() {
+            document.getElementById('glpi_ticket_view')?.classList.add('hidden');
+            document.getElementById('coeForm')?.reset();
+            
+            // Oculta todas as seções de forma segura com operador ?.
+            ['card_passo_2', 'card_passo_3', 'card_passo_4', 'container_final', 'msgAjuste', 'blocoMotivacao', 'blocoProcessoAtual', 'blocoSituacaoAtual', 'blocoCiente', 'wrapper_processo_atual'].forEach(id => {
+                document.getElementById(id)?.classList.add('hidden');
+            });
+            
+            document.querySelectorAll('.secao-dinamica').forEach(el => el.classList.add('hidden'));
+            
+            const btnSubmit = document.getElementById('btnSubmit');
+            if(btnSubmit) btnSubmit.disabled = false;
+
+            document.getElementById('coeForm')?.classList.remove('hidden');
+            
+            tratarCamposOcultos();
+            atualizarAnexosObrigatorios();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
 
         // Função Master para desativar inputs invisíveis e evitar bloqueio do HTML5 required
         function tratarCamposOcultos() {
@@ -997,175 +1204,230 @@
                 }
             });
             // Mantem a regra especifica do botão submit (se está bloqueado pela regra do setor)
-            const bloqueioAtivo = !document.getElementById('msgBloqueio').classList.contains('hidden');
-            document.getElementById('btnSubmit').disabled = bloqueioAtivo;
+            const msgBloqueio = document.getElementById('msgBloqueio');
+            const btnSubmit = document.getElementById('btnSubmit');
+            if (msgBloqueio && btnSubmit) {
+                btnSubmit.disabled = !msgBloqueio.classList.contains('hidden');
+            }
         }
-
 
         // Função Auxiliar
         function toggleRadioCondicional(radioName, idCampoTexto) {
             const valor = document.querySelector(`input[name="${radioName}"]:checked`)?.value;
             const campo = document.getElementById(idCampoTexto);
-            if (valor === 'sim') {
-                campo.classList.remove('hidden');
-                campo.setAttribute('required', 'true');
-            } else {
-                campo.classList.add('hidden');
-                campo.removeAttribute('required');
+            if(campo) {
+                if (valor === 'sim') {
+                    campo.classList.remove('hidden');
+                    campo.setAttribute('required', 'true');
+                } else {
+                    campo.classList.add('hidden');
+                    campo.removeAttribute('required');
+                }
             }
             tratarCamposOcultos();
         }
 
         function toggleCampo(checkbox, idCampoTexto) {
             const campo = document.getElementById(idCampoTexto);
-            if (checkbox.checked) {
-                campo.classList.remove('hidden');
-                campo.setAttribute('required', 'true');
-            } else {
-                campo.classList.add('hidden');
-                campo.removeAttribute('required');
+            if(campo) {
+                if (checkbox.checked) {
+                    campo.classList.remove('hidden');
+                    campo.setAttribute('required', 'true');
+                } else {
+                    campo.classList.add('hidden');
+                    campo.removeAttribute('required');
+                }
             }
             tratarCamposOcultos();
+        }
+
+        // ----------------------------------------------------
+        // LÓGICA DE ANEXOS INTELIGENTES
+        // ----------------------------------------------------
+        function atualizarAnexosObrigatorios() {
+            const tipoSolicitacao = document.querySelector('input[name="tipo_solicitacao"]:checked')?.value;
+            const tipoDesenvolvimento = document.querySelector('input[name="tipo_desenvolvimento"]:checked')?.value;
+            
+            const fileInput = document.getElementById('file_anexos');
+            const alertBox = document.getElementById('box_anexos_obrigatorios');
+            const lblReq = document.getElementById('lbl_anexo_req');
+
+            // Oculta todos inicialmente
+            document.querySelectorAll('#lista_anexos_obrigatorios li').forEach(li => li.classList.add('hidden'));
+
+            let isRequired = false;
+
+            if (!tipoSolicitacao || !tipoDesenvolvimento) {
+                if(fileInput) fileInput.required = false;
+                if(alertBox) alertBox.classList.add('hidden');
+                if(lblReq) lblReq.classList.add('hidden');
+                return;
+            }
+
+            if (tipoSolicitacao === 'ajuste') {
+                document.getElementById('anexo_ajuste_geral')?.classList.remove('hidden');
+                isRequired = true;
+            }
+
+            if (tipoDesenvolvimento === 'relatorios' || tipoDesenvolvimento === 'metabase') {
+                if (tipoSolicitacao === 'novo') {
+                    document.getElementById('anexo_rel_bi_novo')?.classList.remove('hidden');
+                    isRequired = true;
+                } else if (tipoSolicitacao === 'ajuste') {
+                    const tipoAjuste = document.querySelector(`input[name="${tipoDesenvolvimento === 'relatorios' ? 'rel_ajuste_tipo' : 'bi_tipo_ajuste'}"]:checked`)?.value;
+                    if (tipoAjuste === 'melhoria') {
+                        document.getElementById('anexo_rel_bi_melhoria')?.classList.remove('hidden');
+                        isRequired = true;
+                    }
+                }
+            } else if (tipoDesenvolvimento === 'docs') {
+                document.getElementById('anexo_docs')?.classList.remove('hidden');
+                isRequired = true;
+            } else if (tipoDesenvolvimento === 'notificacao') {
+                if (tipoSolicitacao === 'ajuste') {
+                    document.getElementById('anexo_not_ajuste')?.classList.remove('hidden');
+                    isRequired = true;
+                }
+            } else if (tipoDesenvolvimento === 'automacao' || tipoDesenvolvimento === 'sistemas') {
+                if (tipoSolicitacao === 'novo') {
+                    document.getElementById('anexo_aut_sist_novo')?.classList.remove('hidden');
+                    isRequired = true;
+                }
+            }
+
+            // Exibe ou oculta a obrigatoriedade e a caixa de aviso
+            if (isRequired) {
+                alertBox?.classList.remove('hidden');
+                if(fileInput) fileInput.required = true;
+                lblReq?.classList.remove('hidden');
+            } else {
+                alertBox?.classList.add('hidden');
+                if(fileInput) fileInput.required = false;
+                lblReq?.classList.add('hidden');
+            }
         }
 
         // ----------------------------------------------------
         // LÓGICA DE REVELAÇÃO PROGRESSIVA (CASCATA)
         // ----------------------------------------------------
 
-        // Atualiza o Passo 3 baseado se é Ajuste ou Novo Desenvolvimento
         function atualizarLogicaPasso3() {
             const tipoSolicitacao = document.querySelector('input[name="tipo_solicitacao"]:checked')?.value;
 
             if (tipoSolicitacao === 'ajuste') {
-                // Esconde a pergunta Sim/Não de novo dev
-                document.getElementById('wrapper_processo_atual').classList.add('hidden');
+                document.getElementById('wrapper_processo_atual')?.classList.add('hidden');
                 document.querySelectorAll('input[name="processo_atual"]').forEach(el => el.removeAttribute('required'));
 
-                // Esconde o bloco de "Como é realizado hoje" e "Motivação" (caso estivessem abertos pelo Novo)
-                document.getElementById('blocoProcessoAtual').classList.add('hidden');
-                document.getElementById('blocoProcessoAtual').querySelector('textarea').removeAttribute('required');
+                document.getElementById('blocoProcessoAtual')?.classList.add('hidden');
+                document.getElementById('blocoProcessoAtual')?.querySelector('textarea')?.removeAttribute('required');
                 
-                document.getElementById('blocoMotivacao').classList.add('hidden');
-                document.getElementById('blocoMotivacao').querySelector('textarea').removeAttribute('required');
+                document.getElementById('blocoMotivacao')?.classList.add('hidden');
+                document.getElementById('blocoMotivacao')?.querySelector('textarea')?.removeAttribute('required');
 
-                // Mostra o bloco "Situação Atual" obrigatório para Ajuste
-                document.getElementById('blocoSituacaoAtual').classList.remove('hidden');
-                document.getElementById('blocoSituacaoAtual').querySelector('textarea').setAttribute('required', 'true');
+                document.getElementById('blocoSituacaoAtual')?.classList.remove('hidden');
+                document.getElementById('blocoSituacaoAtual')?.querySelector('textarea')?.setAttribute('required', 'true');
 
-                // Como não há pergunta condicional de rádio no passo 3 de Ajuste, revela o Passo 4 automaticamente
-                document.getElementById('card_passo_4').classList.remove('hidden');
+                document.getElementById('card_passo_4')?.classList.remove('hidden');
             } else if (tipoSolicitacao === 'novo') {
-                // Esconde o bloco de Situação Atual que é exclusivo do Ajuste
-                document.getElementById('blocoSituacaoAtual').classList.add('hidden');
-                document.getElementById('blocoSituacaoAtual').querySelector('textarea').removeAttribute('required');
+                document.getElementById('blocoSituacaoAtual')?.classList.add('hidden');
+                document.getElementById('blocoSituacaoAtual')?.querySelector('textarea')?.removeAttribute('required');
 
-                // Mostra a pergunta Sim/Não
-                document.getElementById('wrapper_processo_atual').classList.remove('hidden');
+                document.getElementById('wrapper_processo_atual')?.classList.remove('hidden');
                 document.querySelectorAll('input[name="processo_atual"]').forEach(el => el.setAttribute('required', 'true'));
 
                 const radioSelecionado = document.querySelector('input[name="processo_atual"]:checked');
 
                 if (radioSelecionado) {
-                    // Se a pessoa já tinha escolhido Sim/Não antes, reaplica a visualização correta
                     handleProcessoAtual(); 
                 } else {
-                    // Se ainda não escolheu, esconde todos os sub-blocos e o passo 4
-                    document.getElementById('blocoMotivacao').classList.add('hidden');
-                    document.getElementById('blocoMotivacao').querySelector('textarea').removeAttribute('required');
+                    document.getElementById('blocoMotivacao')?.classList.add('hidden');
+                    document.getElementById('blocoMotivacao')?.querySelector('textarea')?.removeAttribute('required');
 
-                    document.getElementById('blocoProcessoAtual').classList.add('hidden');
-                    document.getElementById('blocoProcessoAtual').querySelector('textarea').removeAttribute('required');
+                    document.getElementById('blocoProcessoAtual')?.classList.add('hidden');
+                    document.getElementById('blocoProcessoAtual')?.querySelector('textarea')?.removeAttribute('required');
 
-                    document.getElementById('card_passo_4').classList.add('hidden');
-                    document.getElementById('container_final').classList.add('hidden');
+                    document.getElementById('card_passo_4')?.classList.add('hidden');
+                    document.getElementById('container_final')?.classList.add('hidden');
                 }
             }
             tratarCamposOcultos();
+            atualizarAnexosObrigatorios();
         }
 
-        // Passo 1 libera o Passo 2
         function handleTipoSolicitacao() {
             const tipo = document.querySelector('input[name="tipo_solicitacao"]:checked')?.value;
             const msgAjuste = document.getElementById('msgAjuste');
 
-            if (tipo === 'ajuste') msgAjuste.classList.remove('hidden');
-            else msgAjuste.classList.add('hidden');
+            if (msgAjuste) {
+                if (tipo === 'ajuste') msgAjuste.classList.remove('hidden');
+                else msgAjuste.classList.add('hidden');
+            }
 
-            // Revela o Passo 2 com animação
-            document.getElementById('card_passo_2').classList.remove('hidden');
+            document.getElementById('card_passo_2')?.classList.remove('hidden');
 
-            // SE o Passo 3 já estiver visível e a pessoa voltar para mudar o Passo 1, atualiza o Passo 3 na hora!
-            if (!document.getElementById('card_passo_3').classList.contains('hidden')) {
+            if (!document.getElementById('card_passo_3')?.classList.contains('hidden')) {
                 atualizarLogicaPasso3();
             }
 
             atualizarSecoesDinamicas();
             tratarCamposOcultos();
+            atualizarAnexosObrigatorios();
         }
 
-        // Passo 2 libera o Passo 3
         function handleTipoDesenvolvimento() {
-            // Revela o Passo 3
-            document.getElementById('card_passo_3').classList.remove('hidden');
-            
-            // Aplica a inteligência do Passo 3 baseada no Passo 1
+            document.getElementById('card_passo_3')?.classList.remove('hidden');
             atualizarLogicaPasso3();
-            
             atualizarSecoesDinamicas();
             tratarCamposOcultos();
+            atualizarAnexosObrigatorios();
         }
 
-        // Passo 3 libera o Passo 4 (Acionado pela última pergunta do card 3 se for Novo)
         function handleProcessoAtual() {
             const valor = document.querySelector('input[name="processo_atual"]:checked')?.value;
             const blocoSim = document.getElementById('blocoProcessoAtual');
             const blocoNao = document.getElementById('blocoMotivacao');
 
             if (valor === 'sim') {
-                blocoSim.classList.remove('hidden');
-                blocoSim.querySelector('textarea').setAttribute('required', 'true');
+                blocoSim?.classList.remove('hidden');
+                blocoSim?.querySelector('textarea')?.setAttribute('required', 'true');
 
-                blocoNao.classList.add('hidden');
-                blocoNao.querySelector('textarea').removeAttribute('required');
+                blocoNao?.classList.add('hidden');
+                blocoNao?.querySelector('textarea')?.removeAttribute('required');
             } else if (valor === 'nao') {
-                blocoNao.classList.remove('hidden');
-                blocoNao.querySelector('textarea').setAttribute('required', 'true');
+                blocoNao?.classList.remove('hidden');
+                blocoNao?.querySelector('textarea')?.setAttribute('required', 'true');
 
-                blocoSim.classList.add('hidden');
-                blocoSim.querySelector('textarea').removeAttribute('required');
+                blocoSim?.classList.add('hidden');
+                blocoSim?.querySelector('textarea')?.removeAttribute('required');
             }
 
-            // Revela o Passo 4
-            document.getElementById('card_passo_4').classList.remove('hidden');
+            document.getElementById('card_passo_4')?.classList.remove('hidden');
             tratarCamposOcultos();
         }
 
-        // Passo 4 libera o Restante do Formulário (Seções Dinâmicas + Uploads + Botão)
         function handleOutrosSetores() {
             const valor = document.querySelector('input[name="outros_setores"]:checked')?.value;
             const blocoCiente = document.getElementById('blocoCiente');
 
             if (valor === 'sim') {
-                blocoCiente.classList.remove('hidden');
+                blocoCiente?.classList.remove('hidden');
                 document.querySelectorAll('input[name="setor_ciente"]').forEach(el => el.setAttribute('required', 'true'));
-
-                // Se marcou SIM, esconde o final e obriga a responder se o setor está ciente
-                document.getElementById('container_final').classList.add('hidden');
+                document.getElementById('container_final')?.classList.add('hidden');
             } else {
-                blocoCiente.classList.add('hidden');
+                blocoCiente?.classList.add('hidden');
                 document.querySelectorAll('input[name="setor_ciente"]').forEach(el => { el.removeAttribute('required'); el.checked = false; });
-                document.getElementById('msgBloqueio').classList.add('hidden');
-                document.getElementById('blocoObservador').classList.add('hidden');
-                document.getElementById('btnSubmit').disabled = false;
+                document.getElementById('msgBloqueio')?.classList.add('hidden');
+                document.getElementById('blocoObservador')?.classList.add('hidden');
+                
+                const btnSubmit = document.getElementById('btnSubmit');
+                if(btnSubmit) btnSubmit.disabled = false;
 
-                // Se marcou NÃO (não tem outros setores), libera o resto do form!
-                document.getElementById('container_final').classList.remove('hidden');
+                document.getElementById('container_final')?.classList.remove('hidden');
                 atualizarSecoesDinamicas();
             }
             tratarCamposOcultos();
         }
 
-        // Lógica do bloqueio interno do Passo 4
         function handleSetorCiente() {
             const ciente = document.querySelector('input[name="setor_ciente"]:checked')?.value;
             const msgBloqueio = document.getElementById('msgBloqueio');
@@ -1173,131 +1435,138 @@
             const btnSubmit = document.getElementById('btnSubmit');
 
             if (ciente === 'nao') {
-                msgBloqueio.classList.remove('hidden');
-                blocoObs.classList.add('hidden');
-                btnSubmit.disabled = true; // BLOQUEIA
+                msgBloqueio?.classList.remove('hidden');
+                blocoObs?.classList.add('hidden');
+                if(btnSubmit) btnSubmit.disabled = true;
 
-                // Oculta tudo que vem depois
-                document.getElementById('container_final').classList.add('hidden');
+                document.getElementById('container_final')?.classList.add('hidden');
             } else if (ciente === 'sim') {
-                msgBloqueio.classList.add('hidden');
-                blocoObs.classList.remove('hidden');
-                blocoObs.querySelector('input').setAttribute('required', 'true');
-                btnSubmit.disabled = false; // LIBERA
+                msgBloqueio?.classList.add('hidden');
+                blocoObs?.classList.remove('hidden');
+                blocoObs?.querySelector('input')?.setAttribute('required', 'true');
+                if(btnSubmit) btnSubmit.disabled = false;
 
-                // Mostra tudo que vem depois
-                document.getElementById('container_final').classList.remove('hidden');
+                document.getElementById('container_final')?.classList.remove('hidden');
                 atualizarSecoesDinamicas();
             }
             tratarCamposOcultos();
         }
 
-
-        // ----------------------------------------------------
-        // GERENCIADOR DAS SEÇÕES DINÂMICAS 
-        // ----------------------------------------------------
         function atualizarSecoesDinamicas() {
             const tipoSolicitacao = document.querySelector('input[name="tipo_solicitacao"]:checked')?.value;
             const tipoDesenvolvimento = document.querySelector('input[name="tipo_desenvolvimento"]:checked')?.value;
 
-            // Esconder todas as dinâmicas preventivamente
             document.querySelectorAll('.secao-dinamica').forEach(el => el.classList.add('hidden'));
 
             if (!tipoSolicitacao || !tipoDesenvolvimento) {
                 tratarCamposOcultos();
+                atualizarAnexosObrigatorios();
                 return;
             }
 
-            // Exibe Relatórios
             if (tipoDesenvolvimento === 'relatorios') {
-                document.getElementById('sec_relatorios').classList.remove('hidden');
+                document.getElementById('sec_relatorios')?.classList.remove('hidden');
                 if (tipoSolicitacao === 'ajuste') {
-                    document.getElementById('relatorios_ajuste').classList.remove('hidden');
-                    document.getElementById('relatorios_novo').classList.add('hidden');
+                    document.getElementById('relatorios_ajuste')?.classList.remove('hidden');
+                    document.getElementById('relatorios_novo')?.classList.add('hidden');
                 } else {
-                    document.getElementById('relatorios_ajuste').classList.add('hidden');
-                    document.getElementById('relatorios_novo').classList.remove('hidden');
+                    document.getElementById('relatorios_ajuste')?.classList.add('hidden');
+                    document.getElementById('relatorios_novo')?.classList.remove('hidden');
                 }
             }
 
-            // Exibe Docs
             if (tipoDesenvolvimento === 'docs') {
-                document.getElementById('sec_docs').classList.remove('hidden');
+                document.getElementById('sec_docs')?.classList.remove('hidden');
                 if (tipoSolicitacao === 'ajuste') {
-                    document.getElementById('docs_ajuste').classList.remove('hidden');
-                    document.getElementById('docs_novo').classList.add('hidden');
+                    document.getElementById('docs_ajuste')?.classList.remove('hidden');
+                    document.getElementById('docs_novo')?.classList.add('hidden');
                 } else {
-                    document.getElementById('docs_ajuste').classList.add('hidden');
-                    document.getElementById('docs_novo').classList.remove('hidden');
+                    document.getElementById('docs_ajuste')?.classList.add('hidden');
+                    document.getElementById('docs_novo')?.classList.remove('hidden');
                 }
             }
 
-            // Exibe Notificação Inteligente
             if (tipoDesenvolvimento === 'notificacao') {
-                document.getElementById('sec_notificacao').classList.remove('hidden');
+                document.getElementById('sec_notificacao')?.classList.remove('hidden');
                 if (tipoSolicitacao === 'ajuste') {
-                    document.getElementById('notif_ajuste').classList.remove('hidden');
-                    document.getElementById('notif_novo').classList.add('hidden');
+                    document.getElementById('notif_ajuste')?.classList.remove('hidden');
+                    document.getElementById('notif_novo')?.classList.add('hidden');
                 } else {
-                    document.getElementById('notif_ajuste').classList.add('hidden');
-                    document.getElementById('notif_novo').classList.remove('hidden');
+                    document.getElementById('notif_ajuste')?.classList.add('hidden');
+                    document.getElementById('notif_novo')?.classList.remove('hidden');
                 }
             }
 
-            // Exibe Metabase / BI
             if (tipoDesenvolvimento === 'metabase') {
-                document.getElementById('sec_metabase').classList.remove('hidden');
+                document.getElementById('sec_metabase')?.classList.remove('hidden');
                 if (tipoSolicitacao === 'ajuste') {
-                    document.getElementById('bi_ajuste').classList.remove('hidden');
-                    document.getElementById('bi_novo').classList.add('hidden');
+                    document.getElementById('bi_ajuste')?.classList.remove('hidden');
+                    document.getElementById('bi_novo')?.classList.add('hidden');
                 } else {
-                    document.getElementById('bi_ajuste').classList.add('hidden');
-                    document.getElementById('bi_novo').classList.remove('hidden');
+                    document.getElementById('bi_ajuste')?.classList.add('hidden');
+                    document.getElementById('bi_novo')?.classList.remove('hidden');
                 }
             }
 
-            // Exibe Processos / Automatização / Sistemas
             if (tipoDesenvolvimento === 'automacao' || tipoDesenvolvimento === 'sistemas') {
-                document.getElementById('sec_processos').classList.remove('hidden');
+                document.getElementById('sec_processos')?.classList.remove('hidden');
+                
+                const lblTitleProcessos = document.getElementById('lbl_title_processos');
+                const lblProcInfo = document.getElementById('lbl_proc_info_importantes');
+                const txtProcInfo = document.getElementById('txt_proc_novo_info');
+
+                if (tipoDesenvolvimento === 'automacao') {
+                    if(lblTitleProcessos) lblTitleProcessos.innerHTML = '<span class="blue-diamond">◆</span> 9. DETALHES DA AUTOMATIZAÇÃO';
+                    if(lblProcInfo) lblProcInfo.innerText = 'Informações Importantes';
+                    if(txtProcInfo) txtProcInfo.placeholder = 'Descreva informações adicionais ou importantes para a automação...';
+                } else if (tipoDesenvolvimento === 'sistemas') {
+                    if(lblTitleProcessos) lblTitleProcessos.innerHTML = '<span class="blue-diamond">◆</span> 9. DETALHES DO SISTEMA INTERNO';
+                    if(lblProcInfo) lblProcInfo.innerText = 'Descrição do Sistema Interno';
+                    if(txtProcInfo) txtProcInfo.placeholder = 'Descreva detalhadamente o sistema interno, sua finalidade e integrações necessárias...';
+                }
+
                 if (tipoSolicitacao === 'ajuste') {
-                    document.getElementById('proc_ajuste').classList.remove('hidden');
-                    document.getElementById('proc_novo').classList.add('hidden');
+                    document.getElementById('proc_ajuste')?.classList.remove('hidden');
+                    document.getElementById('proc_novo')?.classList.add('hidden');
                 } else {
-                    document.getElementById('proc_ajuste').classList.add('hidden');
-                    document.getElementById('proc_novo').classList.remove('hidden');
+                    document.getElementById('proc_ajuste')?.classList.add('hidden');
+                    document.getElementById('proc_novo')?.classList.remove('hidden');
                 }
             }
 
             tratarCamposOcultos();
+            atualizarAnexosObrigatorios();
         }
 
         function handleRelatorioAjuste() {
             const tipo = document.querySelector('input[name="rel_ajuste_tipo"]:checked')?.value;
             if (tipo === 'erro') {
-                document.getElementById('rel_erro').classList.remove('hidden');
-                document.getElementById('rel_melhoria').classList.add('hidden');
+                document.getElementById('rel_erro')?.classList.remove('hidden');
+                document.getElementById('rel_melhoria')?.classList.add('hidden');
             } else {
-                document.getElementById('rel_erro').classList.add('hidden');
-                document.getElementById('rel_melhoria').classList.remove('hidden');
+                document.getElementById('rel_erro')?.classList.add('hidden');
+                document.getElementById('rel_melhoria')?.classList.remove('hidden');
             }
             tratarCamposOcultos();
+            atualizarAnexosObrigatorios();
         }
 
         function handleBIAjuste() {
             const tipo = document.querySelector('input[name="bi_tipo_ajuste"]:checked')?.value;
             if (tipo === 'erro') {
-                document.getElementById('bi_erro').classList.remove('hidden');
-                document.getElementById('bi_melhoria').classList.add('hidden');
+                document.getElementById('bi_erro')?.classList.remove('hidden');
+                document.getElementById('bi_melhoria')?.classList.add('hidden');
             } else {
-                document.getElementById('bi_erro').classList.add('hidden');
-                document.getElementById('bi_melhoria').classList.remove('hidden');
+                document.getElementById('bi_erro')?.classList.add('hidden');
+                document.getElementById('bi_melhoria')?.classList.remove('hidden');
             }
             tratarCamposOcultos();
+            atualizarAnexosObrigatorios();
         }
         
-        // Chamada inicial para garantir que o que está oculto já comece bloqueado
         window.onload = function() {
             tratarCamposOcultos();
+            atualizarAnexosObrigatorios();
         };
     </script>
 

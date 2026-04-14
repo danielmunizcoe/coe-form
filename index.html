@@ -341,7 +341,7 @@
                 </div>
                 <div class="form-group">
                     <label>Responsável pela homologação e testes <span class="required">*</span></label>
-                    <span class="help-text">Seleção de usuário GLPI nativa (será adicionado como Requerente)</span>
+                    <span class="help-text">Seleção de usuário GLPI nativa (será adicionado como Observador)</span>
                     <input type="text" name="responsavel" placeholder="Buscar usuário..." required>
                 </div>
 
@@ -360,7 +360,7 @@
                 <div id="blocoSituacaoAtual" class="hidden sub-section">
                     <div class="form-group" style="margin-bottom: 0;">
                         <label>Situação Atual <span class="required">*</span></label>
-                        <span class="help-text">Descrição: Descrever detalhadamente a situação/como é realizado o
+                        <span class="help-text">Descrição: Descrever detalhadamente a situação ou como é realizado o
                             processo hoje.</span>
                         <textarea name="situacao_atual" rows="3"></textarea>
                     </div>
@@ -383,7 +383,7 @@
 
                 <div class="form-group" style="margin-top: 20px;">
                     <label>Objetivo Esperado <span class="required">*</span></label>
-                    <span class="help-text">Descrição: Informe detalhadamente qual é o objetivo esperado</span>
+                    <span class="help-text">Descrição: Informe detalhadamente qual é o objetivo esperado.</span>
                     <textarea name="objetivo" rows="3" required></textarea>
                 </div>
             </div>
@@ -460,7 +460,7 @@
                             <div class="checkbox-group">
                                 <input type="checkbox" id="err_outros" onchange="toggleCampo(this, 'txt_err_outros')">
                                 <label for="err_outros">Outros</label>
-                                <input type="text" id="txt_err_outros" class="hidden mt-1" placeholder="Detalhar...">
+                                <input type="text" id="txt_err_outros" class="hidden mt-1" placeholder="Detalhar o erro apresentado...">
                             </div>
                         </div>
 
@@ -508,23 +508,57 @@
                                             Exclusão</label></div>
                                 </div>
                             </div>
-                            <p class="alert-warning">⚠️ Anexo obrigatório – Mensagem: Insira um anexo como modelo do
-                                relatório.</p>
                         </div>
                     </div>
 
                     <div id="relatorios_novo" class="hidden">
                         <div class="form-group">
                             <label>Caminho das telas e dos documentos <span class="required">*</span></label>
-                            <input type="text">
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Qual sistema ou tabela é a fonte desses dados? <span class="required">*</span></label>
+                            <input type="text" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Prints das telas – Informar quais campos deverão ser considerados <span class="required">*</span></label>
+                            <input type="text" placeholder="Quais campos..." required>
+                        </div>
+                        <div class="form-group">
+                            <label>Print do documento assistencial – Informar quais campos deverão ser considerados <span class="required">*</span></label>
+                            <input type="text" placeholder="Quais campos..." required>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label>Múltipla escolha <span class="required">*</span></label>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="rel_novo_col" onchange="toggleCampo(this, 'txt_rel_novo_col')"> <label for="rel_novo_col">Colunas</label>
+                                <input type="text" id="txt_rel_novo_col" class="hidden mt-1" placeholder="Informe detalhadamente os dados das colunas...">
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="rel_novo_quebra" onchange="toggleCampo(this, 'txt_rel_novo_quebra')"> <label for="rel_novo_quebra">Quebras</label>
+                                <input type="text" id="txt_rel_novo_quebra" class="hidden mt-1" placeholder="Informe detalhadamente as quebras...">
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="rel_novo_ord" onchange="toggleCampo(this, 'txt_rel_novo_ord')"> <label for="rel_novo_ord">Ordenação</label>
+                                <input type="text" id="txt_rel_novo_ord" class="hidden mt-1" placeholder="Informe detalhadamente a ordenação...">
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="rel_novo_filtro" onchange="toggleCampo(this, 'txt_rel_novo_filtro')"> <label for="rel_novo_filtro">Filtros</label>
+                                <input type="text" id="txt_rel_novo_filtro" class="hidden mt-1" placeholder="Informe detalhadamente os filtros necessários...">
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="rel_novo_form" onchange="toggleCampo(this, 'txt_rel_novo_form')"> <label for="rel_novo_form">Fórmulas</label>
+                                <input type="text" id="txt_rel_novo_form" class="hidden mt-1" placeholder="Informe detalhadamente os cálculos e fórmulas aplicáveis...">
+                            </div>
                         </div>
 
                         <div class="form-group mt-2">
                             <label>Descreva as informações que deverão constar no relatório <span
                                     class="required">*</span></label>
-                            <span class="help-text">Descrição: Informe detalhadamente quais informações devem constar no
-                                relatório...</span>
-                            <textarea rows="4"></textarea>
+                            <span class="help-text">Descrição: Informe detalhadamente quais informações devem constar no relatório, incluindo: dados das colunas, tipo de relatório (analítico ou gerencial), cálculos aplicáveis, percentuais, médias, totais, indicadores e demais métricas necessárias.</span>
+                            <textarea rows="4" required></textarea>
                         </div>
                     </div>
                 </div>
@@ -535,29 +569,29 @@
                         ELETRÔNICOS</label>
 
                     <div id="docs_ajuste" class="hidden sub-section" style="margin-bottom: 20px;">
-                        <label>Informação do Ajuste</label>
+                        <label>Informação do Ajuste <span class="required">*</span></label>
                         <div class="checkbox-group">
                             <input type="checkbox" id="doc_erro_msg" onchange="toggleCampo(this, 'txt_doc_erro_msg')">
-                            <label for="doc_erro_msg">Mensagens de erro (+ anexo obrigatório)</label>
+                            <label for="doc_erro_msg">Mensagens de erro</label>
                             <input type="text" id="txt_doc_erro_msg" class="hidden mt-1"
                                 placeholder="Descreva a mensagem de erro">
                         </div>
                         <div class="checkbox-group">
                             <input type="checkbox" id="doc_erro_regra" onchange="toggleCampo(this, 'txt_doc_erro_regra')"> 
-                            <label for="doc_erro_regra">Erros ou alterações em regras (+ anexo obrigatório)</label>
+                            <label for="doc_erro_regra">Erros ou alterações em regras</label>
                             <input type="text" id="txt_doc_erro_regra" class="hidden mt-1" placeholder="Descreva o erro ou alteração">
                         </div>
                         <div class="checkbox-group">
                             <input type="checkbox" id="doc_format" onchange="toggleCampo(this, 'txt_doc_format')"> 
-                            <label for="doc_format">Formatação de campos (+ anexo obrigatório)</label>
+                            <label for="doc_format">Formatação de campos</label>
                             <input type="text" id="txt_doc_format" class="hidden mt-1" placeholder="Descreva a formatação desejada">
                         </div>
                     </div>
 
                     <div id="docs_novo" class="hidden">
                         <div class="form-group">
-                            <label>O documento já possui um modelo definido?</label>
-                            <div class="radio-group"><input type="radio" name="doc_modelo" value="sim"
+                            <label>O documento já possui um modelo definido? <span class="required">*</span></label>
+                            <div class="radio-group"><input type="radio" name="doc_modelo" value="sim" required
                                     onchange="toggleRadioCondicional('doc_modelo', 'txt_doc_modelo')">
                                 <label>Sim</label></div>
                             <div class="radio-group"><input type="radio" name="doc_modelo" value="nao"
@@ -567,9 +601,9 @@
                                 placeholder="Informe o nome ou referência do modelo definido...">
                         </div>
                         <div class="form-group">
-                            <label>O documento terá campos obrigatórios?<br><span class="help-text">Campos que precisam
+                            <label>O documento terá campos obrigatórios? <span class="required">*</span><br><span class="help-text">Campos que precisam
                                     ser preenchidos antes de salvar</span></label>
-                            <div class="radio-group"><input type="radio" name="doc_req" value="sim"
+                            <div class="radio-group"><input type="radio" name="doc_req" value="sim" required
                                     onchange="toggleRadioCondicional('doc_req', 'txt_doc_req')"> <label>Sim</label>
                             </div>
                             <div class="radio-group"><input type="radio" name="doc_req" value="nao"
@@ -579,58 +613,57 @@
                                 placeholder="Liste quais campos serão obrigatórios...">
                         </div>
                         <div class="form-group">
-                            <label>Algum campo precisa aparecer em negrito?</label>
-                            <div class="radio-group"><input type="radio" name="doc_bold" value="sim" onchange="toggleRadioCondicional('doc_bold', 'txt_doc_bold')"> <label>Sim</label></div>
+                            <label>Algum campo precisa aparecer em negrito? <span class="required">*</span></label>
+                            <div class="radio-group"><input type="radio" name="doc_bold" value="sim" required onchange="toggleRadioCondicional('doc_bold', 'txt_doc_bold')"> <label>Sim</label></div>
                             <div class="radio-group"><input type="radio" name="doc_bold" value="nao" onchange="toggleRadioCondicional('doc_bold', 'txt_doc_bold')"> <label>Não</label></div>
                             <input type="text" id="txt_doc_bold" class="hidden mt-1" placeholder="Especifique quais campos devem ficar em negrito...">
                         </div>
                         <div class="form-group">
-                            <label>Algum campo será uma lista de opções para escolher?<br><span class="help-text">Ex: clicar e escolher entre "Cidade", "Status"</span></label>
-                            <div class="radio-group"><input type="radio" name="doc_lista" value="sim" onchange="toggleRadioCondicional('doc_lista', 'txt_doc_lista')"> <label>Sim – lista de opções</label></div>
+                            <label>Algum campo será uma lista de opções para escolher? <span class="required">*</span><br><span class="help-text">Ex: clicar e escolher entre "Cidade", "Status"</span></label>
+                            <div class="radio-group"><input type="radio" name="doc_lista" value="sim" required onchange="toggleRadioCondicional('doc_lista', 'txt_doc_lista')"> <label>Sim – lista de opções</label></div>
                             <div class="radio-group"><input type="radio" name="doc_lista" value="nao" onchange="toggleRadioCondicional('doc_lista', 'txt_doc_lista')"> <label>Não</label></div>
                             <input type="text" id="txt_doc_lista" class="hidden mt-1" placeholder="Informe o nome do campo e as opções disponíveis...">
                         </div>
                         <div class="form-group">
-                            <label>Algum campo permite escolher apenas uma opção entre várias?<br><span class="help-text">Ex: ○ Masculino ○ Feminino</span></label>
-                            <div class="radio-group"><input type="radio" name="doc_radio" value="sim" onchange="toggleRadioCondicional('doc_radio', 'txt_doc_radio')"> <label>Sim</label></div>
+                            <label>Algum campo permite escolher apenas uma opção entre várias? <span class="required">*</span><br><span class="help-text">Ex: ○ Masculino ○ Feminino</span></label>
+                            <div class="radio-group"><input type="radio" name="doc_radio" value="sim" required onchange="toggleRadioCondicional('doc_radio', 'txt_doc_radio')"> <label>Sim</label></div>
                             <div class="radio-group"><input type="radio" name="doc_radio" value="nao" onchange="toggleRadioCondicional('doc_radio', 'txt_doc_radio')"> <label>Não</label></div>
                             <input type="text" id="txt_doc_radio" class="hidden mt-1" placeholder="Informe o nome do campo e as opções de escolha...">
                         </div>
                         <div class="form-group">
-                            <label>Algum campo permite marcar várias opções ao mesmo tempo?<br><span class="help-text">Ex: ☑ E-mail ☑ Telefone</span></label>
-                            <div class="radio-group"><input type="radio" name="doc_check" value="sim" onchange="toggleRadioCondicional('doc_check', 'txt_doc_check')"> <label>Sim</label></div>
+                            <label>Algum campo permite marcar várias opções ao mesmo tempo? <span class="required">*</span><br><span class="help-text">Ex: ☑ E-mail ☑ Telefone</span></label>
+                            <div class="radio-group"><input type="radio" name="doc_check" value="sim" required onchange="toggleRadioCondicional('doc_check', 'txt_doc_check')"> <label>Sim</label></div>
                             <div class="radio-group"><input type="radio" name="doc_check" value="nao" onchange="toggleRadioCondicional('doc_check', 'txt_doc_check')"> <label>Não</label></div>
                             <input type="text" id="txt_doc_check" class="hidden mt-1" placeholder="Informe o nome do campo e as opções de múltipla escolha...">
                         </div>
                         <div class="form-group">
-                            <label>O documento terá botões de ação?<br><span class="help-text">Ex: Salvar, Enviar, Gerar PDF</span></label>
-                            <div class="radio-group"><input type="radio" name="doc_btn" value="sim" onchange="toggleRadioCondicional('doc_btn', 'txt_doc_btn')"> <label>Sim</label></div>
+                            <label>O documento terá botões de ação? <span class="required">*</span><br><span class="help-text">Ex: Salvar, Enviar, Gerar PDF</span></label>
+                            <div class="radio-group"><input type="radio" name="doc_btn" value="sim" required onchange="toggleRadioCondicional('doc_btn', 'txt_doc_btn')"> <label>Sim</label></div>
                             <div class="radio-group"><input type="radio" name="doc_btn" value="nao" onchange="toggleRadioCondicional('doc_btn', 'txt_doc_btn')"> <label>Não</label></div>
                             <input type="text" id="txt_doc_btn" class="hidden mt-1" placeholder="Quais botões e o que eles devem fazer? (Ex: Salvar, Imprimir)...">
                         </div>
                         <div class="form-group">
-                            <label>O documento terá campo para digitar texto livre?<br><span class="help-text">Ex: observações ou descrição</span></label>
-                            <div class="radio-group"><input type="radio" name="doc_texto" value="sim" onchange="toggleRadioCondicional('doc_texto', 'txt_doc_texto')"> <label>Sim</label></div>
+                            <label>O documento terá campo para digitar texto livre? <span class="required">*</span><br><span class="help-text">Ex: observações ou descrição</span></label>
+                            <div class="radio-group"><input type="radio" name="doc_texto" value="sim" required onchange="toggleRadioCondicional('doc_texto', 'txt_doc_texto')"> <label>Sim</label></div>
                             <div class="radio-group"><input type="radio" name="doc_texto" value="nao" onchange="toggleRadioCondicional('doc_texto', 'txt_doc_texto')"> <label>Não</label></div>
                             <input type="text" id="txt_doc_texto" class="hidden mt-1" placeholder="Especifique os campos de texto livre...">
                         </div>
                         <div class="form-group">
-                            <label>Algum campo deve ficar bloqueado para edição?<br><span class="help-text">Apenas visualização ou preenchido automaticamente</span></label>
-                            <div class="radio-group"><input type="radio" name="doc_block" value="sim" onchange="toggleRadioCondicional('doc_block', 'txt_doc_block')"> <label>Sim</label></div>
+                            <label>Algum campo deve ficar bloqueado para edição? <span class="required">*</span><br><span class="help-text">Apenas visualização ou preenchido automaticamente</span></label>
+                            <div class="radio-group"><input type="radio" name="doc_block" value="sim" required onchange="toggleRadioCondicional('doc_block', 'txt_doc_block')"> <label>Sim</label></div>
                             <div class="radio-group"><input type="radio" name="doc_block" value="nao" onchange="toggleRadioCondicional('doc_block', 'txt_doc_block')"> <label>Não</label></div>
                             <input type="text" id="txt_doc_block" class="hidden mt-1" placeholder="Quais campos e qual a regra de bloqueio? (Ex: Data atual)...">
                         </div>
                         <div class="form-group">
-                            <label>Algum campo aparece apenas quando outro é selecionado?<br><span class="help-text">Ex: se escolher “Outro”, aparece um campo para explicar</span></label>
-                            <div class="radio-group"><input type="radio" name="doc_cond" value="sim" onchange="toggleRadioCondicional('doc_cond', 'txt_doc_cond')"> <label>Sim</label></div>
+                            <label>Algum campo aparece apenas quando outro é selecionado? <span class="required">*</span><br><span class="help-text">Ex: se escolher “Outro”, aparece um campo para explicar</span></label>
+                            <div class="radio-group"><input type="radio" name="doc_cond" value="sim" required onchange="toggleRadioCondicional('doc_cond', 'txt_doc_cond')"> <label>Sim</label></div>
                             <div class="radio-group"><input type="radio" name="doc_cond" value="nao" onchange="toggleRadioCondicional('doc_cond', 'txt_doc_cond')"> <label>Não</label></div>
                             <input type="text" id="txt_doc_cond" class="hidden mt-1" placeholder="Explique a regra (Ex: Se escolher convênio, abre aba de carteirinha)...">
                         </div>
                         <div class="form-group">
-                            <label>Foram anexados prints ou exemplos do documento desejado?</label>
-                            <div class="radio-group"><input type="radio" name="doc_prints" value="sim" onchange="toggleRadioCondicional('doc_prints', 'txt_doc_prints')"> <label>Sim</label></div>
-                            <div class="radio-group"><input type="radio" name="doc_prints" value="nao" onchange="toggleRadioCondicional('doc_prints', 'txt_doc_prints')"> <label>Não</label></div>
-                            <input type="text" id="txt_doc_prints" class="hidden mt-1" placeholder="Descreva brevemente o que está nos anexos... (Nome do arquivo, etc)">
+                            <label>Foram anexados prints ou exemplos do documento desejado? <span class="required">*</span></label>
+                            <div class="radio-group"><input type="radio" name="doc_prints" value="sim" required> <label>Sim</label></div>
+                            <div class="radio-group"><input type="radio" name="doc_prints" value="nao"> <label>Não</label></div>
                         </div>
                     </div>
                 </div>
@@ -640,7 +673,7 @@
                     <label class="section-title"><span class="blue-diamond">◆</span> 7. LÓGICA PARA NOTIFICAÇÃO
                         INTELIGENTE</label>
                     <div id="notif_ajuste" class="hidden sub-section">
-                        <label>Informação do Ajuste</label>
+                        <label>Informação do Ajuste <span class="required">*</span></label>
                         <div class="checkbox-group">
                             <input type="checkbox" id="not_email" onchange="toggleCampo(this, 'txt_not_email')"> <label
                                 for="not_email">Não estou recebendo / Inclusão de e-mail</label>
@@ -649,7 +682,7 @@
                         </div>
                         <div class="checkbox-group">
                             <input type="checkbox" id="not_vazio" onchange="toggleCampo(this, 'txt_not_vazio')"> <label for="not_vazio">E-mail sem informações no
-                                corpo (Anexo obrigatório)</label>
+                                corpo</label>
                             <input type="text" id="txt_not_vazio" class="hidden mt-1" placeholder="Descreva o problema...">
                         </div>
                         <div class="checkbox-group">
@@ -672,18 +705,17 @@
                             <span class="help-text">Informe detalhadamente quais informações devem constar na
                                 notificação, incluindo a origem dos dados (de onde as informações serão
                                 extraídas).</span>
-                            <textarea rows="3"></textarea>
+                            <textarea rows="3" required></textarea>
                         </div>
                         <h3>Requisitos Obrigatórios</h3>
                         <div class="form-group"><label>Colunas <span class="required">*</span></label><input
-                                type="text"></div>
+                                type="text" required></div>
                         <div class="form-group"><label>Ordenação <span class="required">*</span></label><input
-                                type="text"></div>
+                                type="text" required></div>
                         <div class="form-group"><label>Quem receberá a notificação? <span
-                                    class="required">*</span></label><input type="text"></div>
-                        <div class="form-group"><label>Horário e frequência</label><span class="help-text">Verificar
-                                regra do notificador</span><input type="text"></div>
-                        <p class="alert-warning">⚠️ Anexos obrigatórios no final do formulário.</p>
+                                    class="required">*</span></label><input type="text" required></div>
+                        <div class="form-group"><label>Horário e frequência <span class="required">*</span></label><span class="help-text">Verificar
+                                regra do notificador</span><input type="text" required></div>
                     </div>
                 </div>
 
@@ -694,9 +726,9 @@
                     <div id="bi_ajuste" class="hidden">
                         <label>Informação do ajuste <span class="required">*</span></label>
                         <div class="radio-group"><input type="radio" name="bi_tipo_ajuste" id="bi_ajuste_erro"
-                                value="erro" onchange="handleBIAjuste()"> <label for="bi_ajuste_erro">Erro</label></div>
+                                value="erro" required onchange="handleBIAjuste()"> <label for="bi_ajuste_erro">Erro</label></div>
                         <div class="radio-group"><input type="radio" name="bi_tipo_ajuste" id="bi_ajuste_melhoria"
-                                value="melhoria" onchange="handleBIAjuste()"> <label
+                                value="melhoria" required onchange="handleBIAjuste()"> <label
                                 for="bi_ajuste_melhoria">Melhoria</label></div>
 
                         <div id="bi_erro" class="hidden sub-section">
@@ -726,7 +758,6 @@
                                 <input type="text" id="txt_bi_err_outros" class="hidden mt-1"
                                     placeholder="Detalhar o erro apresentado">
                             </div>
-                            <p class="alert-warning">⚠️ Anexo obrigatório para todos os itens.</p>
                         </div>
 
                         <div id="bi_melhoria" class="hidden sub-section">
@@ -772,8 +803,6 @@
                                             Exclusão</label></div>
                                 </div>
                             </div>
-                            <p class="alert-warning">⚠️ Anexo obrigatório – Mensagem: Insira um anexo como modelo do
-                                layout esperado.</p>
                         </div>
                     </div>
 
@@ -782,24 +811,20 @@
                         
                         <div class="form-group">
                             <label>Caminho das telas e dos documentos <span class="required">*</span></label>
-                            <input type="text">
+                            <input type="text" required>
                         </div>
                         <div class="form-group">
-                            <label>Origem dos dados</label>
-                            <span class="help-text">Qual sistema ou tabela alimenta?</span>
-                            <input type="text">
+                            <label>Qual sistema ou tabela é a fonte desses dados? <span class="required">*</span></label>
+                            <input type="text" required>
                         </div>
 
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="req_prints_bi"> <label for="req_prints_bi">Prints das telas –
-                                Informar quais campos deverão ser considerados (anexo obrigatório)</label>
-                            <input type="text" placeholder="Quais campos..." class="mt-1">
+                        <div class="form-group">
+                            <label>Prints das telas – Informar quais campos deverão ser considerados <span class="required">*</span></label>
+                            <input type="text" placeholder="Quais campos..." required>
                         </div>
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="req_doc_bi"> <label for="req_doc_bi">Print do documento
-                                assistencial – Informar quais campos deverão ser considerados (anexo
-                                obrigatório)</label>
-                            <input type="text" placeholder="Quais campos..." class="mt-1">
+                        <div class="form-group">
+                            <label>Print do documento assistencial – Informar quais campos deverão ser considerados <span class="required">*</span></label>
+                            <input type="text" placeholder="Quais campos..." required>
                         </div>
                         <div class="form-group mt-2">
                             <label>Descreva as informações que deverão constar no BI <span
@@ -817,17 +842,16 @@
                                     <li>Demais métricas necessárias.</li>
                                 </ul>
                             </div>
-                            <textarea rows="4"></textarea>
+                            <textarea rows="4" required></textarea>
                         </div>
 
                         <h3>Requisitos Obrigatórios</h3>
                         <div class="form-group"><label>Filtros <span class="required">*</span></label><input
-                                type="text"></div>
+                                type="text" required></div>
                         <div class="form-group"><label>Colunas <span class="required">*</span></label><input
-                                type="text"></div>
+                                type="text" required></div>
                         <div class="form-group"><label>Ordenação <span class="required">*</span></label><input
-                                type="text"></div>
-                        <p class="alert-warning">⚠️ Anexos obrigatórios no final do formulário.</p>
+                                type="text" required></div>
                     </div>
                 </div>
 
@@ -836,7 +860,7 @@
                     <label class="section-title"><span class="blue-diamond">◆</span> 9. LÓGICA PARA AUTOMATIZAÇÃO E
                         SISTEMAS INTERNOS</label>
                     <div id="proc_ajuste" class="hidden sub-section">
-                        <label>Automatizações – Ajuste</label>
+                        <label>Automatizações – Ajuste <span class="required">*</span></label>
                         <div class="checkbox-group">
                             <input type="checkbox" id="aut_erro" onchange="toggleCampo(this, 'txt_aut_erro')"> <label
                                 for="aut_erro">Erro na execução da automatização</label>
@@ -855,7 +879,6 @@
                             <input type="text" id="txt_aut_outro" class="hidden mt-1"
                                 placeholder="Descrever (obrigatório)">
                         </div>
-                        <p class="alert-warning">⚠️ Anexo obrigatório para todos os itens.</p>
                     </div>
 
                     <div id="proc_novo" class="hidden">
@@ -863,30 +886,29 @@
                             <label>Informações Importantes</label>
                             <textarea rows="3" placeholder="Descreva informações adicionais ou importantes para a automação..."></textarea>
                         </div>
-                        <div class="alert-warning"
-                            style="background-color: var(--coe-light-blue); border-color: var(--coe-blue); color: #004085;">
-                            <strong>Anexos (OBRIGATÓRIO)</strong><br><br>
-                            Para análise da solicitação, é obrigatório anexar no final do formulário:<br>
-                            <ul>
-                                <li>Fluxo do processo atual (desenho ou fluxograma demonstrando como funciona
-                                    atualmente).</li>
-                                <li>Fluxo do processo esperado (desenho ou fluxograma demonstrando como deverá funcionar
-                                    após a automação).</li>
-                                <li>Prints de todas as etapas do processo atual, evidenciando telas e campos envolvidos.
-                                </li>
-                                <li>Caso necessário, vídeo curto demonstrando o processo completo, do início ao fim.
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
 
                 <!-- UPLOADS FINAIS -->
                 <div class="card">
-                    <label class="section-title">📎 ANEXOS GERAIS</label>
+                    <label class="section-title">📎 ANEXOS GERAIS E OBRIGATÓRIOS</label>
+                    
+                    <!-- Painel Central de Avisos de Anexo -->
+                    <div class="alert-warning" style="background-color: var(--coe-light-blue); border-color: var(--coe-blue); color: #004085; margin-top: 0; margin-bottom: 20px;">
+                        <strong>⚠️ Atenção aos Anexos Obrigatórios (conforme o tipo de solicitação):</strong>
+                        <ul style="margin-top: 8px; margin-bottom: 0; padding-left: 20px; font-size: 13px;">
+                            <li><strong>Ajustes ou Correções (Geral):</strong> Print ou evidência da mensagem de erro ou alteração necessária.</li>
+                            <li><strong>Relatórios / BI (Melhoria):</strong> Modelo do relatório ou layout esperado.</li>
+                            <li><strong>Relatórios / BI (Novo):</strong> Prints das telas e/ou do documento assistencial evidenciando os campos.</li>
+                            <li><strong>Documentos Eletrônicos:</strong> Prints ou exemplos do documento desejado (Novo) ou evidências do erro/formatação (Ajuste).</li>
+                            <li><strong>Notificação Inteligente (Ajuste):</strong> E-mail sem informações no corpo (se aplicável).</li>
+                            <li><strong>Automatizações / Sistemas Internos (Novo):</strong> Fluxo do processo atual, fluxo do processo esperado, prints das etapas e vídeo demonstrativo (se aplicável).</li>
+                        </ul>
+                    </div>
+
                     <div class="form-group" style="margin-bottom: 0;">
-                        <label>Faça o upload de Imagens, Documentos ou Vídeos pertinentes à solicitação.</label>
-                        <input type="file" name="anexos[]" multiple accept="image/*,.pdf,.doc,.docx,.mp4">
+                        <label>Faça o upload de Imagens, Documentos ou Vídeos pertinentes à solicitação. <span class="required">*</span></label>
+                        <input type="file" name="anexos[]" multiple accept="image/*,.pdf,.doc,.docx,.mp4" required>
                     </div>
                 </div>
 
@@ -894,10 +916,13 @@
                 <div class="card">
                     <div class="info-box">
                         <h3 style="margin-top: 0; color: var(--coe-blue);">Das responsabilidades:</h3>
-                        <ul style="margin-bottom: 0; padding-left: 20px;">
-                            <li>Todos os envolvidos neste chamado deverão conferir atentamente todas as informações
-                                relacionadas...</li>
-                            <li>A validação do processo deverá ser formalizada por todos os responsáveis...</li>
+                        <ul style="margin-bottom: 0; padding-left: 20px; line-height: 1.6;">
+                            <li style="margin-bottom: 6px;">Todos os envolvidos neste chamado deverão conferir atentamente todas as informações relacionadas ao desenvolvimento solicitado. Em caso de divergências, o setor de TI deverá ser comunicado no próprio chamado para as devidas tratativas.</li>
+                            <li style="margin-bottom: 6px;">Todos os responsáveis indicados neste chamado deverão estar de acordo com o desenvolvimento proposto e cientes do processo.</li>
+                            <li style="margin-bottom: 6px;">As pessoas indicadas no chamado serão responsáveis por realizar a conferência de todo o processo descrito após a finalização e entrega do desenvolvimento pelo setor de TI, respeitando o prazo informado pela TI neste chamado.</li>
+                            <li style="margin-bottom: 6px;">A validação do processo deverá ser formalizada por todos os responsáveis indicados neste chamado, com retorno dentro do prazo previamente acordado e informado pelo setor de TI.</li>
+                            <li style="margin-bottom: 6px;">Caso não haja retorno dos responsáveis dentro dos prazos estabelecidos, o processo será considerado validado e o chamado será encerrado, com registro da ausência de retorno da área responsável.</li>
+                            <li>Modificações no escopo do desenvolvimento inicialmente solicitado não serão adotadas neste chamado. Quaisquer alterações ou inclusões deverão ser tratadas como uma nova demanda, sendo necessária a abertura de um novo chamado técnico, o qual será incluído na fila de desenvolvimento conforme a ordem de chamado.</li>
                         </ul>
                     </div>
                 </div>
@@ -918,6 +943,9 @@
         // ----------------------------------------------------
         function enviarFormulario(event) {
             event.preventDefault(); // Impede o recarregamento da página (comportamento padrão de submit)
+
+            // Validação de segurança extra caso o HTML5 passe algo invisível
+            tratarCamposOcultos();
 
             // Exibe a mensagem de sucesso
             const msgSucesso = document.getElementById('mensagem_sucesso');
@@ -942,11 +970,30 @@
             document.getElementById('wrapper_processo_atual').classList.add('hidden');
             document.getElementById('btnSubmit').disabled = false;
 
+            // Restaura os campos ocultos para o estado inicial
+            tratarCamposOcultos();
+
             // Após 5 segundos, oculta a mensagem de sucesso novamente
             setTimeout(() => {
                 msgSucesso.classList.add('hidden');
             }, 5000);
         }
+
+        // Função Master para desativar inputs invisíveis e evitar bloqueio do HTML5 required
+        function tratarCamposOcultos() {
+            document.querySelectorAll('input, textarea, select').forEach(el => {
+                // Se o elemento em si ou qualquer pai dele tiver a classe 'hidden', ele é desativado
+                if (el.closest('.hidden')) {
+                    el.disabled = true;
+                } else {
+                    el.disabled = false;
+                }
+            });
+            // Mantem a regra especifica do botão submit (se está bloqueado pela regra do setor)
+            const bloqueioAtivo = !document.getElementById('msgBloqueio').classList.contains('hidden');
+            document.getElementById('btnSubmit').disabled = bloqueioAtivo;
+        }
+
 
         // Função Auxiliar
         function toggleRadioCondicional(radioName, idCampoTexto) {
@@ -959,6 +1006,7 @@
                 campo.classList.add('hidden');
                 campo.removeAttribute('required');
             }
+            tratarCamposOcultos();
         }
 
         function toggleCampo(checkbox, idCampoTexto) {
@@ -970,6 +1018,7 @@
                 campo.classList.add('hidden');
                 campo.removeAttribute('required');
             }
+            tratarCamposOcultos();
         }
 
         // ----------------------------------------------------
@@ -1017,6 +1066,7 @@
                     document.getElementById('container_final').classList.add('hidden');
                 }
             }
+            tratarCamposOcultos();
         }
 
         // Passo 1 libera o Passo 2
@@ -1036,6 +1086,7 @@
             }
 
             atualizarSecoesDinamicas();
+            tratarCamposOcultos();
         }
 
         // Passo 2 libera o Passo 3
@@ -1047,6 +1098,7 @@
             atualizarLogicaPasso3();
             
             atualizarSecoesDinamicas();
+            tratarCamposOcultos();
         }
 
         // Passo 3 libera o Passo 4 (Acionado pela última pergunta do card 3 se for Novo)
@@ -1071,6 +1123,7 @@
 
             // Revela o Passo 4
             document.getElementById('card_passo_4').classList.remove('hidden');
+            tratarCamposOcultos();
         }
 
         // Passo 4 libera o Restante do Formulário (Seções Dinâmicas + Uploads + Botão)
@@ -1095,6 +1148,7 @@
                 document.getElementById('container_final').classList.remove('hidden');
                 atualizarSecoesDinamicas();
             }
+            tratarCamposOcultos();
         }
 
         // Lógica do bloqueio interno do Passo 4
@@ -1121,6 +1175,7 @@
                 document.getElementById('container_final').classList.remove('hidden');
                 atualizarSecoesDinamicas();
             }
+            tratarCamposOcultos();
         }
 
 
@@ -1134,7 +1189,10 @@
             // Esconder todas as dinâmicas preventivamente
             document.querySelectorAll('.secao-dinamica').forEach(el => el.classList.add('hidden'));
 
-            if (!tipoSolicitacao || !tipoDesenvolvimento) return;
+            if (!tipoSolicitacao || !tipoDesenvolvimento) {
+                tratarCamposOcultos();
+                return;
+            }
 
             // Exibe Relatórios
             if (tipoDesenvolvimento === 'relatorios') {
@@ -1195,6 +1253,8 @@
                     document.getElementById('proc_novo').classList.remove('hidden');
                 }
             }
+
+            tratarCamposOcultos();
         }
 
         function handleRelatorioAjuste() {
@@ -1206,6 +1266,7 @@
                 document.getElementById('rel_erro').classList.add('hidden');
                 document.getElementById('rel_melhoria').classList.remove('hidden');
             }
+            tratarCamposOcultos();
         }
 
         function handleBIAjuste() {
@@ -1217,7 +1278,13 @@
                 document.getElementById('bi_erro').classList.add('hidden');
                 document.getElementById('bi_melhoria').classList.remove('hidden');
             }
+            tratarCamposOcultos();
         }
+        
+        // Chamada inicial para garantir que o que está oculto já comece bloqueado
+        window.onload = function() {
+            tratarCamposOcultos();
+        };
     </script>
 
 </body>

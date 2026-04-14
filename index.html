@@ -510,34 +510,36 @@
                                 for="rel_ajuste_melhoria">Melhoria</label></div>
 
                         <div id="rel_erro" class="hidden sub-section">
+                            <p class="help-text">Selecione ao menos uma opção abaixo:</p>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="err_dados" onchange="toggleCampo(this, 'txt_err_dados')">
+                                <input type="checkbox" id="err_dados" name="rel_ajuste_erro_opts" required onchange="toggleCampo(this, 'txt_err_dados'); validarGrupoCheckbox('rel_ajuste_erro_opts')">
                                 <label for="err_dados">Dados incorretos ou ausentes</label>
                                 <input type="text" id="txt_err_dados" class="hidden mt-1"
                                     placeholder="Detalhar quais informações estão ausentes ou incorretas">
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="err_filtros" onchange="toggleCampo(this, 'txt_err_filtros')">
+                                <input type="checkbox" id="err_filtros" name="rel_ajuste_erro_opts" required onchange="toggleCampo(this, 'txt_err_filtros'); validarGrupoCheckbox('rel_ajuste_erro_opts')">
                                 <label for="err_filtros">Filtros inoperantes</label>
                                 <input type="text" id="txt_err_filtros" class="hidden mt-1"
                                     placeholder="Detalhar quais filtros estão inoperantes ou incorretos e descrever o comportamento esperado">
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="err_msg" onchange="toggleCampo(this, 'txt_err_msg_rel')"> <label
+                                <input type="checkbox" id="err_msg" name="rel_ajuste_erro_opts" required onchange="toggleCampo(this, 'txt_err_msg_rel'); validarGrupoCheckbox('rel_ajuste_erro_opts')"> <label
                                     for="err_msg">Mensagem de erro ao gerar relatório</label>
                                 <input type="text" id="txt_err_msg_rel" class="hidden mt-1"
                                     placeholder="Descreva a mensagem de erro...">
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="err_outros" onchange="toggleCampo(this, 'txt_err_outros')">
+                                <input type="checkbox" id="err_outros" name="rel_ajuste_erro_opts" required onchange="toggleCampo(this, 'txt_err_outros'); validarGrupoCheckbox('rel_ajuste_erro_opts')">
                                 <label for="err_outros">Outros</label>
                                 <input type="text" id="txt_err_outros" class="hidden mt-1" placeholder="Detalhar o erro apresentado...">
                             </div>
                         </div>
 
                         <div id="rel_melhoria" class="hidden sub-section">
+                            <p class="help-text">Selecione ao menos uma opção abaixo:</p>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="mel_quebra" onchange="toggleCampo(this, 'box_quebra')">
+                                <input type="checkbox" id="mel_quebra" name="rel_ajuste_melhoria_opts" required onchange="toggleCampo(this, 'box_quebra'); validarGrupoCheckbox('rel_ajuste_melhoria_opts')">
                                 <label for="mel_quebra">Quebra</label>
                                 <div id="box_quebra" class="hidden">
                                     <input type="text"
@@ -548,7 +550,7 @@
                                 </div>
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="mel_filtro" onchange="toggleCampo(this, 'box_filtro')">
+                                <input type="checkbox" id="mel_filtro" name="rel_ajuste_melhoria_opts" required onchange="toggleCampo(this, 'box_filtro'); validarGrupoCheckbox('rel_ajuste_melhoria_opts')">
                                 <label for="mel_filtro">Filtro</label>
                                 <div id="box_filtro" class="hidden">
                                     <input type="text"
@@ -559,7 +561,7 @@
                                 </div>
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="mel_coluna" onchange="toggleCampo(this, 'box_coluna')">
+                                <input type="checkbox" id="mel_coluna" name="rel_ajuste_melhoria_opts" required onchange="toggleCampo(this, 'box_coluna'); validarGrupoCheckbox('rel_ajuste_melhoria_opts')">
                                 <label for="mel_coluna">Coluna</label>
                                 <div id="box_coluna" class="hidden">
                                     <input type="text"
@@ -570,7 +572,7 @@
                                 </div>
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="mel_ordem" onchange="toggleCampo(this, 'box_ordem')"> <label
+                                <input type="checkbox" id="mel_ordem" name="rel_ajuste_melhoria_opts" required onchange="toggleCampo(this, 'box_ordem'); validarGrupoCheckbox('rel_ajuste_melhoria_opts')"> <label
                                     for="mel_ordem">Ordenação</label>
                                 <div id="box_ordem" class="hidden">
                                     <input type="text" placeholder="Informar qual ordenação deve ser aplicada">
@@ -603,24 +605,25 @@
 
                         <div class="form-group mt-3">
                             <label>Múltipla escolha <span class="required">*</span></label>
+                            <p class="help-text">Selecione ao menos uma opção abaixo:</p>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="rel_novo_col" onchange="toggleCampo(this, 'txt_rel_novo_col')"> <label for="rel_novo_col">Colunas</label>
+                                <input type="checkbox" id="rel_novo_col" name="rel_novo_opts" required onchange="toggleCampo(this, 'txt_rel_novo_col'); validarGrupoCheckbox('rel_novo_opts')"> <label for="rel_novo_col">Colunas</label>
                                 <input type="text" id="txt_rel_novo_col" class="hidden mt-1" placeholder="Informe detalhadamente os dados das colunas...">
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="rel_novo_quebra" onchange="toggleCampo(this, 'txt_rel_novo_quebra')"> <label for="rel_novo_quebra">Quebras</label>
+                                <input type="checkbox" id="rel_novo_quebra" name="rel_novo_opts" required onchange="toggleCampo(this, 'txt_rel_novo_quebra'); validarGrupoCheckbox('rel_novo_opts')"> <label for="rel_novo_quebra">Quebras</label>
                                 <input type="text" id="txt_rel_novo_quebra" class="hidden mt-1" placeholder="Informe detalhadamente as quebras...">
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="rel_novo_ord" onchange="toggleCampo(this, 'txt_rel_novo_ord')"> <label for="rel_novo_ord">Ordenação</label>
+                                <input type="checkbox" id="rel_novo_ord" name="rel_novo_opts" required onchange="toggleCampo(this, 'txt_rel_novo_ord'); validarGrupoCheckbox('rel_novo_opts')"> <label for="rel_novo_ord">Ordenação</label>
                                 <input type="text" id="txt_rel_novo_ord" class="hidden mt-1" placeholder="Informe detalhadamente a ordenação...">
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="rel_novo_filtro" onchange="toggleCampo(this, 'txt_rel_novo_filtro')"> <label for="rel_novo_filtro">Filtros</label>
+                                <input type="checkbox" id="rel_novo_filtro" name="rel_novo_opts" required onchange="toggleCampo(this, 'txt_rel_novo_filtro'); validarGrupoCheckbox('rel_novo_opts')"> <label for="rel_novo_filtro">Filtros</label>
                                 <input type="text" id="txt_rel_novo_filtro" class="hidden mt-1" placeholder="Informe detalhadamente os filtros necessários...">
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="rel_novo_form" onchange="toggleCampo(this, 'txt_rel_novo_form')"> <label for="rel_novo_form">Fórmulas</label>
+                                <input type="checkbox" id="rel_novo_form" name="rel_novo_opts" required onchange="toggleCampo(this, 'txt_rel_novo_form'); validarGrupoCheckbox('rel_novo_opts')"> <label for="rel_novo_form">Fórmulas</label>
                                 <input type="text" id="txt_rel_novo_form" class="hidden mt-1" placeholder="Informe detalhadamente os cálculos e fórmulas aplicáveis...">
                             </div>
                         </div>
@@ -640,19 +643,20 @@
 
                     <div id="docs_ajuste" class="hidden sub-section" style="margin-bottom: 20px;">
                         <label>Informação do Ajuste <span class="required">*</span></label>
+                        <p class="help-text">Selecione ao menos uma opção abaixo:</p>
                         <div class="checkbox-group">
-                            <input type="checkbox" id="doc_erro_msg" onchange="toggleCampo(this, 'txt_doc_erro_msg')">
+                            <input type="checkbox" id="doc_erro_msg" name="doc_ajuste_opts" required onchange="toggleCampo(this, 'txt_doc_erro_msg'); validarGrupoCheckbox('doc_ajuste_opts')">
                             <label for="doc_erro_msg">Mensagens de erro</label>
                             <input type="text" id="txt_doc_erro_msg" class="hidden mt-1"
                                 placeholder="Descreva a mensagem de erro">
                         </div>
                         <div class="checkbox-group">
-                            <input type="checkbox" id="doc_erro_regra" onchange="toggleCampo(this, 'txt_doc_erro_regra')"> 
+                            <input type="checkbox" id="doc_erro_regra" name="doc_ajuste_opts" required onchange="toggleCampo(this, 'txt_doc_erro_regra'); validarGrupoCheckbox('doc_ajuste_opts')"> 
                             <label for="doc_erro_regra">Erros ou alterações em regras</label>
                             <input type="text" id="txt_doc_erro_regra" class="hidden mt-1" placeholder="Descreva o erro ou alteração">
                         </div>
                         <div class="checkbox-group">
-                            <input type="checkbox" id="doc_format" onchange="toggleCampo(this, 'txt_doc_format')"> 
+                            <input type="checkbox" id="doc_format" name="doc_ajuste_opts" required onchange="toggleCampo(this, 'txt_doc_format'); validarGrupoCheckbox('doc_ajuste_opts')"> 
                             <label for="doc_format">Formatação de campos</label>
                             <input type="text" id="txt_doc_format" class="hidden mt-1" placeholder="Descreva a formatação desejada">
                         </div>
@@ -743,25 +747,26 @@
                     <label class="section-title"><span class="blue-diamond">◆</span> 7. DETALHES DA NOTIFICAÇÃO</label>
                     <div id="notif_ajuste" class="hidden sub-section">
                         <label>Informação do Ajuste <span class="required">*</span></label>
+                        <p class="help-text">Selecione ao menos uma opção abaixo:</p>
                         <div class="checkbox-group">
-                            <input type="checkbox" id="not_email" onchange="toggleCampo(this, 'txt_not_email')"> <label
+                            <input type="checkbox" id="not_email" name="notif_ajuste_opts" required onchange="toggleCampo(this, 'txt_not_email'); validarGrupoCheckbox('notif_ajuste_opts')"> <label
                                 for="not_email">Não estou recebendo / Inclusão de e-mail</label>
                             <input type="text" id="txt_not_email" class="hidden mt-1"
                                 placeholder="Inserir o e-mail (obrigatório)">
                         </div>
                         <div class="checkbox-group">
-                            <input type="checkbox" id="not_vazio" onchange="toggleCampo(this, 'txt_not_vazio')"> <label for="not_vazio">E-mail sem informações no
+                            <input type="checkbox" id="not_vazio" name="notif_ajuste_opts" required onchange="toggleCampo(this, 'txt_not_vazio'); validarGrupoCheckbox('notif_ajuste_opts')"> <label for="not_vazio">E-mail sem informações no
                                 corpo</label>
                             <input type="text" id="txt_not_vazio" class="hidden mt-1" placeholder="Descreva o problema...">
                         </div>
                         <div class="checkbox-group">
-                            <input type="checkbox" id="not_hora" onchange="toggleCampo(this, 'txt_not_hora')"> <label
+                            <input type="checkbox" id="not_hora" name="notif_ajuste_opts" required onchange="toggleCampo(this, 'txt_not_hora'); validarGrupoCheckbox('notif_ajuste_opts')"> <label
                                 for="not_hora">Alteração de horário e frequência</label>
                             <input type="text" id="txt_not_hora" class="hidden mt-1"
                                 placeholder="Descrever horário/frequência (obrigatório)">
                         </div>
                         <div class="checkbox-group">
-                            <input type="checkbox" id="not_nome" onchange="toggleCampo(this, 'txt_not_nome')"> <label
+                            <input type="checkbox" id="not_nome" name="notif_ajuste_opts" required onchange="toggleCampo(this, 'txt_not_nome'); validarGrupoCheckbox('notif_ajuste_opts')"> <label
                                 for="not_nome">Alteração de nomenclatura</label>
                             <input type="text" id="txt_not_nome" class="hidden mt-1"
                                 placeholder="Descrever nomenclatura (obrigatório)">
@@ -800,28 +805,29 @@
                                 for="bi_ajuste_melhoria">Melhoria</label></div>
 
                         <div id="bi_erro" class="hidden sub-section">
+                            <p class="help-text">Selecione ao menos uma opção abaixo:</p>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="bi_err_dados"
-                                    onchange="toggleCampo(this, 'txt_bi_err_dados')"> <label for="bi_err_dados">Dados
+                                <input type="checkbox" id="bi_err_dados" name="bi_ajuste_erro_opts" required
+                                    onchange="toggleCampo(this, 'txt_bi_err_dados'); validarGrupoCheckbox('bi_ajuste_erro_opts')"> <label for="bi_err_dados">Dados
                                     incorretos ou ausentes</label>
                                 <input type="text" id="txt_bi_err_dados" class="hidden mt-1"
                                     placeholder="Detalhar quais informações estão ausentes ou incorretas">
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="bi_err_filtros"
-                                    onchange="toggleCampo(this, 'txt_bi_err_filtros')"> <label
+                                <input type="checkbox" id="bi_err_filtros" name="bi_ajuste_erro_opts" required
+                                    onchange="toggleCampo(this, 'txt_bi_err_filtros'); validarGrupoCheckbox('bi_ajuste_erro_opts')"> <label
                                     for="bi_err_filtros">Filtros inoperantes</label>
                                 <input type="text" id="txt_bi_err_filtros" class="hidden mt-1"
                                     placeholder="Detalhar quais filtros estão inoperantes ou incorretos e o comportamento esperado">
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="bi_err_msg" onchange="toggleCampo(this, 'txt_bi_err_msg_rel')"> <label
+                                <input type="checkbox" id="bi_err_msg" name="bi_ajuste_erro_opts" required onchange="toggleCampo(this, 'txt_bi_err_msg_rel'); validarGrupoCheckbox('bi_ajuste_erro_opts')"> <label
                                     for="bi_err_msg">Mensagens de erro</label>
                                 <input type="text" id="txt_bi_err_msg_rel" class="hidden mt-1" placeholder="Descreva a mensagem de erro...">
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="bi_err_outros"
-                                    onchange="toggleCampo(this, 'txt_bi_err_outros')"> <label
+                                <input type="checkbox" id="bi_err_outros" name="bi_ajuste_erro_opts" required
+                                    onchange="toggleCampo(this, 'txt_bi_err_outros'); validarGrupoCheckbox('bi_ajuste_erro_opts')"> <label
                                     for="bi_err_outros">Outros</label>
                                 <input type="text" id="txt_bi_err_outros" class="hidden mt-1"
                                     placeholder="Detalhar o erro apresentado">
@@ -831,8 +837,9 @@
                         <div id="bi_melhoria" class="hidden sub-section">
                             <p class="help-text" style="color:var(--text-dark); margin-bottom: 15px;">Somente alterações
                                 simples serão consideradas como melhoria.</p>
+                            <p class="help-text" style="margin-top:-10px;">Selecione ao menos uma opção abaixo:</p>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="bi_mel_filtro" onchange="toggleCampo(this, 'box_bi_filtro')">
+                                <input type="checkbox" id="bi_mel_filtro" name="bi_ajuste_melhoria_opts" required onchange="toggleCampo(this, 'box_bi_filtro'); validarGrupoCheckbox('bi_ajuste_melhoria_opts')">
                                 <label for="bi_mel_filtro">Filtros</label>
                                 <div id="box_bi_filtro" class="hidden">
                                     <input type="text"
@@ -843,7 +850,7 @@
                                 </div>
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="bi_mel_coluna" onchange="toggleCampo(this, 'box_bi_coluna')">
+                                <input type="checkbox" id="bi_mel_coluna" name="bi_ajuste_melhoria_opts" required onchange="toggleCampo(this, 'box_bi_coluna'); validarGrupoCheckbox('bi_ajuste_melhoria_opts')">
                                 <label for="bi_mel_coluna">Coluna</label>
                                 <div id="box_bi_coluna" class="hidden">
                                     <input type="text"
@@ -854,7 +861,7 @@
                                 </div>
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="bi_mel_ordem" onchange="toggleCampo(this, 'box_bi_ordem')">
+                                <input type="checkbox" id="bi_mel_ordem" name="bi_ajuste_melhoria_opts" required onchange="toggleCampo(this, 'box_bi_ordem'); validarGrupoCheckbox('bi_ajuste_melhoria_opts')">
                                 <label for="bi_mel_ordem">Ordenação</label>
                                 <div id="box_bi_ordem" class="hidden">
                                     <input type="text" placeholder="Informar qual ordenação deve ser aplicada">
@@ -862,7 +869,7 @@
                                 </div>
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="bi_mel_visao" onchange="toggleCampo(this, 'box_bi_visao')">
+                                <input type="checkbox" id="bi_mel_visao" name="bi_ajuste_melhoria_opts" required onchange="toggleCampo(this, 'box_bi_visao'); validarGrupoCheckbox('bi_ajuste_melhoria_opts')">
                                 <label for="bi_mel_visao">Visão (tipo de gráfico)</label>
                                 <div id="box_bi_visao" class="hidden">
                                     <input type="text" placeholder="Descrever detalhadamente a visão desejada">
@@ -928,20 +935,21 @@
                     <label class="section-title" id="lbl_title_processos"><span class="blue-diamond">◆</span> 9. DETALHES DA AUTOMATIZAÇÃO</label>
                     <div id="proc_ajuste" class="hidden sub-section">
                         <label>Automatizações – Ajuste <span class="required">*</span></label>
+                        <p class="help-text">Selecione ao menos uma opção abaixo:</p>
                         <div class="checkbox-group">
-                            <input type="checkbox" id="aut_erro" onchange="toggleCampo(this, 'txt_aut_erro')"> <label
+                            <input type="checkbox" id="aut_erro" name="proc_ajuste_opts" required onchange="toggleCampo(this, 'txt_aut_erro'); validarGrupoCheckbox('proc_ajuste_opts')"> <label
                                 for="aut_erro">Erro na execução</label>
                             <input type="text" id="txt_aut_erro" class="hidden mt-1"
                                 placeholder="Descrever erro (obrigatório)">
                         </div>
                         <div class="checkbox-group">
-                            <input type="checkbox" id="aut_dest" onchange="toggleCampo(this, 'txt_aut_dest')"> <label
+                            <input type="checkbox" id="aut_dest" name="proc_ajuste_opts" required onchange="toggleCampo(this, 'txt_aut_dest'); validarGrupoCheckbox('proc_ajuste_opts')"> <label
                                 for="aut_dest">Alteração de destinatários</label>
                             <input type="text" id="txt_aut_dest" class="hidden mt-1"
                                 placeholder="Descrever alteração (obrigatório)">
                         </div>
                         <div class="checkbox-group">
-                            <input type="checkbox" id="aut_outro" onchange="toggleCampo(this, 'txt_aut_outro')"> <label
+                            <input type="checkbox" id="aut_outro" name="proc_ajuste_opts" required onchange="toggleCampo(this, 'txt_aut_outro'); validarGrupoCheckbox('proc_ajuste_opts')"> <label
                                 for="aut_outro">Outro (descrever)</label>
                             <input type="text" id="txt_aut_outro" class="hidden mt-1"
                                 placeholder="Descrever (obrigatório)">
@@ -1129,18 +1137,41 @@
                 addField('Objetivo Esperado', objetivo.trim());
             }
 
-            // Loop por todos os text inputs visíveis do container_final
+            // Loop por todos os text inputs visíveis do container_final (incluindo tratamento de inline checkboxes)
             const detalhesContainer = document.getElementById('container_final');
             if(detalhesContainer) {
                 const visiveis = detalhesContainer.querySelectorAll('input[type="text"]:not(.hidden), textarea:not(.hidden)');
                 visiveis.forEach(el => {
-                    if (!el.disabled && el.value.trim() !== '') {
-                        const parentGroup = el.closest('.form-group, .checkbox-group');
-                        if (parentGroup && !parentGroup.classList.contains('hidden')) {
-                            let label = parentGroup.querySelector('label');
-                            if (label) {
-                                let labelText = label.innerText.replace('*', '').trim();
-                                addField(labelText, el.value.trim());
+                    if (!el.disabled) {
+                        let finalValue = el.value.trim();
+                        let hasInlineChecked = false;
+                        let inlineText = '';
+
+                        // Verifica se há opções embutidas marcadas (Inclusão, Alteração, Exclusão)
+                        const inlineContainer = el.parentElement.querySelector('.inline-options');
+                        if (inlineContainer) {
+                            const checkedBoxes = Array.from(inlineContainer.querySelectorAll('input[type="checkbox"]:checked'));
+                            if (checkedBoxes.length > 0) {
+                                hasInlineChecked = true;
+                                inlineText = checkedBoxes.map(cb => cb.parentElement.innerText.trim()).join(' | ');
+                            }
+                        }
+
+                        // Só adiciona ao preview se tiver texto OU tiver alguma checkbox embutida marcada
+                        if (finalValue !== '' || hasInlineChecked) {
+                            const parentGroup = el.closest('.form-group, .checkbox-group');
+                            if (parentGroup && !parentGroup.classList.contains('hidden')) {
+                                let label = parentGroup.querySelector('label');
+                                if (label) {
+                                    let labelText = label.innerText.replace('*', '').trim();
+                                    
+                                    // Junta o valor do texto com a ação selecionada nos checkboxes
+                                    if (hasInlineChecked) {
+                                        finalValue = finalValue ? `${finalValue}\n👉 Tipo de Alteração: [ ${inlineText} ]` : `👉 Tipo de Alteração: [ ${inlineText} ]`;
+                                    }
+                                    
+                                    addField(labelText, finalValue);
+                                }
                             }
                         }
                     }
@@ -1187,6 +1218,14 @@
 
             document.getElementById('coeForm')?.classList.remove('hidden');
             
+            // Limpa/reseta validação dos grupos de checkbox
+            const gruposCheckbox = [
+                'rel_ajuste_erro_opts', 'rel_ajuste_melhoria_opts', 'rel_novo_opts',
+                'doc_ajuste_opts', 'notif_ajuste_opts', 'bi_ajuste_erro_opts',
+                'bi_ajuste_melhoria_opts', 'proc_ajuste_opts'
+            ];
+            gruposCheckbox.forEach(validarGrupoCheckbox);
+
             tratarCamposOcultos();
             atualizarAnexosObrigatorios();
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1210,6 +1249,17 @@
                 btnSubmit.disabled = !msgBloqueio.classList.contains('hidden');
             }
         }
+
+        // Função de Validação HTML5 Nativa: Pelo menos um checkbox do grupo
+        function validarGrupoCheckbox(groupName) {
+            const checkboxes = document.querySelectorAll(`input[name="${groupName}"]`);
+            if (checkboxes.length === 0) return;
+            const isChecked = Array.from(checkboxes).some(cb => cb.checked);
+            checkboxes.forEach(cb => {
+                cb.required = !isChecked; // Se não tem nenhum checado, todos exigem "required"
+            });
+        }
+
 
         // Função Auxiliar
         function toggleRadioCondicional(radioName, idCampoTexto) {

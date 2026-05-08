@@ -81,6 +81,14 @@
             font-style: italic;
         }
 
+        .radio-group .help-text {
+            margin-left: 28px;
+            margin-top: 4px;
+            margin-bottom: 10px;
+            font-size: 12.5px;
+            line-height: 1.45;
+        }
+
         .form-group {
             margin-bottom: 20px;
         }
@@ -319,9 +327,11 @@
              ========================================== -->
         <form id="coeForm" onsubmit="enviarFormulario(event)">
 
+
             <!-- CABEÇALHO -->
             <div class="card card-header">
-                <h1>🟦 FORMULÁRIO DE DESENVOLVIMENTO (PADRÃO GLPI COE)</h1>
+                <h1>🟦 FORMULÁRIO DE DESENVOLVIMENTO</h1>
+                <p style="margin-top: 10px; margin-bottom: 0; font-size: 14px; line-height: 1.6; color: var(--text-gray); font-weight: 400;">Preencha as informações com o máximo de detalhe possível. Os campos exibidos podem mudar conforme o tipo de solicitação e o tipo de desenvolvimento selecionados.</p>
             </div>
 
             <!-- PASSO 1: TIPO DE SOLICITAÇÃO -->
@@ -329,6 +339,7 @@
                 <div class="form-group" style="margin-bottom: 0;">
                     <label class="section-title"><span class="blue-diamond">◆</span> 1. TIPO DE SOLICITAÇÃO <span
                             class="required">*</span></label>
+                    <span class="help-text">Selecione se a solicitação é para corrigir algo já existente ou para pedir uma nova implementação.</span>
                     <div class="radio-group">
                         <input type="radio" id="solic_ajuste" name="tipo_solicitacao" value="ajuste" required
                             onchange="handleTipoSolicitacao()">
@@ -351,6 +362,7 @@
                 <div class="form-group" style="margin-bottom: 0;">
                     <label class="section-title"><span class="blue-diamond">◆</span> 2. TIPO DE DESENVOLVIMENTO <span
                             class="required">*</span></label>
+                    <span class="help-text">Escolha a categoria que melhor representa sua necessidade para encaminhar o chamado corretamente.</span>
 
                     <div class="category-title">MV</div>
                     <div class="category-container">
@@ -358,16 +370,19 @@
                             <input type="radio" id="dev_relatorios" name="tipo_desenvolvimento" value="relatorios"
                                 required onchange="handleTipoDesenvolvimento()">
                             <label for="dev_relatorios">Relatórios</label>
+                            <span class="help-text">Solicitações para criação, ajuste ou correção de relatórios, incluindo colunas, filtros, ordenação, cálculos, totais e layout de exibição.</span>
                         </div>
                         <div class="radio-group">
                             <input type="radio" id="dev_docs" name="tipo_desenvolvimento" value="docs" required
                                 onchange="handleTipoDesenvolvimento()">
                             <label for="dev_docs">Documentos Eletrônicos</label>
+                            <span class="help-text">Solicitações para criação ou alteração de formulários e documentos eletrônicos, com campos, regras de preenchimento, botões, listas de opções e estrutura visual.</span>
                         </div>
                         <div class="radio-group">
                             <input type="radio" id="dev_notificacao" name="tipo_desenvolvimento" value="notificacao"
                                 required onchange="handleTipoDesenvolvimento()">
                             <label for="dev_notificacao">Notificação Inteligente</label>
+                            <span class="help-text">Solicitações relacionadas ao envio automático de notificações, e-mails e alertas com regras de destinatários, conteúdo, horário e frequência.</span>
                         </div>
                     </div>
 
@@ -377,6 +392,7 @@
                             <input type="radio" id="dev_metabase" name="tipo_desenvolvimento" value="metabase" required
                                 onchange="handleTipoDesenvolvimento()">
                             <label for="dev_metabase">Metabase</label>
+                            <span class="help-text">Solicitações para criação, ajuste ou correção de painéis, consultas e visões analíticas no Metabase, com filtros, colunas, indicadores, gráficos e ordenação.</span>
                         </div>
                     </div>
 
@@ -386,11 +402,13 @@
                             <input type="radio" id="dev_automacao" name="tipo_desenvolvimento" value="automacao"
                                 required onchange="handleTipoDesenvolvimento()">
                             <label for="dev_automacao">Automatização</label>
+                            <span class="help-text">Solicitações para automatizar tarefas ou processos repetitivos, reduzindo atividades manuais, retrabalho e tempo de execução.</span>
                         </div>
                         <div class="radio-group">
                             <input type="radio" id="dev_sistemas" name="tipo_desenvolvimento" value="sistemas" required
                                 onchange="handleTipoDesenvolvimento()">
                             <label for="dev_sistemas">Sistemas Internos</label>
+                            <span class="help-text">Solicitações para criação, ajuste ou evolução de funcionalidades em sistemas internos, incluindo telas, regras de negócio, cadastros, consultas e integrações.</span>
                         </div>
                     </div>
                 </div>
@@ -401,18 +419,20 @@
                 <label class="section-title"><span class="blue-diamond">◆</span> 3. INFORMAÇÕES GERAIS</label>
                 <div class="form-group">
                     <label>Título <span class="required">*</span></label>
+                    <span class="help-text">Informe um nome curto e objetivo para identificar a solicitação.</span>
                     <input type="text" name="titulo" required>
                 </div>
                 <div class="form-group">
                     <label>Responsável pela homologação e testes <span class="required">*</span></label>
-                    <span class="help-text">Seleção de usuário GLPI nativa (será adicionado como Requerente)</span>
-                    <input type="text" name="responsavel" placeholder="Buscar usuário..." required>
+                    <span class="help-text">Informe quem irá validar a entrega e realizar os testes após o desenvolvimento. Busque o nome do colaborador responsável. Essa pessoa irá validar a entrega e realizar os testes após o desenvolvimento.</span>
+                    <input type="text" name="responsavel" placeholder="Busque o nome do colaborador responsável" required>
                 </div>
 
                 <!-- Wrapper para Ocultar em caso de Ajuste -->
                 <div id="wrapper_processo_atual">
                     <div class="form-group" style="margin-bottom: 0;">
                         <label>O processo já é realizado atualmente? <span class="required">*</span></label>
+                        <span class="help-text">Informe se essa atividade já acontece hoje, mesmo que seja feita manualmente.</span>
                         <div class="radio-group"><input type="radio" name="processo_atual" id="proc_atual_nao" value="nao"
                                 onchange="handleProcessoAtual()"> <label for="proc_atual_nao">Não</label></div>
                         <div class="radio-group"><input type="radio" name="processo_atual" id="proc_atual_sim" value="sim"
@@ -425,8 +445,7 @@
                 <div id="blocoSituacaoAtual" class="hidden sub-section">
                     <div class="form-group" style="margin-bottom: 0;">
                         <label>Situação Atual <span class="required">*</span></label>
-                        <span class="help-text">Descrição: Descrever detalhadamente a situação ou como é realizado o
-                            processo hoje.</span>
+                        <span class="help-text">Explique como está o cenário hoje e qual dificuldade, erro ou limitação foi identificada.</span>
                         <textarea name="situacao_atual" rows="3"></textarea>
                     </div>
                 </div>
@@ -442,21 +461,24 @@
                 <div id="blocoProcessoAtual" class="hidden sub-section">
                     <div class="form-group">
                         <label>Descreva como o processo é realizado hoje <span class="required">*</span></label>
+                        <span class="help-text">Detalhe o passo a passo atual para facilitar o entendimento da necessidade.</span>
                         <textarea name="desc_processo_hoje" rows="3"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Tempo gasto com o processo atual</label>
+                        <span class="help-text">Informe o tempo médio atualmente gasto para executar essa atividade.</span>
                         <input type="time" name="tempo_atual">
                     </div>
                     <div class="form-group" style="margin-bottom: 0;">
                         <label>Tempo estimado do novo processo</label>
+                        <span class="help-text">Informe o tempo esperado após a melhoria ou automação, se souber.</span>
                         <input type="time" name="tempo_novo">
                     </div>
                 </div>
 
                 <div class="form-group" style="margin-top: 20px;">
                     <label>Objetivo Esperado <span class="required">*</span></label>
-                    <span class="help-text">Descrição: Informe detalhadamente qual é o objetivo esperado.</span>
+                    <span class="help-text">Descreva de forma clara qual resultado você espera alcançar com esta solicitação.</span>
                     <textarea name="objetivo" rows="3" required></textarea>
                 </div>
             </div>
@@ -467,6 +489,7 @@
                     SETORES</label>
                 <div class="form-group" style="margin-bottom: 0;">
                     <label>Existem outros setores envolvidos no processo? <span class="required">*</span></label>
+                    <span class="help-text">Selecione se outras áreas participam, impactam ou dependem desta solicitação.</span>
                     <div class="radio-group"><input type="radio" name="outros_setores" id="setor_nao" value="nao"
                             required onchange="handleOutrosSetores()"> <label for="setor_nao">Não</label></div>
                     <div class="radio-group"><input type="radio" name="outros_setores" id="setor_sim" value="sim"
@@ -475,6 +498,7 @@
 
                 <div id="blocoCiente" class="hidden sub-section">
                     <label>O setor está ciente e de acordo? <span class="required">*</span></label>
+                    <span class="help-text">Confirme se os setores envolvidos já foram alinhados e estão cientes desta demanda.</span>
                     <div class="radio-group"><input type="radio" name="setor_ciente" id="ciente_nao" value="nao"
                             onchange="handleSetorCiente()"> <label for="ciente_nao">Não</label></div>
                     <div class="radio-group"><input type="radio" name="setor_ciente" id="ciente_sim" value="sim"
@@ -487,8 +511,8 @@
 
                     <div id="blocoObservador" class="hidden form-group mt-2">
                         <label>Incluir responsável como observador <span class="required">*</span></label>
-                        <span class="help-text">Seleção de usuário GLPI</span>
-                        <input type="text" name="observador_setor" placeholder="Buscar usuário do setor...">
+                        <span class="help-text">Informe quem deve acompanhar a solicitação e receber atualizações no chamado. Busque o nome do colaborador responsável para acompanhar a solicitação e receber atualizações no chamado.</span>
+                        <input type="text" name="observador_setor" placeholder="Busque o nome do colaborador responsável">
                     </div>
                 </div>
             </div>
@@ -502,6 +526,7 @@
 
                     <div id="relatorios_ajuste" class="hidden">
                         <label>Informação do Ajuste <span class="required">*</span></label>
+                        <span class="help-text">Selecione se o ajuste solicitado está relacionado a erro ou melhoria no relatório.</span>
                         <div class="radio-group"><input type="radio" name="rel_ajuste_tipo" id="rel_ajuste_erro"
                                 value="erro" onchange="handleRelatorioAjuste()"> <label
                                 for="rel_ajuste_erro">Erro</label></div>
@@ -510,7 +535,7 @@
                                 for="rel_ajuste_melhoria">Melhoria</label></div>
 
                         <div id="rel_erro" class="hidden sub-section">
-                            <p class="help-text">Selecione ao menos uma opção abaixo:</p>
+                            <p class="help-text">Marque abaixo o tipo de ajuste necessário no relatório.</p>
                             <div class="checkbox-group">
                                 <input type="checkbox" id="err_dados" name="rel_ajuste_erro_opts" required onchange="toggleCampo(this, 'txt_err_dados'); validarGrupoCheckbox('rel_ajuste_erro_opts')">
                                 <label for="err_dados">Dados incorretos ou ausentes</label>
@@ -537,7 +562,7 @@
                         </div>
 
                         <div id="rel_melhoria" class="hidden sub-section">
-                            <p class="help-text">Selecione ao menos uma opção abaixo:</p>
+                            <p class="help-text">Marque abaixo quais melhorias devem ser realizadas no relatório.</p>
                             <div class="checkbox-group">
                                 <input type="checkbox" id="mel_quebra" name="rel_ajuste_melhoria_opts" required onchange="toggleCampo(this, 'box_quebra'); validarGrupoCheckbox('rel_ajuste_melhoria_opts')">
                                 <label for="mel_quebra">Quebra</label>
@@ -587,25 +612,29 @@
                     <div id="relatorios_novo" class="hidden">
                         <div class="form-group">
                             <label>Caminho das telas e dos documentos <span class="required">*</span></label>
+                            <span class="help-text">Informe onde estão as telas, menus ou documentos relacionados à solicitação.</span>
                             <input type="text" required>
                         </div>
                         <div class="form-group">
                             <label>Qual sistema ou tabela é a fonte desses dados? <span class="required">*</span></label>
+                            <span class="help-text">Informe de onde os dados serão extraídos, como sistema, banco, tabela ou relatório de origem.</span>
                             <input type="text" required>
                         </div>
                         
                         <div class="form-group">
                             <label>Prints das telas – Informar quais campos deverão ser considerados <span class="required">*</span></label>
+                            <span class="help-text">Descreva quais campos visíveis nas telas devem ser usados na solicitação.</span>
                             <input type="text" placeholder="Quais campos..." required>
                         </div>
                         <div class="form-group">
                             <label>Print do documento assistencial – Informar quais campos deverão ser considerados <span class="required">*</span></label>
+                            <span class="help-text">Informe quais campos do documento assistencial precisam ser considerados.</span>
                             <input type="text" placeholder="Quais campos..." required>
                         </div>
 
                         <div class="form-group mt-3">
                             <label>Múltipla escolha <span class="required">*</span></label>
-                            <p class="help-text">Selecione ao menos uma opção abaixo:</p>
+                            <p class="help-text">Marque abaixo o tipo de erro identificado no BI ou painel.</p>
                             <div class="checkbox-group">
                                 <input type="checkbox" id="rel_novo_col" name="rel_novo_opts" required onchange="toggleCampo(this, 'txt_rel_novo_col'); validarGrupoCheckbox('rel_novo_opts')"> <label for="rel_novo_col">Colunas</label>
                                 <input type="text" id="txt_rel_novo_col" class="hidden mt-1" placeholder="Informe detalhadamente os dados das colunas...">
@@ -643,7 +672,7 @@
 
                     <div id="docs_ajuste" class="hidden sub-section" style="margin-bottom: 20px;">
                         <label>Informação do Ajuste <span class="required">*</span></label>
-                        <p class="help-text">Selecione ao menos uma opção abaixo:</p>
+                        <p class="help-text">Marque abaixo o tipo de ajuste necessário na notificação.</p>
                         <div class="checkbox-group">
                             <input type="checkbox" id="doc_erro_msg" name="doc_ajuste_opts" required onchange="toggleCampo(this, 'txt_doc_erro_msg'); validarGrupoCheckbox('doc_ajuste_opts')">
                             <label for="doc_erro_msg">Mensagens de erro</label>
@@ -665,6 +694,7 @@
                     <div id="docs_novo" class="hidden">
                         <div class="form-group">
                             <label>O documento já possui um modelo definido? <span class="required">*</span></label>
+                            <span class="help-text">Informe se já existe um modelo, layout ou referência pronta para este documento.</span>
                             <div class="radio-group"><input type="radio" name="doc_modelo" value="sim" required
                                     onchange="toggleRadioCondicional('doc_modelo', 'txt_doc_modelo')">
                                 <label>Sim</label></div>
@@ -747,7 +777,7 @@
                     <label class="section-title"><span class="blue-diamond">◆</span> 7. DETALHES DA NOTIFICAÇÃO</label>
                     <div id="notif_ajuste" class="hidden sub-section">
                         <label>Informação do Ajuste <span class="required">*</span></label>
-                        <p class="help-text">Selecione ao menos uma opção abaixo:</p>
+                        <p class="help-text">Marque abaixo o tipo de ajuste necessário na notificação.</p>
                         <div class="checkbox-group">
                             <input type="checkbox" id="not_email" name="notif_ajuste_opts" required onchange="toggleCampo(this, 'txt_not_email'); validarGrupoCheckbox('notif_ajuste_opts')"> <label
                                 for="not_email">Não estou recebendo / Inclusão de e-mail</label>
@@ -782,12 +812,12 @@
                             <textarea rows="3" required></textarea>
                         </div>
                         <h3>Requisitos Obrigatórios</h3>
-                        <div class="form-group"><label>Colunas <span class="required">*</span></label><input
+                        <div class="form-group"><label>Colunas <span class="required">*</span></label><span class="help-text">Informe quais campos ou colunas devem aparecer na notificação.</span><input
                                 type="text" required></div>
-                        <div class="form-group"><label>Ordenação <span class="required">*</span></label><input
+                        <div class="form-group"><label>Ordenação <span class="required">*</span></label><span class="help-text">Explique como os dados devem ser organizados ou exibidos.</span><input
                                 type="text" required></div>
                         <div class="form-group"><label>Quem receberá a notificação? <span
-                                    class="required">*</span></label><input type="text" required></div>
+                                    class="required">*</span></label><span class="help-text">Informe os destinatários, perfis ou setores que devem receber essa notificação.</span><input type="text" required></div>
                         <div class="form-group"><label>Horário e frequência <span class="required">*</span></label><span class="help-text">Verificar
                                 regra do notificador</span><input type="text" required></div>
                     </div>
@@ -837,7 +867,7 @@
                         <div id="bi_melhoria" class="hidden sub-section">
                             <p class="help-text" style="color:var(--text-dark); margin-bottom: 15px;">Somente alterações
                                 simples serão consideradas como melhoria.</p>
-                            <p class="help-text" style="margin-top:-10px;">Selecione ao menos uma opção abaixo:</p>
+                            <p class="help-text" style="margin-top:-10px;">Marque abaixo quais melhorias devem ser realizadas no BI ou painel.</p>
                             <div class="checkbox-group">
                                 <input type="checkbox" id="bi_mel_filtro" name="bi_ajuste_melhoria_opts" required onchange="toggleCampo(this, 'box_bi_filtro'); validarGrupoCheckbox('bi_ajuste_melhoria_opts')">
                                 <label for="bi_mel_filtro">Filtros</label>
@@ -886,19 +916,23 @@
                         
                         <div class="form-group">
                             <label>Caminho das telas e dos documentos <span class="required">*</span></label>
+                            <span class="help-text">Informe onde estão as telas, menus ou documentos relacionados à solicitação.</span>
                             <input type="text" required>
                         </div>
                         <div class="form-group">
                             <label>Qual sistema ou tabela é a fonte desses dados? <span class="required">*</span></label>
+                            <span class="help-text">Informe de onde os dados serão extraídos, como sistema, banco, tabela ou relatório de origem.</span>
                             <input type="text" required>
                         </div>
 
                         <div class="form-group">
                             <label>Prints das telas – Informar quais campos deverão ser considerados <span class="required">*</span></label>
+                            <span class="help-text">Descreva quais campos visíveis nas telas devem ser usados na solicitação.</span>
                             <input type="text" placeholder="Quais campos..." required>
                         </div>
                         <div class="form-group">
                             <label>Print do documento assistencial – Informar quais campos deverão ser considerados <span class="required">*</span></label>
+                            <span class="help-text">Informe quais campos do documento assistencial precisam ser considerados.</span>
                             <input type="text" placeholder="Quais campos..." required>
                         </div>
                         <div class="form-group mt-2">
@@ -921,11 +955,11 @@
                         </div>
 
                         <h3>Requisitos Obrigatórios</h3>
-                        <div class="form-group"><label>Filtros <span class="required">*</span></label><input
+                        <div class="form-group"><label>Filtros <span class="required">*</span></label><span class="help-text">Liste os filtros necessários para consulta ou segmentação dos dados.</span><input
                                 type="text" required></div>
-                        <div class="form-group"><label>Colunas <span class="required">*</span></label><input
+                        <div class="form-group"><label>Colunas <span class="required">*</span></label><span class="help-text">Informe quais campos ou colunas devem aparecer na notificação.</span><input
                                 type="text" required></div>
-                        <div class="form-group"><label>Ordenação <span class="required">*</span></label><input
+                        <div class="form-group"><label>Ordenação <span class="required">*</span></label><span class="help-text">Explique como os dados devem ser organizados ou exibidos.</span><input
                                 type="text" required></div>
                     </div>
                 </div>
@@ -959,6 +993,7 @@
                     <div id="proc_novo" class="hidden">
                         <div class="form-group">
                             <label id="lbl_proc_info_importantes">Informações Importantes</label>
+                            <span class="help-text">Descreva regras, exceções, dependências ou detalhes relevantes para a automação ou sistema interno.</span>
                             <textarea id="txt_proc_novo_info" rows="3" placeholder="Descreva informações adicionais ou importantes para a automação..."></textarea>
                         </div>
                     </div>
@@ -983,6 +1018,7 @@
 
                     <div class="form-group" style="margin-bottom: 0;">
                         <label>Faça o upload de Imagens, Documentos ou Vídeos pertinentes à solicitação. <span id="lbl_anexo_req" class="required hidden">*</span></label>
+                        <span class="help-text">Anexe evidências, prints, documentos de referência ou vídeos que ajudem a entender e validar a solicitação.</span>
                         <input type="file" name="anexos[]" id="file_anexos" multiple accept="image/*,.pdf,.doc,.docx,.mp4">
                     </div>
                 </div>
